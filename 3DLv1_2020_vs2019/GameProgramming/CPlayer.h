@@ -32,7 +32,13 @@ public:
 	void TaskCollision();
 	//描画処理
 	void Render();
-
+	int mJump; //ジャンプフラグ
+	//重力
+	float x = 300.0f;
+	float y = 300.0f;
+	float yadd = 0.0f;
+	//慣性
+	float t = 1;
 };
 
 #endif

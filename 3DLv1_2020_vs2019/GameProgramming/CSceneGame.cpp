@@ -119,7 +119,11 @@ void CSceneGame::Update() {
 		Camera.mRotation.mY -= 2.0f;
 	}
 	//	e = CVector(-2.0f, 10.0f, -30.0f) * mPlayer.mMatrix;
-	e = CVector(-2.0f, 10.0f, -30.0f) * CMatrix().RotateY(Camera.mRotation.mY) * mPlayer.mMatrix;
+	e = CVector(0.0f, 5.0f, -25.0f) * CMatrix().RotateY(Camera.mRotation.mY) * mPlayer.mMatrix;
+	if (CKey::Push(VK_SPACE))
+	{
+		e = CVector(0.0f, 0.0f, 0.1f) * mPlayer.mMatrix;
+	}
 	//’‹“_‚ğ‹‚ß‚é
 	c = mPlayer.mPosition;
 	//ã•ûŒü‚ğ‹‚ß‚é

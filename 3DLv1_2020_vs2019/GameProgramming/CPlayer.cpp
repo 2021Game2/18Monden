@@ -17,12 +17,14 @@ CPlayer *CPlayer::spThis = 0;
 
 #define FIRECOUNT 15	//発射間隔
 
+
 CPlayer::CPlayer()
 : mLine(this, &mMatrix, CVector(0.0f, 0.0f, -14.0f), CVector(0.0f, 0.0f, 17.0f))
 , mLine2(this, &mMatrix, CVector(0.0f, 5.0f, -8.0f), CVector(0.0f, -3.0f, -8.0f))
 , mLine3(this, &mMatrix, CVector(9.0f, 0.0f, -8.0f), CVector(-9.0f, 0.0f, -8.0f))
 , mCollider(this, &mMatrix, CVector(0.0f, 0.0f, 0.0f), 0.5f)
 , mFireCount(0)
+, mJump(0) //0はジャンプ可能
 {
 	mTag = EPLAYER;	//タグの設定
 	spThis = this;
@@ -41,40 +43,56 @@ void CPlayer::Update() {
 		//Y軸の回転値を増加
 		mRotation.mY -= 1;
 	}
-	//上矢印キー入力で前進
-	if (CKey::Push(VK_UP)) {
-		//Z軸方向に1進んだ値を回転移動させる
-		mPosition = CVector(0.0f, 0.0f, 1.0f) * mMatrix;
-	}
-	//Sキー入力で上向き
-	if (CKey::Push('S')) {
-		//X軸の回転値を減算
-		mRotation.mX -= 1;
-	}
-	//Wキー入力で上向き
+	//Wキーで前進
 	if (CKey::Push('W')) {
-		//X軸の回転値を加算
-		mRotation.mX += 1;
+		if (t < 100) {
+			t++;
+		}
+		//Z軸方向に1進んだ値を回転移動させる
+		mPosition = CVector(0.0f, 0.0f, 0.05f * t) * mMatrix;
 	}
+	//キー離すと慣性で滑る
+	if (CKey::Push('W') == false && t > 1) {
+		t--;
+		mPosition = CVector(0.0f, 0.0f, 0.05f * t) * mMatrix;
+	}
+
+	//Sキーで後退
+	if (CKey::Push('S')) {
+		if (t > -30) {
+			t--;
+		}
+		mPosition = CVector(0.0f, 0.0f, 0.05f * t) * mMatrix;
+	}
+	//キー離すと慣性で滑る
+	if (CKey::Push('S') == false && t < -1) {
+		t++;
+		mPosition = CVector(0.0f, 0.0f, 0.05f * t) * mMatrix;
+	}
+
 
 	if (mFireCount > 0)
 	{
 		mFireCount--;
 	}
 
-	//スペースキー入力で弾発射
-	if (CKey::Push(VK_SPACE) && mFireCount == 0) {
-		mFireCount = FIRECOUNT;
-		CBullet *bullet = new CBullet();
-		bullet->Set(0.1f, 1.5f);
-		bullet->mPosition = CVector(0.0f, 0.0f, 10.0f) * mMatrix;
-		bullet->mRotation = mRotation;
-		bullet->Update();
-//		TaskManager.Add(bullet);
-	}
-
 	//CTransformの更新
 	CTransform::Update();
+
+	//ジャンプ
+	if (mJump == 0 && CKey::Once('J'))
+	{
+		yadd = -1.0f;
+		mJump++;
+	}
+
+	mPosition.mY -= yadd;
+	yadd += 0.05f;
+	if (mPosition.mY <= 0) {
+		yadd = 0;
+		mJump = 0;
+	}
+
 }
 
 void CPlayer::Collision(CCollider *m, CCollider *o) {
