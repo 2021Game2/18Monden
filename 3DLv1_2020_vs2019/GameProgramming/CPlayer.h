@@ -8,6 +8,8 @@
 #include "CColliderLine.h"
 //
 #include "CText.h"
+
+#include "CCollider.h"
 /*
 プレイヤークラス
 キャラクタクラスを継承
@@ -32,12 +34,14 @@ public:
 	void TaskCollision();
 	//描画処理
 	void Render();
+
 	int mJump; //ジャンプフラグ
 	//重力
 	float x = 300.0f;
 	float y = 300.0f;
 	float yadd = 0.0f;
-	//慣性
+
+	//ダッシュ慣性
 	float t = 1;
 };
 

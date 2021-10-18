@@ -15,6 +15,8 @@ void CBullet::Set(float w, float d) {
 	mT.SetVertex(CVector(w, 0.0f, 0.0f), CVector(0.0f, 0.0f, -d), CVector(-w, 0.0f, 0.0f));
 	//三角形の法線設定
 	mT.SetNormal(CVector(0.0f, 1.0f, 0.0f));
+
+	mModelShuriken.Load("Shuriken.obj", "Shuriken.mtl");
 }
 
 //更新

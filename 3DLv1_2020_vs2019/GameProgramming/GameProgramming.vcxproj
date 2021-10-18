@@ -89,6 +89,8 @@
     <ClCompile Include="CBullet.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="CCharacter.cpp" />
+    <ClCompile Include="CCity.cpp" />
+    <ClCompile Include="CCoin.cpp" />
     <ClCompile Include="CCollider.cpp" />
     <ClCompile Include="CColliderLine.cpp" />
     <ClCompile Include="CColliderMesh.cpp" />
@@ -97,6 +99,7 @@
     <ClCompile Include="CEnemy.cpp" />
     <ClCompile Include="CEnemy2.cpp" />
     <ClCompile Include="CKey.cpp" />
+    <ClCompile Include="CMakimono.cpp" />
     <ClCompile Include="CMaterial.cpp" />
     <ClCompile Include="CMatrix.cpp" />
     <ClCompile Include="CModel.cpp" />
@@ -120,6 +123,8 @@
     <ClInclude Include="CBullet.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="CCharacter.h" />
+    <ClInclude Include="CCity.h" />
+    <ClInclude Include="CCoin.h" />
     <ClInclude Include="CCollider.h" />
     <ClInclude Include="CColliderLine.h" />
     <ClInclude Include="CCollisionManager.h" />
@@ -127,6 +132,7 @@
     <ClInclude Include="CEnemy.h" />
     <ClInclude Include="CEnemy2.h" />
     <ClInclude Include="CKey.h" />
+    <ClInclude Include="CMakimono.h" />
     <ClInclude Include="CMaterial.h" />
     <ClInclude Include="CMatrix.h" />
     <ClInclude Include="CColliderMesh.h" />

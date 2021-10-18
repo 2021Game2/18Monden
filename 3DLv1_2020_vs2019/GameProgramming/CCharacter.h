@@ -22,6 +22,8 @@ public:
 		EENEMY,		//敵
 		EBULLETPLAYER,	//プレイヤー弾
 		EBULLETENEMY,	//敵弾
+		EMAKIMONO,
+		ECOIN,
 	};
 	ETag mTag;
 	CModel *mpModel; //モデルのポインタ

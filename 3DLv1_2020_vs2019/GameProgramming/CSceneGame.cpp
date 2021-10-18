@@ -20,6 +20,16 @@
 //
 #include "CUtil.h"
 
+#include "CCity.h"
+
+#include "CMakimono.h"
+
+#include "CCoin.h"
+
+CModel mModelHouse;
+CModel mModelMakimono;
+CModel mModelCoin;
+
 void CSceneGame::Init() {
 	mText.LoadTexture("FontWhite.tga",1,64);
 
@@ -34,35 +44,63 @@ void CSceneGame::Init() {
 
 	mEye = CVector(1.0f, 2.0f, 3.0f);
 	//モデルファイルの入力
-	mModel.Load("f14.obj", "f14.mtl");
+	mModel.Load("Ninja2.obj", "Ninja2.mtl");
 	mBackGround.Load("sky.obj", "sky.mtl");
 
 	CMatrix matrix;
 	matrix.Print();
 
-	//
-
 	mPlayer.mpModel = &mModel;
-	mPlayer.mScale = CVector(0.1f, 0.1f, 0.1f);
+	mPlayer.mScale = CVector(0.03f, 0.03f, 0.03f);
 	//
-	mPlayer.mPosition = CVector(0.0f, 0.0f, -3.0f) * mBackGroundMatrix;
+	mPlayer.mPosition = CVector(0.0f, -0.0f, -3.0f) * mBackGroundMatrix;
 	//mPlayer.mPosition = CVector(0.0f, 0.0f, -503.0f);
 	mPlayer.mRotation = CVector(0.0f, 180.0f, 0.0f);
 
+	//家
+	mModelHouse.Load("house.obj", "house.mtl");
+	new CCity(&mModelHouse, CVector(0.0f, -2.0f, -600.0f),
+		CVector(), CVector(1.0f, 1.0f, 1.0f));
+
+	new CCity(&mModelHouse, CVector(50.0f, -2.0f, -600.0f),
+		CVector(), CVector(1.0f, 1.0f, 1.0f));
+
+	new CCity(&mModelHouse, CVector(-50.0f, -2.0f, -600.0f),
+		CVector(), CVector(1.0f, 1.0f, 1.0f));
+
+	new CCity(&mModelHouse, CVector(100.0f, -2.0f, -600.0f),
+		CVector(), CVector(1.0f, 1.0f, 1.0f));
+
+	new CCity(&mModelHouse, CVector(-100.0f, -2.0f, -600.0f),
+		CVector(), CVector(1.0f, 1.0f, 1.0f));
+
+	new CCity(&mModelHouse, CVector(-150.0f, -2.0f, -600.0f),
+		CVector(), CVector(1.0f, 1.0f, 1.0f));
+
+	//巻物
+	mModelMakimono.Load("Makimono.obj", "Makimono.mtl");
+	new CMakimono(&mModelMakimono, CVector(0.0f, 1.0f, -510.0f),
+		CVector(60.0f,0.0f, -50.0f), CVector(7.0f, 7.0f, 7.0f));
+
+	//コイン
+	mModelCoin.Load("Coin.obj", "Coin.mtl");
+	new CCoin(&mModelCoin, CVector(-5.0f, -0.5f, -510.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
 	//敵機のインスタンス作成
-	new CEnemy(&mModelC5, CVector(0.0f, 10.0f, -100.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
-	new CEnemy(&mModelC5, CVector(30.0f, 10.0f, -130.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
+	//new CEnemy(&mModelC5, CVector(0.0f, 10.0f, -100.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
+	//new CEnemy(&mModelC5, CVector(30.0f, 10.0f, -130.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
 	//new CEnemy(&mModelC5, CVector(0.0f, 10.0f, -600.0f), CVector(), CVector(0.1f, 0.1f, 0.1f));
 	//new CEnemy(&mModelC5, CVector(30.0f, 10.0f, -630.0f), CVector(), CVector(0.1f, 0.1f, 0.1f));
 
 //	new CEnemy2(CVector(-15.0f, 15.0f, -90.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
 //	new CEnemy2(CVector(15.0f, 15.0f, -150.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
 
-	new CEnemy2(CVector(-5.0f, 1.0f, -10.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
-	new CEnemy2(CVector(5.0f, 1.0f, -10.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
+	//new CEnemy2(CVector(-5.0f, 1.0f, -10.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
+	//new CEnemy2(CVector(5.0f, 1.0f, -10.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
 
 	//ビルボードの生成
-	new CBillBoard(CVector(-6.0f, 3.0f, -10.0f), 1.0f, 1.0f);
+	//new CBillBoard(CVector(-6.0f, 3.0f, -10.0f), 1.0f, 1.0f);
 	//背景モデルから三角コライダを生成
 	//親インスタンスと行列はなし
 	//mColliderMesh.Set(NULL, NULL, &mBackGround);
@@ -79,7 +117,7 @@ void CSceneGame::Update() {
 
 	if (CKey::Push('L'))
 	{
-		mEye.mX += 0.1f;
+		mEye.mX += 0.2f;
 	}
 	if (CKey::Push('J'))
 	{
@@ -119,10 +157,10 @@ void CSceneGame::Update() {
 		Camera.mRotation.mY -= 2.0f;
 	}
 	//	e = CVector(-2.0f, 10.0f, -30.0f) * mPlayer.mMatrix;
-	e = CVector(0.0f, 5.0f, -25.0f) * CMatrix().RotateY(Camera.mRotation.mY) * mPlayer.mMatrix;
+	e = CVector(0.0f, 20.0f, -100.0f) * CMatrix().RotateY(Camera.mRotation.mY) * mPlayer.mMatrix;
 	if (CKey::Push(VK_SPACE))
 	{
-		e = CVector(0.0f, 0.0f, 0.1f) * mPlayer.mMatrix;
+		e = CVector(0.0f, 20.0f, 100.0f) * mPlayer.mMatrix;
 	}
 	//注視点を求める
 	c = mPlayer.mPosition;
@@ -151,15 +189,15 @@ void CSceneGame::Update() {
 	if (CEnemy::sCount == 0)
 	{
 		//2Dの描画開始
-		CUtil::Start2D(-400, 400, -300, 300);
+		//CUtil::Start2D(-400, 400, -300, 300);
 		//描画色の設定（緑色の半透明）
-		glColor4f(239.0f / 256.0f, 175.0f / 256.0f, 0.0f, 1.0f);
+		//glColor4f(239.0f / 256.0f, 175.0f / 256.0f, 0.0f, 1.0f);
 
 		//文字列の描画
-		mText.DrawString("MISSION CLEAR", -200, 100, 16, 32);
+		//mText.DrawString("MISSION CLEAR", -200, 100, 16, 32);
 
 		//2Dの描画終了
-		CUtil::End2D();
+		//CUtil::End2D();
 	}
 
 }

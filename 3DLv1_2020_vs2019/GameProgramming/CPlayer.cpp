@@ -22,14 +22,14 @@ CPlayer::CPlayer()
 : mLine(this, &mMatrix, CVector(0.0f, 0.0f, -14.0f), CVector(0.0f, 0.0f, 17.0f))
 , mLine2(this, &mMatrix, CVector(0.0f, 5.0f, -8.0f), CVector(0.0f, -3.0f, -8.0f))
 , mLine3(this, &mMatrix, CVector(9.0f, 0.0f, -8.0f), CVector(-9.0f, 0.0f, -8.0f))
-, mCollider(this, &mMatrix, CVector(0.0f, 0.0f, 0.0f), 0.5f)
+, mCollider(this, &mMatrix, CVector(0.0f, 20.0f, 0.0f), 0.5f)
 , mFireCount(0)
 , mJump(0) //0はジャンプ可能
 {
-	mTag = EPLAYER;	//タグの設定
 	spThis = this;
 	//テクスチャファイルの読み込み（1行64列）
 	mText.LoadTexture("FontWhite.tga", 1, 64);
+	mTag = EPLAYER;
 }
 
 //更新処理
@@ -37,15 +37,15 @@ void CPlayer::Update() {
 	//Aキー入力で回転
 	if (CKey::Push('A')) {
 		//Y軸の回転値を増加
-		mRotation.mY += 1;
+		mRotation.mY += 3;
 	}
 	if (CKey::Push('D')) {
 		//Y軸の回転値を増加
-		mRotation.mY -= 1;
+		mRotation.mY -= 3;
 	}
 	//Wキーで前進
 	if (CKey::Push('W')) {
-		if (t < 100) {
+		if (t < 200) {
 			t++;
 		}
 		//Z軸方向に1進んだ値を回転移動させる
@@ -59,7 +59,10 @@ void CPlayer::Update() {
 
 	//Sキーで後退
 	if (CKey::Push('S')) {
-		if (t > -30) {
+		if (t > 0) {
+			t -= t * 1/10; //ブレーキ
+		}
+		if (t > -90) {
 			t--;
 		}
 		mPosition = CVector(0.0f, 0.0f, 0.05f * t) * mMatrix;
@@ -82,16 +85,30 @@ void CPlayer::Update() {
 	//ジャンプ
 	if (mJump == 0 && CKey::Once('J'))
 	{
-		yadd = -1.0f;
+		yadd = -1.2f;
 		mJump++;
 	}
 
 	mPosition.mY -= yadd;
 	yadd += 0.05f;
+
 	if (mPosition.mY <= 0) {
 		yadd = 0;
 		mJump = 0;
 	}
+
+
+	//弾発射
+	if (CKey::Push('I') && mFireCount == 0) {
+		mFireCount = FIRECOUNT;
+		CBullet* bullet = new CBullet();
+		bullet->Set(0.1f, 1.5f);
+		bullet->mPosition = CVector(0.0f, 0.0f, 10.0f) * mMatrix;
+		bullet->mRotation = mRotation;
+		bullet->Update();
+		//		TaskManager.Add(bullet);
+	}
+
 
 }
 
@@ -113,6 +130,7 @@ void CPlayer::Collision(CCollider *m, CCollider *o) {
 			mPosition = mPosition - adjust * -1;
 			//行列の更新
 			CTransform::Update();
+
 		}
 		break;
 	case CCollider::ESPHERE:
@@ -148,45 +166,45 @@ void CPlayer::Render()
 	CCharacter::Render();
 
 	//2Dの描画開始
-	CUtil::Start2D(-400, 400, -300, 300);
+	//CUtil::Start2D(-400, 400, -300, 300);
 	//描画色の設定（緑色の半透明）
-	glColor4f(0.0f, 1.0f, 0.0f, 0.99f);
+	//glColor4f(0.0f, 1.0f, 0.0f, 0.99f);
 	//文字列編集エリアの作成
-	char buf[64];
+	//char buf[64];
 
 	//Y座標の表示
 	//文字列の設定
-	sprintf(buf, "PY:%7.2f", mPosition.mY);
+	//sprintf(buf, "PY:%7.2f", mPosition.mY);
 	//文字列の描画
-	mText.DrawString(buf, 100, 30, 8, 16);
+	//mText.DrawString(buf, 100, 30, 8, 16);
 
 	//X軸回転値の表示
 	//文字列の設定
-	sprintf(buf, "RX:%7.2f", mRotation.mX);
+	//sprintf(buf, "RX:%7.2f", mRotation.mX);
 	//文字列の描画
-	mText.DrawString(buf, 100, 0, 8, 16);
+	//mText.DrawString(buf, 100, 0, 8, 16);
 	//X軸回転値の表示
 	//文字列の設定
-	sprintf(buf, "FX:%7.2f", (CVector(0.0f, 0.0f, 1.0f) * mMatrixRotate).GetRotationX(CVector(0.0f, 1.0f, 0.0f) * mMatrixRotate));
+	//sprintf(buf, "FX:%7.2f", (CVector(0.0f, 0.0f, 1.0f) * mMatrixRotate).GetRotationX(CVector(0.0f, 1.0f, 0.0f) * mMatrixRotate));
 	//文字列の描画
-	mText.DrawString(buf, 100, -20, 8, 16);
+	//mText.DrawString(buf, 100, -20, 8, 16);
 
 
 
 	//Y軸回転値の表示
 	//文字列の設定
-	sprintf(buf, "RY:%7.2f", mRotation.mY);
+	//sprintf(buf, "RY:%7.2f", mRotation.mY);
 	//文字列の描画
-	mText.DrawString(buf, 100, -100, 8, 16);
+	//mText.DrawString(buf, 100, -100, 8, 16);
 
 	//Y軸回転値の表示
 	//文字列の設定
-	sprintf(buf, "FY:%7.2f", (CVector(0.0f, 0.0f, 1.0f) * mMatrixRotate).GetRotationY());
+	//sprintf(buf, "FY:%7.2f", (CVector(0.0f, 0.0f, 1.0f) * mMatrixRotate).GetRotationY());
 	//文字列の描画
-	mText.DrawString(buf, 100, -120, 8, 16);
+	//mText.DrawString(buf, 100, -120, 8, 16);
 
 
 	//2Dの描画終了
-	CUtil::End2D();
+	//CUtil::End2D();
 
 }
