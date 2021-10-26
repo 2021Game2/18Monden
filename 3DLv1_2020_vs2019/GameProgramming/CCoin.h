@@ -27,6 +27,8 @@ public:
 	int mFy; //Y²•ûŒü‚ÌˆÚ“® -1:‰º 0:ˆÚ“®‚µ‚È‚¢ 1:ã‚ÖˆÚ“®
 
 	void TaskCollision();
+
+	int Time = 30;
 };
 
 #endif

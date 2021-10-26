@@ -26,6 +26,8 @@ CCoin::CCoin(CModel* model, CVector position,
 void CCoin::Update() {
 	//s—ñ‚ðXV
 	CTransform::Update();
+
+	mRotation.mY += 3;
 }
 
 //Õ“Ëˆ—
@@ -41,7 +43,11 @@ void CCoin::Collision(CCollider* m, CCollider* o) {
 			if (o->mTag == CCollider::EBODY) {
 				if (o->mpParent->mTag == EPLAYER) {
 					if (CCollider::Collision(o, m)) {
+						Time--;
 						mEnabled = false;
+						if (Time < 0) {
+							mEnabled = true;
+						}
 					}
 				}
 			}
