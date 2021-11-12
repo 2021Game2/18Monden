@@ -44,7 +44,7 @@ void CSceneGame::Init() {
 
 	mEye = CVector(1.0f, 2.0f, 3.0f);
 	//モデルファイルの入力
-	mModel.Load("Ninja2.obj", "Ninja2.mtl");
+	mModel.Load("Car.obj", "Car.mtl");
 	mBackGround.Load("sky.obj", "sky.mtl");
 
 	CMatrix matrix;
@@ -53,12 +53,12 @@ void CSceneGame::Init() {
 	mPlayer.mpModel = &mModel;
 	mPlayer.mScale = CVector(0.03f, 0.03f, 0.03f);
 	//
-	mPlayer.mPosition = CVector(0.0f, -0.0f, -3.0f) * mBackGroundMatrix;
+	mPlayer.mPosition = CVector(0.0f, 0.0f, -3.0f) * mBackGroundMatrix;
 	//mPlayer.mPosition = CVector(0.0f, 0.0f, -503.0f);
 	mPlayer.mRotation = CVector(0.0f, 180.0f, 0.0f);
 
 	//家
-	mModelHouse.Load("house.obj", "house.mtl");
+	mModelHouse.Load("City2.obj", "City2.mtl");
 	new CCity(&mModelHouse, CVector(0.0f, -2.0f, -600.0f),
 		CVector(), CVector(1.0f, 1.0f, 1.0f));
 
@@ -148,14 +148,31 @@ void CSceneGame::Update() {
 	//カメラのパラメータを作成する
 	CVector e, c, u;//視点、注視点、上方向
 	//視点を求める
-	if (CKey::Push(VK_RIGHT))
+	if (CKey::Push('D') && Camera.mRotation.mY < 30)
 	{
-		Camera.mRotation.mY += 2.0f;
+			if (d < 10) {
+			d++;
+		}
+		Camera.mRotation.mY += d/30;
 	}
-	if (CKey::Push(VK_LEFT))
+
+	if (CKey::Push('D') == false && Camera.mRotation.mY > 0) {
+		Camera.mRotation.mY--;
+	}
+
+
+	if (CKey::Push('A') && Camera.mRotation.mY > -30)
 	{
-		Camera.mRotation.mY -= 2.0f;
+		if (f > -10) {
+			f--;
+		}
+		Camera.mRotation.mY += f/30;
 	}
+
+	if (CKey::Push('A') == false && Camera.mRotation.mY < 0) {
+		Camera.mRotation.mY++;
+	}
+
 	//	e = CVector(-2.0f, 10.0f, -30.0f) * mPlayer.mMatrix;
 	e = CVector(0.0f, 20.0f, -100.0f) * CMatrix().RotateY(Camera.mRotation.mY) * mPlayer.mMatrix;
 	if (CKey::Push(VK_SPACE))

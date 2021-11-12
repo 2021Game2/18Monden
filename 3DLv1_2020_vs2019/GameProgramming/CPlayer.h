@@ -39,10 +39,12 @@ public:
 	//重力
 	float x = 300.0f;
 	float y = 300.0f;
-	float yadd = 0.0f;
+	float yadd;
 
 	//ダッシュ慣性
 	float t = 1;
+
+	float c = 1;
 };
 
 #endif

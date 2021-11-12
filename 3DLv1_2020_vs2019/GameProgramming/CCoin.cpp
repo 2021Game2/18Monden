@@ -19,6 +19,9 @@ CCoin::CCoin(CModel* model, CVector position,
 	CTaskManager::Get()->Remove(this); //削除して
 	CTaskManager::Get()->Add(this); //追加する
 	mTag = ECOIN;
+
+	CTransform::Update();
+	mCollider.ChangePriority();
 }
 
 
@@ -52,7 +55,7 @@ void CCoin::Collision(CCollider* m, CCollider* o) {
 				}
 			}
 			break;
-		case CCollider::ETRIANGLE: //三角コライダの時
+		/*/case CCollider::ETRIANGLE: //三角コライダの時
 			CVector adjust; //調整値
 			//三角コライダと球コライダの衝突判定
 			if (CCollider::CollisionTriangleSphere(o, m, &adjust))
@@ -60,7 +63,7 @@ void CCoin::Collision(CCollider* m, CCollider* o) {
 				mPosition = mPosition + adjust;
 				mRotation.mY++;
 			}
-			break;
+			break;*/
 		}
 		break;
 	}
@@ -68,6 +71,6 @@ void CCoin::Collision(CCollider* m, CCollider* o) {
 
 void CCoin::TaskCollision()
 {
-	mCollider.ChangePriority();
-	CCollisionManager::Get()->Collision(&mCollider, COLLISIONRANGE);
+	//mCollider.ChangePriority();
+	//CCollisionManager::Get()->Collision(&mCollider, COLLISIONRANGE);
 }

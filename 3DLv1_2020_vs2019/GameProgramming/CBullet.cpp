@@ -32,7 +32,7 @@ void CBullet::Update() {
 void CBullet::Render() {
 //	mCollider.Render();
 
-	mModelShuriken.Load("Shuriken.obj", "Shuriken.mtl");
+	mModelShuriken.Load("Shuriken4.obj", "Shuriken4.mtl");
 	mModelShuriken.Render(mMatrix);
 }
 

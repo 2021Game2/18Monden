@@ -14,6 +14,9 @@ CCity::CCity(CModel* model, CVector position,
 	mPriority = 1;
 	CTaskManager::Get()->Remove(this); //削除して
 	CTaskManager::Get()->Add(this); //追加する
+
+	CTransform::Update();
+
 	ColliderMesh.Set(this, &mMatrix, mpModel);
 }
 
@@ -21,5 +24,5 @@ CCity::CCity(CModel* model, CVector position,
 //更新処理
 void CCity::Update() {
 	//行列を更新
-	CTransform::Update();
+	
 }

@@ -25,6 +25,7 @@ CPlayer::CPlayer()
 , mCollider(this, &mMatrix, CVector(0.0f, 20.0f, 0.0f), 0.5f)
 , mFireCount(0)
 , mJump(0) //0はジャンプ可能
+, yadd(0)
 {
 	spThis = this;
 	//テクスチャファイルの読み込み（1行64列）
@@ -36,16 +37,44 @@ CPlayer::CPlayer()
 void CPlayer::Update() {
 	//Aキー入力で回転
 	if (CKey::Push('A')) {
-		//Y軸の回転値を増加
-		mRotation.mY += 3;
+		if (c < 0) {
+			c -= c * 1 / 10;
+		}
+
+		if (c < 30) {
+			c++;
+		}
+		mRotation.mY += c * 1/10;
 	}
+	//Aキー離すと慣性で回転
+	if (CKey::Push('A') == false && c > 1) {
+		c--;
+		mRotation.mY += c * 1 / 20;
+	}
+
+
+
+	//Dキー入力で回転
 	if (CKey::Push('D')) {
-		//Y軸の回転値を増加
-		mRotation.mY -= 3;
+		if (c > 0) {
+			c -= c * 1 / 10; //逆回転で慣性を抑える
+		}
+
+		if (c > -30) {
+			c--;
+		}
+		mRotation.mY += c * 1/10;
 	}
+	//Dキー離すと慣性で回転
+	if (CKey::Push('D') == false && c < -1) {
+		c++;
+		mRotation.mY += c * 1 / 20;
+	}
+
+
 	//Wキーで前進
 	if (CKey::Push('W')) {
-		if (t < 200) {
+		if (t < 300) {
 			t++;
 		}
 		//Z軸方向に1進んだ値を回転移動させる
@@ -62,11 +91,13 @@ void CPlayer::Update() {
 		if (t > 0) {
 			t -= t * 1/10; //ブレーキ
 		}
+
 		if (t > -90) {
 			t--;
 		}
 		mPosition = CVector(0.0f, 0.0f, 0.05f * t) * mMatrix;
 	}
+
 	//キー離すと慣性で滑る
 	if (CKey::Push('S') == false && t < -1) {
 		t++;
@@ -89,12 +120,12 @@ void CPlayer::Update() {
 		mJump++;
 	}
 
-	mPosition.mY -= yadd;
-	yadd += 0.05f;
+		mPosition.mY -= yadd;
+		yadd += 0.05f;
 
-	if (mPosition.mY <= 0) {
-		yadd = 0;
-		mJump = 0;
+		if (mPosition.mY < 0) {
+			yadd = 0;
+			mJump = 0;
 	}
 
 
@@ -126,11 +157,13 @@ void CPlayer::Collision(CCollider *m, CCollider *o) {
 			CVector adjust;//調整用ベクトル
 			//三角形と線分の衝突判定
 			CCollider::CollisionTriangleLine(o, m, &adjust);
-			//位置の更新(mPosition + adjust)
-			mPosition = mPosition - adjust * -1;
-			//行列の更新
-			CTransform::Update();
-
+				//yadd = 0;
+				//mJump = 0;
+				//位置の更新(mPosition + adjust)
+				mPosition = mPosition - adjust * -1;
+				//行列の更新
+				CTransform::Update();
+			
 		}
 		break;
 	case CCollider::ESPHERE:

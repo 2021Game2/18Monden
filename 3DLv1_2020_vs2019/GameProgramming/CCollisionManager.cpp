@@ -62,7 +62,13 @@ void CCollisionManager::Collision(CCollider *c, int range) {
 		//e‚ÌÕ“Ëˆ—‚ðŒÄ‚Ño‚·
 		//Ž©•ª‚ÌÕ“Ëˆ—
 		if (c->mpParent && c != task)
+		{
 			c->mpParent->Collision(c, task);
+			if (task->mpParent)
+			{
+				task->mpParent->Collision(task, c);
+			}
+		}
 		//Œ»ÝˆÊ’u‚ðŽŸ‚É‚·‚é
 		task = (CCollider*)task->mpNext;
 	}
