@@ -7,7 +7,7 @@
 //コンストラクタ
 CCoin::CCoin(CModel* model, CVector position,
 	CVector rotation, CVector scale)
-	: mCollider(this, &mMatrix, CVector(0.0f, 0.2f, 0.0f), 0.5f)
+	: mCollider(this, &mMatrix, CVector(0.0f, 0.2f, 0.0f), 0.7f)
 {
 	//モデル、位置、回転、拡縮を設定する
 	mpModel = model; //モデルの設定
@@ -46,11 +46,8 @@ void CCoin::Collision(CCollider* m, CCollider* o) {
 			if (o->mTag == CCollider::EBODY) {
 				if (o->mpParent->mTag == EPLAYER) {
 					if (CCollider::Collision(o, m)) {
-						Time--;
 						mEnabled = false;
-						if (Time < 0) {
-							mEnabled = true;
-						}
+						CPlayer::spThis->CoinGet++;
 					}
 				}
 			}

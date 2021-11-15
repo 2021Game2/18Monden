@@ -58,7 +58,7 @@ void CSceneGame::Init() {
 	mPlayer.mRotation = CVector(0.0f, 180.0f, 0.0f);
 
 	//家
-	mModelHouse.Load("City2.obj", "City2.mtl");
+	mModelHouse.Load("City3.obj", "City3.mtl");
 	new CCity(&mModelHouse, CVector(0.0f, -2.0f, -600.0f),
 		CVector(), CVector(1.0f, 1.0f, 1.0f));
 
@@ -78,13 +78,25 @@ void CSceneGame::Init() {
 		CVector(), CVector(1.0f, 1.0f, 1.0f));
 
 	//巻物
-	mModelMakimono.Load("Makimono.obj", "Makimono.mtl");
+	mModelMakimono.Load("bullet.obj", "bullet.mtl");
 	new CMakimono(&mModelMakimono, CVector(0.0f, 1.0f, -510.0f),
 		CVector(60.0f,0.0f, -50.0f), CVector(7.0f, 7.0f, 7.0f));
 
 	//コイン
 	mModelCoin.Load("Coin.obj", "Coin.mtl");
-	new CCoin(&mModelCoin, CVector(-5.0f, -0.5f, -510.0f),
+	new CCoin(&mModelCoin, CVector(-20.0f, -0.5f, -580.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(0.0f, -0.5f, -580.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(-10.0f, -0.5f, -580.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(10.0f, -0.5f, -580.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(20.0f, -0.5f, -580.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
 	//敵機のインスタンス作成

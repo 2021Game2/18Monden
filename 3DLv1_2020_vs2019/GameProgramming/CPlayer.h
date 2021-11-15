@@ -45,6 +45,10 @@ public:
 	float t = 1;
 
 	float c = 1;
+
+	int CoinGet;
+
+	int BulletP;
 };
 
 #endif

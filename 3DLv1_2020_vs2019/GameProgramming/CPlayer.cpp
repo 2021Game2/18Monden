@@ -26,6 +26,8 @@ CPlayer::CPlayer()
 , mFireCount(0)
 , mJump(0) //0はジャンプ可能
 , yadd(0)
+, CoinGet(0)
+, BulletP(0)
 {
 	spThis = this;
 	//テクスチャファイルの読み込み（1行64列）
@@ -130,7 +132,8 @@ void CPlayer::Update() {
 
 
 	//弾発射
-	if (CKey::Push('I') && mFireCount == 0) {
+	if (CKey::Push('I') && mFireCount == 0 && BulletP > 0) {
+		BulletP--;
 		mFireCount = FIRECOUNT;
 		CBullet* bullet = new CBullet();
 		bullet->Set(0.1f, 1.5f);
@@ -199,45 +202,22 @@ void CPlayer::Render()
 	CCharacter::Render();
 
 	//2Dの描画開始
-	//CUtil::Start2D(-400, 400, -300, 300);
+	CUtil::Start2D(-400, 400, -300, 300);
 	//描画色の設定（緑色の半透明）
-	//glColor4f(0.0f, 1.0f, 0.0f, 0.99f);
+	glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
 	//文字列編集エリアの作成
-	//char buf[64];
+	char buf[64];
 
 	//Y座標の表示
 	//文字列の設定
-	//sprintf(buf, "PY:%7.2f", mPosition.mY);
+	sprintf(buf, "COIN:%d", CoinGet);
 	//文字列の描画
-	//mText.DrawString(buf, 100, 30, 8, 16);
+	mText.DrawString(buf, -300, 270, 16, 32);
 
-	//X軸回転値の表示
-	//文字列の設定
-	//sprintf(buf, "RX:%7.2f", mRotation.mX);
-	//文字列の描画
-	//mText.DrawString(buf, 100, 0, 8, 16);
-	//X軸回転値の表示
-	//文字列の設定
-	//sprintf(buf, "FX:%7.2f", (CVector(0.0f, 0.0f, 1.0f) * mMatrixRotate).GetRotationX(CVector(0.0f, 1.0f, 0.0f) * mMatrixRotate));
-	//文字列の描画
-	//mText.DrawString(buf, 100, -20, 8, 16);
-
-
-
-	//Y軸回転値の表示
-	//文字列の設定
-	//sprintf(buf, "RY:%7.2f", mRotation.mY);
-	//文字列の描画
-	//mText.DrawString(buf, 100, -100, 8, 16);
-
-	//Y軸回転値の表示
-	//文字列の設定
-	//sprintf(buf, "FY:%7.2f", (CVector(0.0f, 0.0f, 1.0f) * mMatrixRotate).GetRotationY());
-	//文字列の描画
-	//mText.DrawString(buf, 100, -120, 8, 16);
-
+	sprintf(buf, "BULLET:%d", BulletP);
+	mText.DrawString(buf, -300, -270, 16, 32);
 
 	//2Dの描画終了
-	//CUtil::End2D();
+	CUtil::End2D();
 
 }
