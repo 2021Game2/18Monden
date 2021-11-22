@@ -125,10 +125,10 @@ void CPlayer::Update() {
 		mPosition.mY -= yadd;
 		yadd += 0.05f;
 
-		if (mPosition.mY < 0) {
+		/*if (mPosition.mY < 0) {
 			yadd = 0;
 			mJump = 0;
-	}
+	}*/
 
 
 	//’e”­ŽË

@@ -8,6 +8,7 @@
 キャラクタクラスを継承
 */
 class CCity : public CCharacter {
+	CMatrix mMatrixCol;
 public:
 	//三角形の可変長配列
 	std::vector<CTriangle> mTriangles;

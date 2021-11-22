@@ -1,2 +1,14 @@
-﻿  CSceneGame.cpp
+﻿  CBullet.cpp
+  CCoin.cpp
+  CCollider.cpp
+  CColliderLine.cpp
+  CCollisionManager.cpp
+  CEnemy.cpp
+  CEnemy2.cpp
+  CMakimono.cpp
+  CPlayer.cpp
+C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CPlayer.cpp(213,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CPlayer.cpp(217,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  CSceneGame.cpp
+  コードを生成中...
   GameProgramming.vcxproj -> C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\Debug\GameProgramming.exe
