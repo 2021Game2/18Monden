@@ -77,7 +77,7 @@ void CSceneGame::Init() {
 	new CCity(&mModelHouse, CVector(-150.0f, -2.0f, -600.0f),
 		CVector(), CVector(1.0f, 1.0f, 1.0f));
 
-	//巻物
+	//弾丸
 	mModelMakimono.Load("bullet.obj", "bullet.mtl");
 	new CMakimono(&mModelMakimono, CVector(0.0f, 1.0f, -510.0f),
 		CVector(60.0f,0.0f, -50.0f), CVector(7.0f, 7.0f, 7.0f));
@@ -100,7 +100,7 @@ void CSceneGame::Init() {
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
 	//敵機のインスタンス作成
-	//new CEnemy(&mModelC5, CVector(0.0f, 30.0f, -100.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
+	new CEnemy(&mModelC5, CVector(30.0f, 0.0f, -10.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
 	//new CEnemy(&mModelC5, CVector(30.0f, 10.0f, -130.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
 	//new CEnemy(&mModelC5, CVector(0.0f, 10.0f, -600.0f), CVector(), CVector(0.1f, 0.1f, 0.1f));
 	//new CEnemy(&mModelC5, CVector(30.0f, 10.0f, -630.0f), CVector(), CVector(0.1f, 0.1f, 0.1f));

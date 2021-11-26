@@ -118,17 +118,12 @@ void CPlayer::Update() {
 	//ジャンプ
 	if (mJump == 0 && CKey::Once('J'))
 	{
-		yadd = -1.2f;
+		yadd = -0.2f;
 		mJump++;
 	}
 
 		mPosition.mY -= yadd;
-		yadd += 0.05f;
-
-		/*if (mPosition.mY < 0) {
-			yadd = 0;
-			mJump = 0;
-	}*/
+		yadd += 0.01f;
 
 
 	//弾発射
@@ -143,7 +138,8 @@ void CPlayer::Update() {
 		//		TaskManager.Add(bullet);
 	}
 
-
+	//行列を更新
+	CTransform::Update();
 }
 
 void CPlayer::Collision(CCollider *m, CCollider *o) {
@@ -159,14 +155,15 @@ void CPlayer::Collision(CCollider *m, CCollider *o) {
 		if (o->mType == CCollider::ETRIANGLE) {
 			CVector adjust;//調整用ベクトル
 			//三角形と線分の衝突判定
-			CCollider::CollisionTriangleLine(o, m, &adjust);
-				//yadd = 0;
-				//mJump = 0;
+			if (CCollider::CollisionTriangleLine(o, m, &adjust))
+			{
+				yadd = 0;
+				mJump = 0;
 				//位置の更新(mPosition + adjust)
 				mPosition = mPosition - adjust * -1;
 				//行列の更新
 				CTransform::Update();
-			
+			}
 		}
 		break;
 	case CCollider::ESPHERE:

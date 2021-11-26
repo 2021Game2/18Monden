@@ -21,7 +21,7 @@ CCity::CCity(CModel* model, CVector position,
 
 	CModel cube;
 	cube.Load("cube.obj","cube.mtl");
-	mMatrixCol = CMatrix().Scale(18.0f, 23.0f, 17.0f) * mMatrix;
+	mMatrixCol = CMatrix().Scale(17.5f, 15.0f, 16.0f) * mMatrix;
 	ColliderMesh.Set(this, &mMatrixCol, &cube);
 }
 
