@@ -34,6 +34,8 @@ public:
 	//Collision(コライダ1, コライダ2)
 	void Collision(CCollider *m, CCollider *o);
 	void TaskCollision();
+
+	CVector mPoint; //目標地点
 };
 
 #endif
