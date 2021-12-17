@@ -115,6 +115,7 @@
     <ClCompile Include="CColliderTriangle.cpp" />
     <ClCompile Include="CUtil.cpp" />
     <ClCompile Include="CVector.cpp" />
+    <ClCompile Include="CWall.cpp" />
     <ClCompile Include="Update.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -151,6 +152,7 @@
     <ClInclude Include="CColliderTriangle.h" />
     <ClInclude Include="CUtil.h" />
     <ClInclude Include="CVector.h" />
+    <ClInclude Include="CWall.h" />
     <ClInclude Include="Update.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

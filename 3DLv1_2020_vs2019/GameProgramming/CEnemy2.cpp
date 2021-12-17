@@ -17,7 +17,7 @@ CModel CEnemy2::mModel;	//モデルデータ作成
 
 CEnemy2::CEnemy2()
 : mCollider(this, &mMatrix, CVector(0.0f, 0.0f, 0.0f), 0.4f)
-, mColSearch(this, &mMatrix, CVector(0.0f, 0.0f, 100.0f), 130.0f)
+, mColSearch(this, &mMatrix, CVector(0.0f, 0.0f, 100.0f), 50.0f)
 , mpPlayer(0)
 , mHp(HP)
 , mFireCount(0)
@@ -56,11 +56,6 @@ CEnemy2::CEnemy2(const CVector& position, const CVector& rotation, const CVector
 //更新処理
 void CEnemy2::Update() {
 
-	//行列を更新
-	CTransform::Update();
-	//位置を移動
-	mPosition = CVector(0.0f, 0.0f, 1.0f) * mMatrix;
-
 	/*CBullet *bullet = new CBullet();
 	bullet->Set(0.1f, 1.5f);
 	bullet->mPosition = CVector(0.0f, 0.0f, 10.0f) * mMatrix;
@@ -79,23 +74,33 @@ void CEnemy2::Update() {
 	CVector vp = mPoint - mPosition;
 	float dx = vp.Dot(vx);
 	float dy = vp.Dot(vy);
+	float dz = vp.Dot(vz);
 	float margin = 0.1f;
-	if (dx > margin)
+
+	if (dz < -margin)
 	{
-		mRotation.mY += 10.0f;
+		mRotation.mY -= 1.0f;
 	}
-	else if (dx < -margin)
+	else
 	{
-		mRotation.mY -= 10.0f;
+		if (dx > margin)
+		{
+			mRotation.mY += 1.0f;
+		}
+		else if (dx < -margin)
+		{
+			mRotation.mY -= 1.0f;
+		}
 	}
-	if (dy > margin)
+
+	/*if (dy > margin)
 	{
-		mRotation.mX -= 10.0f;
+		mRotation.mX -= 5.0f;
 	}
 	else if (dy < -margin)
 	{
-		mRotation.mX += 10.0f;
-	}
+		mRotation.mX += 5.0f;
+	}*/
 
 	mPosition = mPosition + CVector(0.0f, 0.0f, VELOCITY) * mMatrixRotate;
 	CTransform::Update();
@@ -117,10 +122,9 @@ void CEnemy2::Collision(CCollider* m, CCollider* o) {
 		case CCollider::ETRIANGLE: //三角コライダの時
 			CVector adjust; //調整値
 			//三角コライダと球コライダの衝突判定
-			if (CCollider::ESPHERE(o, m, &adjust))
-			{      //衝突しない位置まで戻す
+			if (CCollider::CollisionTriangleSphere(o, m, &adjust))
+			{	//衝突しない位置まで戻す
 				mPosition = mPosition + adjust;
-				mRotation.mY++;
 			}
 			break;
 		}

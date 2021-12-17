@@ -19,16 +19,24 @@ public:
 	//コライダ
 	CCollider mCollider;
 
+	static CCoin *spThis;
+
 	//衝突処理
 	//Collision(コライダ１,コライダ２)
 	void Collision(CCollider* m, CCollider* o);
 
 	int mFx; //X軸方向の移動 -1:左 0:移動しない 1:右へ移動
-	int mFy; //Y軸方向の移動 -1:下 0:移動しない 1:上へ移動
+	int mFy; //Y軸方向の移動 -1:下 0:移動しない 1:上へ移動wwwwwwww
 
 	void TaskCollision();
 
-	int Time = 30;
+	int Time;
+
+	int CoinRender;
+
+	void Render();
+
+	void ColliderRender();
 };
 
 #endif

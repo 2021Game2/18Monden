@@ -1,4 +1,4 @@
-﻿  CEnemy2.cpp
-C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CEnemy2.cpp(120,19): warning C4353: 非標準の拡張機能が使用: 関数式として定数 0 が使用されています。本来の '__noop' 関数を使用してください
-LINK : warning LNK4098: defaultlib 'MSVCRT' は他のライブラリの使用と競合しています。/NODEFAULTLIB:library を使用してください。
+﻿  CCoin.cpp
+  CSceneGame.cpp
+  コードを生成中...
   GameProgramming.vcxproj -> C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\Debug\GameProgramming.exe

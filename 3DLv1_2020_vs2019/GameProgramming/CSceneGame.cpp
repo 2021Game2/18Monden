@@ -26,9 +26,12 @@
 
 #include "CCoin.h"
 
+#include "CWall.h"
+
 CModel mModelHouse;
 CModel mModelMakimono;
 CModel mModelCoin;
+CModel mModelWall;
 
 void CSceneGame::Init() {
 	mText.LoadTexture("FontWhite.tga",1,64);
@@ -74,9 +77,6 @@ void CSceneGame::Init() {
 	new CCity(&mModelHouse, CVector(-100.0f, -2.0f, -600.0f),
 		CVector(), CVector(1.0f, 1.0f, 1.0f));
 
-	new CCity(&mModelHouse, CVector(-150.0f, -2.0f, -600.0f),
-		CVector(), CVector(1.0f, 1.0f, 1.0f));
-
 	//弾丸
 	mModelMakimono.Load("bullet.obj", "bullet.mtl");
 	new CMakimono(&mModelMakimono, CVector(0.0f, 1.0f, -510.0f),
@@ -85,7 +85,7 @@ void CSceneGame::Init() {
 	//コイン
 	mModelCoin.Load("Coin.obj", "Coin.mtl");
 	new CCoin(&mModelCoin, CVector(-20.0f, -0.5f, -580.0f),
-		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+			CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
 	new CCoin(&mModelCoin, CVector(0.0f, -0.5f, -580.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
@@ -99,6 +99,10 @@ void CSceneGame::Init() {
 	new CCoin(&mModelCoin, CVector(20.0f, -0.5f, -580.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
+	mModelWall.Load("wall.obj", "wall.mtl");
+	new CWall(&mModelWall, CVector(130.0f, -0.5f, -580.0f),
+		CVector(0.0f, 90.0f, 0.0f), CVector(100.0f, 100.0f, 0.0f));
+
 	//敵機のインスタンス作成
 	new CEnemy(&mModelC5, CVector(30.0f, 0.0f, -10.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
 	//new CEnemy(&mModelC5, CVector(30.0f, 10.0f, -130.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
@@ -106,7 +110,7 @@ void CSceneGame::Init() {
 	//new CEnemy(&mModelC5, CVector(30.0f, 10.0f, -630.0f), CVector(), CVector(0.1f, 0.1f, 0.1f));
 
 	new CEnemy2(CVector(0.0f, 0.0f, -100.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
-//	new CEnemy2(CVector(15.0f, 15.0f, -150.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
+    new CEnemy2(CVector(15.0f, 0.0f, -50.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
 
 	//new CEnemy2(CVector(-5.0f, 1.0f, -10.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
 	//new CEnemy2(CVector(5.0f, 1.0f, -10.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));

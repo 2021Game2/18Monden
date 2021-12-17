@@ -23,8 +23,8 @@ CCity::CCity(CModel* model, CVector position,
 	cube.Load("cube.obj","cube.mtl");
 	mMatrixCol = CMatrix().Scale(17.5f, 15.0f, 16.0f) * mMatrix;
 	ColliderMesh.Set(this, &mMatrixCol, &cube);
+	mTag = EHOUSE;
 }
-
 
 //XVˆ—
 void CCity::Update() {

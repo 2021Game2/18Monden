@@ -24,6 +24,7 @@ public:
 		EBULLETENEMY,	//敵弾
 		EMAKIMONO,
 		ECOIN,
+		EHOUSE,
 	};
 	ETag mTag;
 	CModel *mpModel; //モデルのポインタ
