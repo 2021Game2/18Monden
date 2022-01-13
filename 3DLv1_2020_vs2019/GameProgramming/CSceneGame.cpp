@@ -56,52 +56,125 @@ void CSceneGame::Init() {
 	mPlayer.mpModel = &mModel;
 	mPlayer.mScale = CVector(0.03f, 0.03f, 0.03f);
 	//
-	mPlayer.mPosition = CVector(0.0f, 0.0f, -3.0f) * mBackGroundMatrix;
+	mPlayer.mPosition = CVector(0.0f, 0.0f, -25.0f) * mBackGroundMatrix;
 	//mPlayer.mPosition = CVector(0.0f, 0.0f, -503.0f);
 	mPlayer.mRotation = CVector(0.0f, 180.0f, 0.0f);
 
 	//家
 	mModelHouse.Load("City3.obj", "City3.mtl");
-	new CCity(&mModelHouse, CVector(0.0f, -2.0f, -600.0f),
+	new CCity(&mModelHouse, CVector(0.0f, -2.0f, -550.0f),
 		CVector(), CVector(1.0f, 1.0f, 1.0f));
 
-	new CCity(&mModelHouse, CVector(50.0f, -2.0f, -600.0f),
+	new CCity(&mModelHouse, CVector(50.0f, -2.0f, -550.0f),
 		CVector(), CVector(1.0f, 1.0f, 1.0f));
 
-	new CCity(&mModelHouse, CVector(-50.0f, -2.0f, -600.0f),
+	new CCity(&mModelHouse, CVector(-50.0f, -2.0f, -550.0f),
 		CVector(), CVector(1.0f, 1.0f, 1.0f));
 
-	new CCity(&mModelHouse, CVector(100.0f, -2.0f, -600.0f),
+	new CCity(&mModelHouse, CVector(100.0f, -2.0f, -550.0f),
 		CVector(), CVector(1.0f, 1.0f, 1.0f));
 
-	new CCity(&mModelHouse, CVector(-100.0f, -2.0f, -600.0f),
+	new CCity(&mModelHouse, CVector(-100.0f, -2.0f, -550.0f),
 		CVector(), CVector(1.0f, 1.0f, 1.0f));
 
 	//弾丸
 	mModelMakimono.Load("bullet.obj", "bullet.mtl");
-	new CMakimono(&mModelMakimono, CVector(0.0f, 1.0f, -510.0f),
+	new CMakimono(&mModelMakimono, CVector(0.0f, 1.0f, -460.0f),
 		CVector(60.0f,0.0f, -50.0f), CVector(7.0f, 7.0f, 7.0f));
 
 	//コイン
 	mModelCoin.Load("Coin.obj", "Coin.mtl");
-	new CCoin(&mModelCoin, CVector(-20.0f, -0.5f, -580.0f),
+	new CCoin(&mModelCoin, CVector(-120.0f, -0.5f, -530.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(-100.0f, -0.5f, -530.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(-80.0f, -0.5f, -530.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(-60.0f, -0.5f, -530.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(-40.0f, -0.5f, -530.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(-20.0f, -0.5f, -530.0f),
 			CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
-	new CCoin(&mModelCoin, CVector(0.0f, -0.5f, -580.0f),
+	new CCoin(&mModelCoin, CVector(0.0f, -0.5f, -530.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
-	new CCoin(&mModelCoin, CVector(-10.0f, -0.5f, -580.0f),
+	new CCoin(&mModelCoin, CVector(20.0f, -0.5f, -530.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
-	new CCoin(&mModelCoin, CVector(10.0f, -0.5f, -580.0f),
+	new CCoin(&mModelCoin, CVector(40.0f, -0.5f, -530.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
-	new CCoin(&mModelCoin, CVector(20.0f, -0.5f, -580.0f),
+	new CCoin(&mModelCoin, CVector(60.0f, -0.5f, -530.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
+	new CCoin(&mModelCoin, CVector(80.0f, -0.5f, -530.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(100.0f, -0.5f, -530.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(120.0f, -0.5f, -530.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(-120.0f, -0.5f, -570.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(-100.0f, -0.5f, -570.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(-80.0f, -0.5f, -570.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(-60.0f, -0.5f, -570.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(-40.0f, -0.5f, -570.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(-20.0f, -0.5f, -570.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(0.0f, -0.5f, -570.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(20.0f, -0.5f, -570.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(40.0f, -0.5f, -570.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(60.0f, -0.5f, -570.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(80.0f, -0.5f, -570.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(100.0f, -0.5f, -570.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(120.0f, -0.5f, -570.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	//壁
 	mModelWall.Load("wall.obj", "wall.mtl");
-	new CWall(&mModelWall, CVector(130.0f, -0.5f, -580.0f),
+	new CWall(&mModelWall, CVector(130.0f, -0.5f, -530.0f),
 		CVector(0.0f, 90.0f, 0.0f), CVector(100.0f, 100.0f, 0.0f));
+
+	new CWall(&mModelWall, CVector(-130.0f, -0.5f, -530.0f),
+		CVector(0.0f, 90.0f, 0.0f), CVector(100.0f, 100.0f, 0.0f));
+
+	new CWall(&mModelWall, CVector(0.0f, -0.5f, -580.0f),
+		CVector(0.0f, 90.0f, 0.0f), CVector(0.0f, 100.0f, 200.0f));
+
+	new CWall(&mModelWall, CVector(0.0f, -0.5f, -520.0f),
+		CVector(0.0f, 90.0f, 0.0f), CVector(0.0f, 100.0f, 200.0f));
 
 	//敵機のインスタンス作成
 	new CEnemy(&mModelC5, CVector(30.0f, 0.0f, -10.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));

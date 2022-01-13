@@ -79,17 +79,17 @@ void CEnemy2::Update() {
 
 	if (dz < -margin)
 	{
-		mRotation.mY -= 1.0f;
+		mRotation.mY -= 2.0f;
 	}
 	else
 	{
 		if (dx > margin)
 		{
-			mRotation.mY += 1.0f;
+			mRotation.mY += 2.0f;
 		}
 		else if (dx < -margin)
 		{
-			mRotation.mY -= 1.0f;
+			mRotation.mY -= 2.0f;
 		}
 	}
 
@@ -108,7 +108,7 @@ void CEnemy2::Update() {
 	int r = rand() % 180;
 
 }
-
+#include "CCoin.h"
 //衝突処理
 //Collision(コライダ１,コライダ２)
 void CEnemy2::Collision(CCollider* m, CCollider* o) {
@@ -132,9 +132,11 @@ void CEnemy2::Collision(CCollider* m, CCollider* o) {
 	case CCollider::ESEARCH:
 		if (o->mType == CCollider::ESPHERE) {
 			if (o->mpParent->mTag == ECOIN) {
-				if (CCollider::Collision(m, o)) {
-					mpPlayer = o->mpParent;
-					mPoint = mpPlayer->mPosition;
+				if (((CCoin*)o->mpParent)->CoinRender == 0) {
+					if (CCollider::Collision(m, o)) {
+						mpPlayer = o->mpParent;
+						mPoint = mpPlayer->mPosition;
+					}
 				}
 			}
 		}

@@ -51,6 +51,12 @@ void CCoin::Render() {
 	}
 }
 
+/*void CCoin::ColliderRender() {
+	if (CoinRender == 0) {
+		CCollider::Render();
+	}
+}*/
+
 //衝突処理
 //Collision(コライダ１,コライダ２)
 void CCoin::Collision(CCollider* m, CCollider* o) {
@@ -68,13 +74,15 @@ void CCoin::Collision(CCollider* m, CCollider* o) {
 			if (o->mTag == CCollider::EBODY) {
 				if (o->mpParent->mTag == EPLAYER) {
 					if (CCollider::Collision(o, m)) {
-						CoinRender = 300;
+						CoinRender = 1000;
 						CPlayer::spThis->CoinGet++;
+						//エフェクト生成
+						new CEffect(o->mpParent->mPosition, 1.0f, 1.0f, "exp.tga", 4, 4, 2);
 					}
 				}
 				if (o->mpParent->mTag == EENEMY) {
 					if (CCollider::Collision(o, m)) {
-						CoinRender = 300;
+						CoinRender = 1000;
 						}
 					}
 				}
