@@ -4,10 +4,23 @@
 マトリクスクラス
 4行4列の行列データを扱います
 */
+class CVector;
+
 class CMatrix {
 public:
-	//4×4の行列データを設定
-	float mM[4][4];
+	union {
+		//4×4の行列データを設定
+		float mM[4][4];
+		//1次元配列として使う
+		float mF[16];
+		struct
+		{
+			float	m00, m10, m20, m30,
+				m01, m11, m21, m31,
+				m02, m12, m22, m32,
+				m03, m13, m23, m33;
+		};
+	};
 	//表示確認用
 	//4×4の行列を画面出力
 	void Print();
@@ -32,8 +45,24 @@ public:
 	CMatrix Translate(float mx, float my, float mz);
 	//*演算子のオーバーロード
 	//CMatrix * CMatrix の演算結果を返す
-	CMatrix operator*(const CMatrix &m);
+	CMatrix operator*(const CMatrix& m);
+	//クオータニオンで回転行列を設定する
+	CMatrix SetQuaternion(float x, float y, float z, float w);
+	//*演算子のオーバーロード
+	//CMatrix * float の演算結果を返す
+	CMatrix operator*(const float& f);
+	//+演算子のオーバーロード
+	//CMatrix1 + CMatrix2 の演算結果を返す
+	CMatrix operator+(const CMatrix& m);
+	//+=演算子のオーバーロード
+	//CMatrix1 += CMatrix2 の演算を行う
+	void operator+=(const CMatrix& m);
 
+	CVector operator*(const CVector& v);
+
+	CMatrix Inverse(void);
+	CVector GetXVec();
+	CVector GetYVec();
+	CVector GetZVec();
 };
 #endif
-

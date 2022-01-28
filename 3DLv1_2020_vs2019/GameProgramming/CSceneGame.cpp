@@ -79,8 +79,23 @@ void CSceneGame::Init() {
 
 	//íeä€
 	mModelMakimono.Load("bullet.obj", "bullet.mtl");
-	new CMakimono(&mModelMakimono, CVector(0.0f, 1.0f, -460.0f),
+	new CMakimono(&mModelMakimono, CVector(-123.0f, 1.0f, -550.0f),
 		CVector(60.0f,0.0f, -50.0f), CVector(7.0f, 7.0f, 7.0f));
+
+	new CMakimono(&mModelMakimono, CVector(-73.0f, 1.0f, -550.0f),
+		CVector(60.0f, 0.0f, -50.0f), CVector(7.0f, 7.0f, 7.0f));
+
+	new CMakimono(&mModelMakimono, CVector(-23.0f, 1.0f, -550.0f),
+		CVector(60.0f, 0.0f, -50.0f), CVector(7.0f, 7.0f, 7.0f));
+
+	new CMakimono(&mModelMakimono, CVector(27.0f, 1.0f, -550.0f),
+		CVector(60.0f, 0.0f, -50.0f), CVector(7.0f, 7.0f, 7.0f));
+
+	new CMakimono(&mModelMakimono, CVector(77.0f, 1.0f, -550.0f),
+		CVector(60.0f, 0.0f, -50.0f), CVector(7.0f, 7.0f, 7.0f));
+
+	new CMakimono(&mModelMakimono, CVector(127.0f, 1.0f, -550.0f),
+		CVector(60.0f, 0.0f, -50.0f), CVector(7.0f, 7.0f, 7.0f));
 
 	//ÉRÉCÉì
 	mModelCoin.Load("Coin.obj", "Coin.mtl");

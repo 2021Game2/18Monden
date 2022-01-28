@@ -18,34 +18,34 @@ public:
 	//CVector(X座標, Y座標, Z座標)
 	CVector(float x, float y, float z);
 	//CVector * CMatrixの結果をCVectorで返す
-	CVector operator*(const CMatrix &m);
+	CVector operator*(const CMatrix& m);
 	//-演算子のオーバーロード
 	//CVector - CVector の演算結果を返す
-	CVector operator-(const CVector &v);
+	CVector operator-(const CVector& v);
 	//ベクトルの長さを返す
 	float Length();
 	//内積
 	//Dot(ベクトル)
-	float Dot(const CVector &v);
+	float Dot(const CVector& v);
 	//外積
 	//Cross(ベクトル)
-	CVector Cross(const CVector &v);
+	CVector Cross(const CVector& v);
 	//*演算子のオーバーロード
 	//CVector * float の演算結果を返す
-	CVector operator*(const float &f);
+	CVector operator*(const float& f);
+	CVector operator/(const float& f);
 	//正規化
 	//大きさ1のベクトルを返す
 	CVector Normalize();
-	//+演算子のオーバーロード
+	//+演算しのオーバーロード
 	//CVector + CVector の演算結果を返す
-	CVector operator+(const CVector &v);
-	//Y軸での回転角度の取得
-	//度度を返す（Z軸＋が0度）
-	float GetRotationY();
-	//X軸での回転角度の取得
-	//度度を返す（Z軸＋が0度）
-	//GetRotationX(Y軸方向)
-	float GetRotationX(CVector& y);
+	CVector operator+(const CVector& v);
+	//+=演算子のオーバーロード
+	//CVector1 += CVector2 の演算を行う
+	void operator+=(const CVector& v);
+	//CVector1 -= CVector2 の演算を行う
+	void operator-=(const CVector& v);
 
 };
 #endif
+

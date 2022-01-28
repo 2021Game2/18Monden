@@ -4,22 +4,54 @@
 /*
 カメラクラス
 */
+#define DEF_CAMERA_DIST 10.0f
+#define DEF_CAMERA_HEAD_ADJUST 3.0f
 class CCamera {
 public:
-	//回転
-	CVector mRotation;
 	//視点
 	CVector mEye;
 	//注視点
 	CVector mCenter;
 	//上方向
 	CVector mUp;
+
+	CMatrix mMatrix;
+	CMatrix mProj;
+
+	//重複するがカメラ制御用
+	CVector mPos;		//位置
+	CVector mTarget;	//ターゲット
+	CVector mRotation;
+	float	mAngleX;	//アングル
+	float	mAngleY;	//アングル
+	float	mDist;	//距離
+
 	//カメラの設定
 	//Set(視点, 注視点, 上方向)
-	void Set(const CVector &eye, const CVector &center,
-		const CVector &up);
+	void Set(const CVector& eye, const CVector& center,
+		const CVector& up);
+
+	void SetTarget(const CVector& target);
+
+	//カメラ初期化
+	void Init();
+	//カメラ更新処理
+	void Update();
+
 	//カメラ適用
 	void Render();
+
+	//ベクトル取得
+	CMatrix GetMat();
+	//プロジェクションマトリクス取得
+	CMatrix GetProjMat();
+
+	//スクリーン座標変換
+	//戻り値 表示範囲
+	//pOut 結果格納用
+	//pos 2Dに変換したいワールド座標
+	bool WorldToScreen(CVector* pOut, const CVector& pos);
+
 };
 
 //カメラの外部参照

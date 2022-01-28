@@ -107,6 +107,29 @@ void CEnemy2::Update() {
 
 	int r = rand() % 180;
 
+	if (mpPlayer)
+	{
+		//プレイヤーまでのベクトルを求める
+		CVector vp = mpPlayer->mPosition - mPosition;
+		float dx = vp.Dot(vx); //左ベクトルとの内積を求める
+		float dy = vp.Dot(vy); //上ベクトルとの内積を求める
+		//X軸のずれが2.0以下
+		if (-2.0f < dx && dx < 2.0f)
+		{
+			//Y軸のずれが2.0以下
+			if (-2.0f < dy && dy < 2.0f)
+			{
+				//弾を発射
+				CBullet* bullet = new CBullet();
+				bullet->Set(0.1f, 0.5f);
+				bullet->mPosition =
+					CVector(0.0f, 0.0f, 10.0f) * mMatrix;
+				bullet->mRotation = mRotation;
+				bullet->Update();
+			}
+		}
+	}
+	mpPlayer = 0;
 }
 #include "CCoin.h"
 //衝突処理
@@ -131,6 +154,12 @@ void CEnemy2::Collision(CCollider* m, CCollider* o) {
 		break;
 	case CCollider::ESEARCH:
 		if (o->mType == CCollider::ESPHERE) {
+			if (o->mpParent->mTag == EPLAYER) {
+				if (CCollider::Collision(m, o))
+				{
+					mpPlayer = o->mpParent;
+				}
+			}
 			if (o->mpParent->mTag == ECOIN) {
 				if (((CCoin*)o->mpParent)->CoinRender == 0) {
 					if (CCollider::Collision(m, o)) {
