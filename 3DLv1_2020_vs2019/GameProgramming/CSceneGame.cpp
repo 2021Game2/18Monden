@@ -33,22 +33,31 @@ CModel mModelMakimono;
 CModel mModelCoin;
 CModel mModelWall;
 
-void CSceneGame::Init() {
-	mText.LoadTexture("FontWhite.tga",1,64);
+#define FONT_IMAGE "FontWhite.tga"
+#define ENEMY_MODEL "Resource\\c5.obj","Resourece\\c5.mtl"
+#define GROUND_TRANSLATE 0.0f, 0.0f, -500.0f
+#define CAR_MODEL "Resource\\Car.obj","Resource\\Car.mtl"
+#define HOUSE_MODEL "Resource\\City3.obj","Resource\\City3.mtl"
+#define SKY_MODEL "Resource\\sky.obj","Resourece\\sky.mtl"
+#define COIN_MODEL "Resource\\Coin.obj","Resource\\Coin.mtl"
+#define BULLET_MODEL "Resource\\bullet.obj","Resource\\bullet.mtl"
 
-	mBackGroundMatrix.Translate(0.0f, 0.0f, -500.0f);
+void CSceneGame::Init() {
+	mText.LoadTexture(FONT_IMAGE,1,64);
+
+	mBackGroundMatrix.Translate(GROUND_TRANSLATE);
 
 	//三角コライダの確認
 //	mColliderTriangle.Set(NULL, NULL, CVector(-50.0f, 0.0f, -50.0f), CVector(-50.0f, 0.0f, 50.0f), CVector(50.0f, 0.0f, -50.0f));
 //	mColliderTriangle2.Set(NULL, NULL, CVector(50.0f, 0.0f, -50.0f), CVector(-50.0f, 0.0f, 50.0f), CVector(50.0f, 0.0f, 50.0f));
 
 	//C5モデルの読み込み
-	mModelC5.Load("c5.obj", "c5.mtl");
+	mModelC5.Load(ENEMY_MODEL);
 
 	mEye = CVector(1.0f, 2.0f, 3.0f);
 	//モデルファイルの入力
-	mModel.Load("Car.obj", "Car.mtl");
-	mBackGround.Load("sky.obj", "sky.mtl");
+	mModel.Load(CAR_MODEL);
+	mBackGround.Load(SKY_MODEL);
 
 	CMatrix matrix;
 	matrix.Print();
@@ -61,7 +70,7 @@ void CSceneGame::Init() {
 	mPlayer.mRotation = CVector(0.0f, 180.0f, 0.0f);
 
 	//家
-	mModelHouse.Load("City3.obj", "City3.mtl");
+	mModelHouse.Load(HOUSE_MODEL);
 	new CCity(&mModelHouse, CVector(0.0f, -2.0f, -550.0f),
 		CVector(), CVector(1.0f, 1.0f, 1.0f));
 
@@ -78,7 +87,7 @@ void CSceneGame::Init() {
 		CVector(), CVector(1.0f, 1.0f, 1.0f));
 
 	//弾丸
-	mModelMakimono.Load("bullet.obj", "bullet.mtl");
+	mModelMakimono.Load(BULLET_MODEL);
 	new CMakimono(&mModelMakimono, CVector(-123.0f, 1.0f, -550.0f),
 		CVector(60.0f,0.0f, -50.0f), CVector(7.0f, 7.0f, 7.0f));
 
@@ -98,7 +107,7 @@ void CSceneGame::Init() {
 		CVector(60.0f, 0.0f, -50.0f), CVector(7.0f, 7.0f, 7.0f));
 
 	//コイン
-	mModelCoin.Load("Coin.obj", "Coin.mtl");
+	mModelCoin.Load(COIN_MODEL);
 	new CCoin(&mModelCoin, CVector(-120.0f, -0.5f, -530.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
