@@ -83,6 +83,7 @@ void CCoin::Collision(CCollider* m, CCollider* o) {
 				if (o->mpParent->mTag == EENEMY) {
 					if (CCollider::Collision(o, m)) {
 						CoinRender = 1000;
+						CPlayer::spThis->EnemyCoinGet++;
 						}
 					}
 				}

@@ -28,6 +28,7 @@ CPlayer::CPlayer()
 , yadd(0)
 , CoinGet(0)
 , BulletP(0)
+, EnemyCoinGet(0)
 {
 	spThis = this;
 	//テクスチャファイルの読み込み（1行64列）
@@ -207,9 +208,16 @@ void CPlayer::Render()
 
 	//Y座標の表示
 	//文字列の設定
-	sprintf(buf, "COIN:%d", CoinGet);
+	sprintf(buf, "PLAYER:%d", CoinGet);
 	//文字列の描画
 	mText.DrawString(buf, -300, 270, 16, 32);
+
+
+	//Y座標の表示
+	//文字列の設定
+	sprintf(buf, "ENEMY:%d", EnemyCoinGet);
+	//文字列の描画
+	mText.DrawString(buf, 100, 270, 16, 32);
 
 	sprintf(buf, "BULLET:%d", BulletP);
 	mText.DrawString(buf, -300, -270, 16, 32);

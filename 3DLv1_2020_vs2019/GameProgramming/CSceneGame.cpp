@@ -38,7 +38,7 @@ CModel mModelWall;
 #define GROUND_TRANSLATE 0.0f, 0.0f, -500.0f
 #define CAR_MODEL "Resource\\Car.obj","Resource\\Car.mtl"
 #define HOUSE_MODEL "Resource\\City3.obj","Resource\\City3.mtl"
-#define SKY_MODEL "Resource\\sky.obj","Resourece\\sky.mtl"
+#define SKY_MODEL "Resource\\sky.obj","Resource\\sky.mtl"
 #define COIN_MODEL "Resource\\Coin.obj","Resource\\Coin.mtl"
 #define BULLET_MODEL "Resource\\bullet.obj","Resource\\bullet.mtl"
 

@@ -7,7 +7,7 @@
 /*
 キャラクタクラスを継承
 */
-class CCity : public CCharacter {
+class CCity : private CCharacter {
 	CMatrix mMatrixCol;
 public:
 	//三角形の可変長配列

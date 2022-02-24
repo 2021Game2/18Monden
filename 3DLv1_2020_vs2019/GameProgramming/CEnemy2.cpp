@@ -8,7 +8,7 @@
 #define MTL "f16.mtl"	//モデルのマテリアルファイル
 
 #define HP 3	//耐久値
-#define VELOCITY 0.11f	//速度
+#define VELOCITY 0.31f	//速度
 
 CModel CEnemy2::mModel;	//モデルデータ作成
 

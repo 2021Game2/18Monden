@@ -8,7 +8,7 @@
 /*
 キャラクタクラスを継承
 */
-class CMakimono : public CCharacter{
+class CMakimono : private CCharacter{
 public:
 	//コンストラクタ
 	CMakimono(CModel* model, CVector position, CVector rotation, CVector scale);

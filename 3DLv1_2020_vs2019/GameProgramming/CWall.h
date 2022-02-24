@@ -8,7 +8,7 @@
 エネミークラス
 キャラクタクラスを継承
 */
-class CWall : public CCharacter {
+class CWall : private CCharacter {
 public:
 	//三角形の可変長配列
 	std::vector<CTriangle> mTriangles;

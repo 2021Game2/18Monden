@@ -48,6 +48,8 @@ public:
 
 	int CoinGet;
 
+	int EnemyCoinGet;
+
 	int BulletP;
 };
 

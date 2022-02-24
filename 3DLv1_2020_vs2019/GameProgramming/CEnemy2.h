@@ -8,7 +8,7 @@
 エネミークラス
 キャラクタクラスを継承
 */
-class CEnemy2 : public CCharacter {
+class CEnemy2 : private CCharacter {
 public:
 	int mFireCount;
 

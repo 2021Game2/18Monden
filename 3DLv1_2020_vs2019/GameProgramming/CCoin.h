@@ -9,7 +9,7 @@
 アイテムクラス
 キャラクタクラスを継承
 */
-class CCoin : public CCharacter {
+class CCoin : private CCharacter {
 public:
 	//コンストラクタ
 	CCoin(CModel* model, CVector position, CVector rotation, CVector scale);
