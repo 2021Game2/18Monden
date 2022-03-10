@@ -28,7 +28,7 @@ CPlayer::CPlayer()
 , yadd(0)
 , CoinGet(0)
 , BulletP(0)
-, EnemyCoinGet(0)
+, EnemyCoinGet(30)
 {
 	spThis = this;
 	//テクスチャファイルの読み込み（1行64列）
@@ -38,6 +38,10 @@ CPlayer::CPlayer()
 
 //更新処理
 void CPlayer::Update() {
+	if (Time > 0) {
+		Time--;
+	}
+
 	//Aキー入力で回転
 	if (CKey::Push('A')) {
 		if (c < 0) {
@@ -132,6 +136,7 @@ void CPlayer::Update() {
 		BulletP--;
 		mFireCount = FIRECOUNT;
 		CBullet* bullet = new CBullet();
+		bullet->mTag = EBULLETPLAYER;
 		bullet->Set(0.1f, 1.5f);
 		bullet->mPosition = CVector(0.0f, 0.0f, 10.0f) * mMatrix;
 		bullet->mRotation = mRotation;
@@ -172,6 +177,10 @@ void CPlayer::Collision(CCollider *m, CCollider *o) {
 		if (o->mType == CCollider::ESPHERE) {
 			if (CCollider::Collision(m, o))
 			{
+				if (o->mpParent->mTag == EBULLETENEMY && CoinGet > 0) {
+					CoinGet--;
+					new CEffect(o->mpParent->mPosition, 1.0f, 1.0f, "exp.tga", 4, 4, 2);
+				}
 				//エフェクト生成
 				//new CEffect(o->mpParent->mPosition, 1.0f, 1.0f, "exp.tga", 4, 4, 2);
 			}
@@ -218,6 +227,12 @@ void CPlayer::Render()
 	sprintf(buf, "ENEMY:%d", EnemyCoinGet);
 	//文字列の描画
 	mText.DrawString(buf, 100, 270, 16, 32);
+
+	//Y座標の表示
+//文字列の設定
+	sprintf(buf, "TIME:%d", Time/60);
+	//文字列の描画
+	mText.DrawString(buf, -40, 270, 8, 16);
 
 	sprintf(buf, "BULLET:%d", BulletP);
 	mText.DrawString(buf, -300, -270, 16, 32);

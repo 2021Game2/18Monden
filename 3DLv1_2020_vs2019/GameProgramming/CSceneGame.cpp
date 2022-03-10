@@ -206,8 +206,8 @@ void CSceneGame::Init() {
 	//new CEnemy(&mModelC5, CVector(0.0f, 10.0f, -600.0f), CVector(), CVector(0.1f, 0.1f, 0.1f));
 	//new CEnemy(&mModelC5, CVector(30.0f, 10.0f, -630.0f), CVector(), CVector(0.1f, 0.1f, 0.1f));
 
-	new CEnemy2(CVector(0.0f, 0.0f, -100.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
-    new CEnemy2(CVector(15.0f, 0.0f, -50.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
+	new CEnemy2(CVector(0.0f, -0.5f, -100.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
+    new CEnemy2(CVector(15.0f, -0.5f, -50.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
 
 	//new CEnemy2(CVector(-5.0f, 1.0f, -10.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
 	//new CEnemy2(CVector(5.0f, 1.0f, -10.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
@@ -261,30 +261,7 @@ void CSceneGame::Update() {
 	//カメラのパラメータを作成する
 	CVector e, c, u;//視点、注視点、上方向
 	//視点を求める
-	if (CKey::Push('D') && Camera.mRotation.mY < 30)
-	{
-			if (d < 10) {
-			d++;
-		}
-		Camera.mRotation.mY += d/30;
-	}
 
-	if (CKey::Push('D') == false && Camera.mRotation.mY > 0) {
-		Camera.mRotation.mY--;
-	}
-
-
-	if (CKey::Push('A') && Camera.mRotation.mY > -30)
-	{
-		if (f > -10) {
-			f--;
-		}
-		Camera.mRotation.mY += f/30;
-	}
-
-	if (CKey::Push('A') == false && Camera.mRotation.mY < 0) {
-		Camera.mRotation.mY++;
-	}
 
 	//	e = CVector(-2.0f, 10.0f, -30.0f) * mPlayer.mMatrix;
 	e = CVector(0.0f, 20.0f, -100.0f) * CMatrix().RotateY(Camera.mRotation.mY) * mPlayer.mMatrix;

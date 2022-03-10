@@ -8,7 +8,7 @@
 #define MTL "f16.mtl"	//モデルのマテリアルファイル
 
 #define HP 3	//耐久値
-#define VELOCITY 0.31f	//速度
+#define VELOCITY 0.01f	//速度
 
 CModel CEnemy2::mModel;	//モデルデータ作成
 
@@ -121,6 +121,7 @@ void CEnemy2::Update() {
 			{
 				//弾を発射
 				CBullet* bullet = new CBullet();
+				bullet->mTag = EBULLETENEMY;
 				bullet->Set(0.1f, 0.5f);
 				bullet->mPosition =
 					CVector(0.0f, 0.0f, 10.0f) * mMatrix;
@@ -148,6 +149,17 @@ void CEnemy2::Collision(CCollider* m, CCollider* o) {
 			if (CCollider::CollisionTriangleSphere(o, m, &adjust))
 			{	//衝突しない位置まで戻す
 				mPosition = mPosition + adjust;
+			}
+			break;
+			//相手のコライダが球コライダの時
+			if (o->mType == CCollider::ESPHERE) {
+				if (CCollider::Collision(m, o))
+				{
+					if (o->mpParent->mTag == EBULLETPLAYER && CPlayer::spThis->EnemyCoinGet > 0) {
+						CPlayer::spThis->EnemyCoinGet--;
+						new CEffect(o->mpParent->mPosition, 1.0f, 1.0f, "exp.tga", 4, 4, 2);
+					}
+				}
 			}
 			break;
 		}

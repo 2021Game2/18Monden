@@ -51,6 +51,8 @@ public:
 	int EnemyCoinGet;
 
 	int BulletP;
+
+	int Time = 120 * 60;
 };
 
 #endif
