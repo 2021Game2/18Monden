@@ -1,6 +1,4 @@
-﻿  CPlayer.cpp
-C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CPlayer.cpp(220,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CPlayer.cpp(227,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CPlayer.cpp(233,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CPlayer.cpp(237,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+﻿  CBullet.cpp
+  CColliderTriangle.cpp
+  コードを生成中...
   GameProgramming.vcxproj -> C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\Debug\GameProgramming.exe

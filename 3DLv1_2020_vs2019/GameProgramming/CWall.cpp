@@ -15,13 +15,21 @@ CWall::CWall(CModel* model, CVector position,
 	mPriority = 1;
 	CTaskManager::Get()->Remove(this); //削除して
 	CTaskManager::Get()->Add(this); //追加する
-	ColliderMesh.Set(this, &mMatrix, mpModel);
+
+	CTransform::Update();
+	//ColliderMesh.Set(this, &mMatrix, mpModel);
+
+	CModel cube;
+	cube.Load("cube.obj", "cube.mtl");
+	mMatrixCol = CMatrix().Scale(17.5f, 15.0f, 16.0f) * mMatrix;
+	ColliderMesh.Set(this, &mMatrixCol, &cube);
+	mTag = EHOUSE;
 }
 
 
 //更新処理
 void CWall::Update() {
 	//行列を更新
-	CTransform::Update();
+
 }
 

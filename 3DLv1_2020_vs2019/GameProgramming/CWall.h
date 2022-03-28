@@ -9,6 +9,7 @@
 キャラクタクラスを継承
 */
 class CWall : private CCharacter {
+	CMatrix mMatrixCol;
 public:
 	//三角形の可変長配列
 	std::vector<CTriangle> mTriangles;

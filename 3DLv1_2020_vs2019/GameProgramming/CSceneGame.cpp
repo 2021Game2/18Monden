@@ -189,16 +189,16 @@ void CSceneGame::Init() {
 	//壁
 	mModelWall.Load("wall.obj", "wall.mtl");
 	new CWall(&mModelWall, CVector(130.0f, -0.5f, -530.0f),
-		CVector(0.0f, 90.0f, 0.0f), CVector(100.0f, 100.0f, 0.0f));
+		CVector(0.0f, 90.0f, 0.0f), CVector(100.0f, 100.0f, 1.0f));
 
 	new CWall(&mModelWall, CVector(-130.0f, -0.5f, -530.0f),
-		CVector(0.0f, 90.0f, 0.0f), CVector(100.0f, 100.0f, 0.0f));
+		CVector(0.0f, 90.0f, 0.0f), CVector(100.0f, 100.0f, 1.0f));
 
 	new CWall(&mModelWall, CVector(0.0f, -0.5f, -580.0f),
-		CVector(0.0f, 90.0f, 0.0f), CVector(0.0f, 100.0f, 200.0f));
+		CVector(0.0f, 90.0f, 0.0f), CVector(1.0f, 100.0f, 200.0f));
 
 	new CWall(&mModelWall, CVector(0.0f, -0.5f, -520.0f),
-		CVector(0.0f, 90.0f, 0.0f), CVector(0.0f, 100.0f, 200.0f));
+		CVector(0.0f, 90.0f, 0.0f), CVector(1.0f, 100.0f, 200.0f));
 
 	//敵機のインスタンス作成
 	new CEnemy(&mModelC5, CVector(30.0f, 0.0f, -10.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
@@ -259,7 +259,8 @@ void CSceneGame::Init() {
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
 
-
+	new CWall(&mModelWall, CVector(-20.0f, 1.0f, -550.0f),
+		CVector(), CVector(1.0f, 1.0f, 1.0f));
 
 
 	//ビルボードの生成
