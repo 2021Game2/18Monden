@@ -17,12 +17,12 @@ CWall::CWall(CModel* model, CVector position,
 	CTaskManager::Get()->Add(this); //’Ç‰Á‚·‚é
 
 	CTransform::Update();
-	//ColliderMesh.Set(this, &mMatrix, mpModel);
+	ColliderMesh.Set(this, &mMatrix, mpModel);
 
-	CModel cube;
-	cube.Load("cube.obj", "cube.mtl");
-	mMatrixCol = CMatrix().Scale(17.5f, 15.0f, 16.0f) * mMatrix;
-	ColliderMesh.Set(this, &mMatrixCol, &cube);
+	//CModel cube;
+	//cube.Load("cube.obj", "cube.mtl");
+	//mMatrixCol = CMatrix().Scale(17.5f, 15.0f, 16.0f) * mMatrix;
+	//ColliderMesh.Set(this, &mMatrixCol, &cube);
 	mTag = EHOUSE;
 }
 

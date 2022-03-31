@@ -126,8 +126,8 @@ void CSceneGame::Init() {
 	new CCoin(&mModelCoin, CVector(-20.0f, 1.5f, -530.0f),
 			CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
-	new CCoin(&mModelCoin, CVector(0.0f, -0.5f, -530.0f),
-		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+	/*new CCoin(&mModelCoin, CVector(0.0f, -0.5f, -530.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));*/
 
 	new CCoin(&mModelCoin, CVector(20.0f, 1.5f, -530.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
@@ -165,8 +165,8 @@ void CSceneGame::Init() {
 	new CCoin(&mModelCoin, CVector(-20.0f, -0.5f, -575.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
-	new CCoin(&mModelCoin, CVector(0.0f, -0.5f, -570.0f),
-		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+	/*new CCoin(&mModelCoin, CVector(0.0f, -0.5f, -570.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));*/
 
 	new CCoin(&mModelCoin, CVector(20.0f, -0.5f, -575.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
@@ -243,8 +243,8 @@ void CSceneGame::Init() {
 	new CCoin(&mModelCoin, CVector(15.0f, -0.5f, -555.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
-	new CCoin(&mModelCoin, CVector(20.0f, -0.5f, -550.0f),
-		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+	/*new CCoin(&mModelCoin, CVector(20.0f, -0.5f, -550.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));*/
 
 	new CCoin(&mModelCoin, CVector(-5.0f, -0.5f, -565.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
@@ -255,13 +255,52 @@ void CSceneGame::Init() {
 	new CCoin(&mModelCoin, CVector(-15.0f, -0.5f, -555.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
-	new CCoin(&mModelCoin, CVector(-20.0f, -0.5f, -550.0f),
+	/*new CCoin(&mModelCoin, CVector(-20.0f, -0.5f, -550.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));*/
+
+	//足場
+	new CWall(&mModelWall, CVector(0.0f, 0.0f, -570.0f),
+		CVector(-20.0f, 0.0f, 0.0f), CVector(2.0f, 0.1f, 10.0f));
+
+	new CWall(&mModelWall, CVector(0.0f, 0.0f, -530.0f),
+		CVector(20.0f, 0.0f, 0.0f), CVector(2.0f, 0.1f, 10.0f));
+
+	new CWall(&mModelWall, CVector(-20.0f, 0.0f, -550.0f),
+		CVector(0.0f, 0.0f, 20.0f), CVector(10.0f, 0.1f, 2.0f));
+
+	new CWall(&mModelWall, CVector(20.0f, 0.0f, -550.0f),
+		CVector(0.0f, 0.0f, -20.0f), CVector(10.0f, 0.1f, 2.0f));
+
+	new CWall(&mModelWall, CVector(0.0f, 3.3f, -550.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(10.5f, 0.1f, 10.5f));
+
+	//台上コイン
+	new CCoin(&mModelCoin, CVector(0.0f, 3.4f, -550.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
+	new CCoin(&mModelCoin, CVector(5.0f, 3.4f, -550.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
-	new CWall(&mModelWall, CVector(-20.0f, 1.0f, -550.0f),
-		CVector(), CVector(1.0f, 1.0f, 1.0f));
+	new CCoin(&mModelCoin, CVector(-5.0f, 3.4f, -550.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
+	new CCoin(&mModelCoin, CVector(10.0f, 3.4f, -550.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(-10.0f, 3.4f, -550.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(0.0f, 3.4f, -555.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(0.0f, 3.4f, -545.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(0.0f, 3.4f, -560.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(0.0f, 3.4f, -540.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
 	//ビルボードの生成
 	//new CBillBoard(CVector(-6.0f, 3.0f, -10.0f), 1.0f, 1.0f);
