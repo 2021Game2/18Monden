@@ -1,2 +1,3 @@
 ﻿  CSceneGame.cpp
+LINK : warning LNK4098: defaultlib 'MSVCRT' は他のライブラリの使用と競合しています。/NODEFAULTLIB:library を使用してください。
   GameProgramming.vcxproj -> C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\Debug\GameProgramming.exe

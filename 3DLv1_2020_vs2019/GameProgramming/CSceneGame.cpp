@@ -302,6 +302,36 @@ void CSceneGame::Init() {
 	new CCoin(&mModelCoin, CVector(0.0f, 3.4f, -540.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
+	//浮遊台
+	new CWall(&mModelWall, CVector(15.0f, 4.0f, -565.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(3.0f, 0.1f, 3.0f));
+
+	//浮遊台
+	new CWall(&mModelWall, CVector(-15.0f, 4.0f, -565.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(3.0f, 0.1f, 3.0f));
+
+	//浮遊台
+	new CWall(&mModelWall, CVector(15.0f, 4.0f, -535.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(3.0f, 0.1f, 3.0f));
+
+	//浮遊台
+	new CWall(&mModelWall, CVector(-15.0f, 4.0f, -535.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(3.0f, 0.1f, 3.0f));
+
+	//浮遊台上コイン
+	new CCoin(&mModelCoin, CVector(15.0f, 4.1f, -535.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(-15.0f, 4.1f, -535.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(15.0f, 4.1f, -565.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+	new CCoin(&mModelCoin, CVector(-15.0f, 4.1f, -565.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
+
+
 	//ビルボードの生成
 	//new CBillBoard(CVector(-6.0f, 3.0f, -10.0f), 1.0f, 1.0f);
 	//背景モデルから三角コライダを生成
