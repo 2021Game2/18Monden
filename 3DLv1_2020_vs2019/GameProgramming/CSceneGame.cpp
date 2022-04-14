@@ -103,7 +103,7 @@ void CSceneGame::Init() {
 	new CMakimono(&mModelMakimono, CVector(77.0f, 0.5f, -550.0f),
 		CVector(60.0f, 0.0f, -50.0f), CVector(7.0f, 7.0f, 7.0f));
 
-	new CMakimono(&mModelMakimono, CVector(127.0f, 0.5f, -550.0f),
+	new CMakimono(&mModelMakimono, CVector(123.0f, 0.5f, -550.0f),
 		CVector(60.0f, 0.0f, -50.0f), CVector(7.0f, 7.0f, 7.0f));
 
 	//ÉRÉCÉì
@@ -305,18 +305,26 @@ void CSceneGame::Init() {
 	//ïÇóVë‰
 	new CWall(&mModelWall, CVector(15.0f, 4.0f, -565.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(3.0f, 0.1f, 3.0f));
-
-	//ïÇóVë‰
 	new CWall(&mModelWall, CVector(-15.0f, 4.0f, -565.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(3.0f, 0.1f, 3.0f));
-
-	//ïÇóVë‰
 	new CWall(&mModelWall, CVector(15.0f, 4.0f, -535.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(3.0f, 0.1f, 3.0f));
-
-	//ïÇóVë‰
 	new CWall(&mModelWall, CVector(-15.0f, 4.0f, -535.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(3.0f, 0.1f, 3.0f));
+
+	new CWall(&mModelWall, CVector(-73.0f, 4.0f, -530.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(50.0f, 0.1f, 2.0f));
+	new CWall(&mModelWall, CVector(73.0f, 4.0f, -530.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(50.0f, 0.1f, 2.0f));
+	new CWall(&mModelWall, CVector(-73.0f, 4.0f, -570.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(50.0f, 0.1f, 2.0f));
+	new CWall(&mModelWall, CVector(73.0f, 4.0f, -570.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(50.0f, 0.1f, 2.0f));
+
+	new CWall(&mModelWall, CVector(-123.0f, 4.0f, -550.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 0.1f, 22.0f));
+	new CWall(&mModelWall, CVector(123.0f, 4.0f, -550.0f),
+		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 0.1f, 22.0f));
 
 	//ïÇóVë‰è„ÉRÉCÉì
 	new CCoin(&mModelCoin, CVector(15.0f, 4.1f, -535.0f),
@@ -384,7 +392,7 @@ void CSceneGame::Update() {
 
 
 	//	e = CVector(-2.0f, 10.0f, -30.0f) * mPlayer.mMatrix;
-	e = CVector(0.0f, 20.0f, -100.0f) * CMatrix().RotateY(Camera.mRotation.mY) * mPlayer.mMatrix;
+	e = CVector(0.0f, 31.5f, -100.0f) * CMatrix().RotateY(Camera.mRotation.mY) * mPlayer.mMatrix;
 	if (CKey::Push(VK_SPACE))
 	{
 		e = CVector(0.0f, 20.0f, 100.0f) * mPlayer.mMatrix;

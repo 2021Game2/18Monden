@@ -1,12 +1,14 @@
 #ifndef CCAMERA_H
 #define CCAMERA_H
 #include "CVector.h"
+#include "CCharacter.h"
+#include "CColliderLine.h"
 /*
 カメラクラス
 */
 #define DEF_CAMERA_DIST 10.0f
 #define DEF_CAMERA_HEAD_ADJUST 3.0f
-class CCamera {
+class CCamera : public CCharacter{
 public:
 	//視点
 	CVector mEye;
@@ -14,6 +16,9 @@ public:
 	CVector mCenter;
 	//上方向
 	CVector mUp;
+
+	CCamera();
+	CColliderLine mLine; //線分コライダ
 
 	CMatrix mMatrix;
 	CMatrix mProj;
@@ -37,7 +42,11 @@ public:
 	void Init();
 	//カメラ更新処理
 	void Update();
+	//カメラ適用
+	void Draw();
 
+	//衝突処理
+	void Collision(CCollider* m, CCollider* o);
 	//カメラ適用
 	void Render();
 

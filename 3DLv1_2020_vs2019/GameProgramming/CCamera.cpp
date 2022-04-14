@@ -5,11 +5,15 @@
 #include <stdio.h>
 #include "CInput.h"
 #include "main.h"
+#include "CCollisionManager.h"
 
 //ƒJƒƒ‰‚ÌŠO•”•Ï”
 CCamera Camera;
 
 
+CCamera::CCamera()
+	: mLine(this, nullptr, CVector(0.0f, 0.0f, 0.0f), CVector(0.0f, 0.0f, 0.0f))
+{}
 
 void CCamera::Init()
 {
@@ -113,6 +117,7 @@ void CCamera::Update() {
 //	glMultMatrixf(Matrix.mF);
 //	Camera.mEye = CVector(1.0f, 2.0f, 10.0f) * Matrix;
 
+	mLine.Set(this, nullptr, mEye, mCenter);
 
 	oldMouseX = mouseX;
 	oldMouseY = mouseY;
@@ -158,4 +163,15 @@ bool CCamera::WorldToScreen(CVector* pOut, const CVector& pos)
 	pOut->mZ = screen_pos.mZ;
 
 	return true;
+}
+
+void CCamera::Collision(CCollider* m, CCollider* o)
+{
+	if (o->mType == CCollider::ETRIANGLE) {
+		CVector adjust;
+		if (CCollider::CollisionTriangleLine(o, m, &adjust)) {
+			mEye += (adjust + adjust.Normalize() * 0.5f);
+			mLine.Set(this, nullptr, mEye, mCenter);
+		}
+	}
 }
