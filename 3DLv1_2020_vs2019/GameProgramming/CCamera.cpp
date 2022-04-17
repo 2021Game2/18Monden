@@ -13,7 +13,11 @@ CCamera Camera;
 
 CCamera::CCamera()
 	: mLine(this, nullptr, CVector(0.0f, 0.0f, 0.0f), CVector(0.0f, 0.0f, 0.0f))
-{}
+{
+	mPriority = 0;
+	CTaskManager::Get()->Remove(this);
+	CTaskManager::Get()->Add(this);
+}
 
 void CCamera::Init()
 {
@@ -167,6 +171,8 @@ bool CCamera::WorldToScreen(CVector* pOut, const CVector& pos)
 
 void CCamera::Collision(CCollider* m, CCollider* o)
 {
+	m->mType = CCollider::ELINE;
+
 	if (o->mType == CCollider::ETRIANGLE) {
 		CVector adjust;
 		if (CCollider::CollisionTriangleLine(o, m, &adjust)) {
@@ -174,4 +180,9 @@ void CCamera::Collision(CCollider* m, CCollider* o)
 			mLine.Set(this, nullptr, mEye, mCenter);
 		}
 	}
+}
+
+void CCamera::TaskCollision() {
+	mLine.ChangePriority();
+	CCollisionManager::Get()->Collision(&mLine, COLLISIONRANGE);
 }

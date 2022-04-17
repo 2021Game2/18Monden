@@ -3,6 +3,7 @@
 #include "glut.h"
 #include "GLFW/glfw3.h"
 #include "Update.h"
+#include "CInput.h"
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
@@ -124,6 +125,7 @@ int main(void)
 	//メッシュシェーダー用
 //	CLight::getLight(0)->setDir(CVector3(0, -1, 1).GetNormalize());
 //	CLight::getLight(0)->setColor(CVector3(0.9f, 0.9f, 0.9f), CVector3(1.0f, 1.0f, 1.0f));
+	CInput::Init(window);
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))

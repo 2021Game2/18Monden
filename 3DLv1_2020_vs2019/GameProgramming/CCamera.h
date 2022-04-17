@@ -3,6 +3,7 @@
 #include "CVector.h"
 #include "CCharacter.h"
 #include "CColliderLine.h"
+#include "CPlayer.h"
 /*
 カメラクラス
 */
@@ -47,6 +48,9 @@ public:
 
 	//衝突処理
 	void Collision(CCollider* m, CCollider* o);
+
+	void TaskCollision();
+
 	//カメラ適用
 	void Render();
 

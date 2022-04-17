@@ -346,6 +346,26 @@ void CSceneGame::Init() {
 	//親インスタンスと行列はなし
 	//mColliderMesh.Set(NULL, NULL, &mBackGround);
 	mColliderMesh.Set(NULL, &mBackGroundMatrix, &mBackGround);
+
+	//カメラのパラメータを作成する
+	CVector e, c, u;//視点、注視点、上方向
+	//視点を求める
+
+
+	//	e = CVector(-2.0f, 10.0f, -30.0f) * mPlayer.mMatrix;
+	e = CVector(0.0f, 31.5f, -100.0f) * CMatrix().RotateY(Camera.mRotation.mY) * mPlayer.mMatrix;
+	if (CKey::Push(VK_SPACE))
+	{
+		e = CVector(0.0f, 20.0f, 100.0f) * mPlayer.mMatrix;
+	}
+	//注視点を求める
+	c = mPlayer.mPosition;
+	//上方向を求める
+	u = CVector(0.0f, 1.0f, 0.0f) * mPlayer.mMatrixRotate;
+	//カメラの設定
+	//gluLookAt(e.mX, e.mY, e.mZ, c.mX, c.mY, c.mZ, u.mX, u.mY, u.mZ);
+	//カメラクラスの設定
+	Camera.Set(e, c, u);
 }
 
 void CSceneGame::Update() {
@@ -387,7 +407,7 @@ void CSceneGame::Update() {
 
 //	mPlayer.Update();
 	//カメラのパラメータを作成する
-	CVector e, c, u;//視点、注視点、上方向
+/*	CVector e, c, u;//視点、注視点、上方向
 	//視点を求める
 
 
@@ -404,7 +424,7 @@ void CSceneGame::Update() {
 	//カメラの設定
 	//gluLookAt(e.mX, e.mY, e.mZ, c.mX, c.mY, c.mZ, u.mX, u.mY, u.mZ);
 	//カメラクラスの設定
-	Camera.Set(e, c, u);
+	Camera.Set(e, c, u);*/
 	Camera.Render();
 	//	mPlayer.Render();
 
