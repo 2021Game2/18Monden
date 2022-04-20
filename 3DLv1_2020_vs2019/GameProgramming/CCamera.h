@@ -39,6 +39,8 @@ public:
 
 	void SetTarget(const CVector& target);
 
+	void SetAddRotate(const CVector& target);
+
 	//カメラ初期化
 	void Init();
 	//カメラ更新処理

@@ -13,6 +13,8 @@
 //
 #include "CEffect.h"
 
+#include "CCamera.h"
+
 CPlayer *CPlayer::spThis = 0;
 
 #define FIRECOUNT 15	//発射間隔
@@ -38,6 +40,8 @@ CPlayer::CPlayer()
 
 //更新処理
 void CPlayer::Update() {
+	static CVector OldRotate = mRotation;
+
 	if (Time > 0) {
 		Time--;
 	}
@@ -146,6 +150,10 @@ void CPlayer::Update() {
 
 	//行列を更新
 	CTransform::Update();
+
+	Camera.SetTarget(mPosition);
+	Camera.SetAddRotate(OldRotate - mRotation);
+	OldRotate = mRotation;
 }
 
 void CPlayer::Collision(CCollider *m, CCollider *o) {

@@ -51,6 +51,15 @@ void CCamera::SetTarget(const CVector& target)
 {
 	mTarget = target;
 }
+//円周率M_PIを有効にする
+#define USE_MATH_DEFINES
+//数学関数のインクルード
+#include <math.h>
+
+void CCamera::SetAddRotate(const CVector& rotate)
+{
+	mAngleX -= rotate.mY / 180.0f * 3.14159265358979323846f;
+}
 
 
 void CCamera::Update() {
