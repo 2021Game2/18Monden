@@ -1,6 +1,10 @@
-﻿  CPlayer.cpp
-C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CPlayer.cpp(228,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CPlayer.cpp(235,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CPlayer.cpp(241,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CPlayer.cpp(245,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  GameProgramming.vcxproj -> C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\Debug\GameProgramming.exe
+﻿  CSceneGame.cpp
+C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CSceneGame.h(48,13): error C3646: 'mShadowMap': 不明なオーバーライド指定子です
+C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CSceneGame.h(48,23): error C4430: 型指定子がありません - int と仮定しました。メモ: C++ は int を既定値としてサポートしていません
+C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CSceneGame.h(51,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\include\glew.h(84,1): fatal error C1189: #error:  gl.h included before glew.h
+  CSceneManager.cpp
+C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CSceneGame.h(48,13): error C3646: 'mShadowMap': 不明なオーバーライド指定子です
+C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CSceneGame.h(48,23): error C4430: 型指定子がありません - int と仮定しました。メモ: C++ は int を既定値としてサポートしていません
+C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CSceneGame.h(51,1): error C2143: 構文エラー: ';' が '}' の前にありません。
+  コードを生成中...

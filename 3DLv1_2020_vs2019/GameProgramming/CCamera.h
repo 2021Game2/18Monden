@@ -7,8 +7,8 @@
 /*
 カメラクラス
 */
-#define DEF_CAMERA_DIST 10.0f
-#define DEF_CAMERA_HEAD_ADJUST 3.0f
+#define DEF_CAMERA_DIST 2.5f
+#define DEF_CAMERA_HEAD_ADJUST 0.75f
 class CCamera : public CCharacter{
 public:
 	//視点

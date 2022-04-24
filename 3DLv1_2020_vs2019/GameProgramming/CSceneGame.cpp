@@ -28,10 +28,16 @@
 
 #include "CWall.h"
 
+#include "CShadowMap.h"
+
 CModel mModelHouse;
 CModel mModelMakimono;
 CModel mModelCoin;
 CModel mModelWall;
+
+
+#define TEXWIDTH  8192  //テクスチャ幅
+#define TEXHEIGHT  6144  //テクスチャ高さ
 
 #define FONT_IMAGE "FontWhite.tga"
 #define ENEMY_MODEL "Resource\\c5.obj","Resourece\\c5.mtl"
@@ -43,6 +49,7 @@ CModel mModelWall;
 #define BULLET_MODEL "Resource\\bullet.obj","Resource\\bullet.mtl"
 
 void CSceneGame::Init() {
+
 	mText.LoadTexture(FONT_IMAGE,1,64);
 
 	mBackGroundMatrix.Translate(GROUND_TRANSLATE);
@@ -366,6 +373,11 @@ void CSceneGame::Init() {
 	//gluLookAt(e.mX, e.mY, e.mZ, c.mX, c.mY, c.mZ, u.mX, u.mY, u.mZ);
 	//カメラクラスの設定
 	Camera.Set(e, c, u);
+
+	float shadowColor[] = { 0.4f, 0.4f, 0.4f, 0.2f };  //影の色
+	float lightPos[] = { 50.0f, 160.0f, 50.0f };  //光源の位置
+	mShadowMap.Init(TEXWIDTH, TEXHEIGHT, Render, shadowColor, lightPos);
+
 }
 
 void CSceneGame::Update() {
@@ -435,7 +447,8 @@ void CSceneGame::Update() {
 
 	//タスクリストの削除
 	CTaskManager::Get()->Delete();
-	CTaskManager::Get()->Render();
+	//CTaskManager::Get()->Render();
+	mShadowMap.Render();
 
 #ifdef _DEBUG
 	//コライダの描画
@@ -455,5 +468,10 @@ void CSceneGame::Update() {
 		//CUtil::End2D();
 	}
 
+}
+
+void Render()
+{
+	CTaskManager::Get()->Render();
 }
 

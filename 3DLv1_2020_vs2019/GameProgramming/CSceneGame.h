@@ -42,9 +42,12 @@ public:
 	//更新処理のオーバーライド
 	void Update();
 
-
 	float d = 1;
 	float f = 1;
+
+	CShadowMap mShadowMap;
+
+	void Render()
 };
 
 #endif
