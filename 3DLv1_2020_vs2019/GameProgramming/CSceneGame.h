@@ -14,6 +14,8 @@
 #include "CColliderMesh.h"
 //
 #include "CText.h"
+
+#include "CShadowMap.h"
 /*
 ゲームのシーン
 */
@@ -37,6 +39,9 @@ public:
 	CPlayer mPlayer;
 
 	CVector mEye;
+
+	CShadowMap mShadowMap;
+
 	//初期化処理のオーバーライド
 	void Init();
 	//更新処理のオーバーライド
@@ -44,10 +49,7 @@ public:
 
 	float d = 1;
 	float f = 1;
-
-	CShadowMap mShadowMap;
-
-	void Render()
 };
+void Render();
 
 #endif

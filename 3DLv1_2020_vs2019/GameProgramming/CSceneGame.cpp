@@ -28,8 +28,6 @@
 
 #include "CWall.h"
 
-#include "CShadowMap.h"
-
 CModel mModelHouse;
 CModel mModelMakimono;
 CModel mModelCoin;
@@ -437,7 +435,7 @@ void CSceneGame::Update() {
 	//gluLookAt(e.mX, e.mY, e.mZ, c.mX, c.mY, c.mZ, u.mX, u.mY, u.mZ);
 	//カメラクラスの設定
 	Camera.Set(e, c, u);*/
-	Camera.Render();
+	//Camera.Render();
 	//	mPlayer.Render();
 
 	mBackGround.Render(mBackGroundMatrix);
@@ -448,6 +446,9 @@ void CSceneGame::Update() {
 	//タスクリストの削除
 	CTaskManager::Get()->Delete();
 	//CTaskManager::Get()->Render();
+
+	Camera.Draw();
+
 	mShadowMap.Render();
 
 #ifdef _DEBUG

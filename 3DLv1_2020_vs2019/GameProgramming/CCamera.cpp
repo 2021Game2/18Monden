@@ -138,6 +138,15 @@ void CCamera::Update() {
 
 }
 
+void CCamera::Draw() {
+	gluLookAt(mEye.mX, mEye.mY, mEye.mZ,
+		mCenter.mX, mCenter.mY, mCenter.mZ,
+		mUp.mX, mUp.mY, mUp.mZ);
+
+	//ÉJÉÅÉâçsóÒäiî[
+	glGetFloatv(GL_MODELVIEW_MATRIX, mMatrix.mF);
+}
+
 void CCamera::Render() {
 	gluLookAt(mEye.mX, mEye.mY, mEye.mZ,
 		mCenter.mX, mCenter.mY, mCenter.mZ,

@@ -1,10 +1,2 @@
 ﻿  CSceneGame.cpp
-C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CSceneGame.h(48,13): error C3646: 'mShadowMap': 不明なオーバーライド指定子です
-C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CSceneGame.h(48,23): error C4430: 型指定子がありません - int と仮定しました。メモ: C++ は int を既定値としてサポートしていません
-C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CSceneGame.h(51,1): error C2143: 構文エラー: ';' が '}' の前にありません。
-C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\include\glew.h(84,1): fatal error C1189: #error:  gl.h included before glew.h
-  CSceneManager.cpp
-C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CSceneGame.h(48,13): error C3646: 'mShadowMap': 不明なオーバーライド指定子です
-C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CSceneGame.h(48,23): error C4430: 型指定子がありません - int と仮定しました。メモ: C++ は int を既定値としてサポートしていません
-C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CSceneGame.h(51,1): error C2143: 構文エラー: ';' が '}' の前にありません。
-  コードを生成中...
+  GameProgramming.vcxproj -> C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\Debug\GameProgramming.exe
