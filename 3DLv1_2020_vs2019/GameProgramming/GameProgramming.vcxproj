@@ -98,6 +98,7 @@
     <ClCompile Include="CEffect.cpp" />
     <ClCompile Include="CEnemy.cpp" />
     <ClCompile Include="CEnemy2.cpp" />
+    <ClCompile Include="CGround.cpp" />
     <ClCompile Include="CInput.cpp" />
     <ClCompile Include="CKey.cpp" />
     <ClCompile Include="CMakimono.cpp" />
@@ -134,6 +135,7 @@
     <ClInclude Include="CEffect.h" />
     <ClInclude Include="CEnemy.h" />
     <ClInclude Include="CEnemy2.h" />
+    <ClInclude Include="CGround.h" />
     <ClInclude Include="CInput.h" />
     <ClInclude Include="CKey.h" />
     <ClInclude Include="CMakimono.h" />

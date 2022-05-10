@@ -28,6 +28,8 @@
 
 #include "CWall.h"
 
+#include "CGround.h"
+
 CModel mModelHouse;
 CModel mModelMakimono;
 CModel mModelCoin;
@@ -62,7 +64,11 @@ void CSceneGame::Init() {
 	mEye = CVector(1.0f, 2.0f, 3.0f);
 	//モデルファイルの入力
 	mModel.Load(CAR_MODEL);
+
+
 	mBackGround.Load(SKY_MODEL);
+	new CGround(&mBackGround, CVector(0.0f, 0.0f, -500.0f),
+		CVector(), CVector(1.0f, 1.0f, 1.0f));
 
 	CMatrix matrix;
 	matrix.Print();
@@ -373,7 +379,7 @@ void CSceneGame::Init() {
 	Camera.Set(e, c, u);
 
 	float shadowColor[] = { 0.4f, 0.4f, 0.4f, 0.2f };  //影の色
-	float lightPos[] = { 50.0f, 160.0f, 50.0f };  //光源の位置
+	float lightPos[] = { 0.0f, 160.0f, -500.0f };  //光源の位置
 	mShadowMap.Init(TEXWIDTH, TEXHEIGHT, Render, shadowColor, lightPos);
 
 }
@@ -447,9 +453,10 @@ void CSceneGame::Update() {
 	CTaskManager::Get()->Delete();
 	//CTaskManager::Get()->Render();
 
+	mShadowMap.Render();
+
 	Camera.Draw();
 
-	mShadowMap.Render();
 
 #ifdef _DEBUG
 	//コライダの描画
