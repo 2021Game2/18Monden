@@ -356,7 +356,7 @@ void CSceneGame::Init() {
 	//背景モデルから三角コライダを生成
 	//親インスタンスと行列はなし
 	//mColliderMesh.Set(NULL, NULL, &mBackGround);
-	mColliderMesh.Set(NULL, &mBackGroundMatrix, &mBackGround);
+	//mColliderMesh.Set(NULL, &mBackGroundMatrix, &mBackGround);
 
 	//カメラのパラメータを作成する
 	CVector e, c, u;//視点、注視点、上方向
@@ -379,7 +379,7 @@ void CSceneGame::Init() {
 	Camera.Set(e, c, u);
 
 	float shadowColor[] = { 0.4f, 0.4f, 0.4f, 0.2f };  //影の色
-	float lightPos[] = { 0.0f, 160.0f, -500.0f };  //光源の位置
+	float lightPos[] = { 0.0f, 160.0f, -550.0f };  //光源の位置
 	mShadowMap.Init(TEXWIDTH, TEXHEIGHT, Render, shadowColor, lightPos);
 
 }
@@ -444,7 +444,7 @@ void CSceneGame::Update() {
 	//Camera.Render();
 	//	mPlayer.Render();
 
-	mBackGround.Render(mBackGroundMatrix);
+	//mBackGround.Render(mBackGroundMatrix);
 
 //	mPlayer.bullet.Update();
 //	mPlayer.bullet.Render();
@@ -453,9 +453,10 @@ void CSceneGame::Update() {
 	CTaskManager::Get()->Delete();
 	//CTaskManager::Get()->Render();
 
-	mShadowMap.Render();
 
 	Camera.Draw();
+
+	mShadowMap.Render();
 
 
 #ifdef _DEBUG

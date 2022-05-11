@@ -118,7 +118,7 @@ void CShadowMap::Render()
 	glLoadIdentity(); //行列の初期化
 
 	/* Depthテクスチャの透視変換行列を保存しておく */
-	gluPerspective(75.0, (GLdouble)mTextureWidth / (GLdouble)mTextureHeight, 1.0, 100000.0);
+	gluPerspective(700.0, (GLdouble)mTextureWidth / (GLdouble)mTextureHeight, 1.0, 100000.0);
 	glGetFloatv(GL_PROJECTION_MATRIX, projection.mM[0]); //透視変換行列の保存
 	/* 光源位置を視点としシーンが視野に収まるようモデルビュー変換行列を設定する */
 	glMatrixMode(GL_MODELVIEW); //モデルビュー行列に切り替え
