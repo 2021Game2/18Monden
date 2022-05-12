@@ -22,9 +22,9 @@ CPlayer *CPlayer::spThis = 0;
 
 CPlayer::CPlayer()
 : mLine(this, &mMatrix, CVector(0.0f, 0.0f, -14.0f), CVector(0.0f, 0.0f, 17.0f))
-, mLine2(this, &mMatrix, CVector(0.0f, 5.0f, -8.0f), CVector(0.0f, -3.0f, -8.0f))
-, mLine3(this, &mMatrix, CVector(9.0f, 0.0f, -8.0f), CVector(-9.0f, 0.0f, -8.0f))
-, mCollider(this, &mMatrix, CVector(0.0f, 20.0f, 0.0f), 0.5f)
+, mLine2(this, &mMatrix, CVector(0.0f, 5.0f, -28.0f), CVector(0.0f, -3.0f, -18.0f))
+, mLine3(this, &mMatrix, CVector(20.0f, 0.0f, -8.0f), CVector(-20.0f, 0.0f, -8.0f))
+, mCollider(this, &mMatrix, CVector(0.0f, 0.0f, 0.0f), 0.2f)
 , mFireCount(0)
 , mJump(0) //0はジャンプ可能
 , yadd(0)
@@ -171,8 +171,8 @@ void CPlayer::Collision(CCollider *m, CCollider *o) {
 			//三角形と線分の衝突判定
 			if (CCollider::CollisionTriangleLine(o, m, &adjust))
 			{
-				yadd = 0;
-				mJump = 0;
+				//yadd = 0;
+				//mJump = 0;
 				//位置の更新(mPosition + adjust)
 				mPosition = mPosition - adjust * -1;
 				//行列の更新
@@ -191,6 +191,20 @@ void CPlayer::Collision(CCollider *m, CCollider *o) {
 				}
 				//エフェクト生成
 				//new CEffect(o->mpParent->mPosition, 1.0f, 1.0f, "exp.tga", 4, 4, 2);
+			}
+		}
+
+		if (o->mType == CCollider::ETRIANGLE) {
+			CVector adjust;//調整用ベクトル
+			//三角形と線分の衝突判定
+			if (CCollider::CollisionTriangleSphere(o, m, &adjust))
+			{
+				yadd = 0;
+				mJump = 0;
+				//位置の更新(mPosition + adjust)
+				//mPosition = mPosition - adjust * -1;
+				//行列の更新
+				CTransform::Update();
 			}
 		}
 		break;
