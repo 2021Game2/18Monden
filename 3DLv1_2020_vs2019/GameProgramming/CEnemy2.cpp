@@ -12,7 +12,7 @@
 
 CModel CEnemy2::mModel;	//ƒ‚ƒfƒ‹ƒf[ƒ^ì¬
 
-#define FIRECOUNT 15	//”­ŽËŠÔŠu
+#define FIRECOUNT 10	//”­ŽËŠÔŠu
 
 
 CEnemy2::CEnemy2()
@@ -93,6 +93,12 @@ void CEnemy2::Update() {
 		}
 	}
 
+
+	if (mFireCount > 0)
+	{
+		mFireCount--;
+	}
+
 	/*if (dy > margin)
 	{
 		mRotation.mX -= 5.0f;
@@ -117,9 +123,10 @@ void CEnemy2::Update() {
 		if (-2.0f < dx && dx < 2.0f)
 		{
 			//YŽ²‚Ì‚¸‚ê‚ª2.0ˆÈ‰º
-			if (-2.0f < dy && dy < 2.0f)
+			if (-2.0f < dy && dy < 2.0f && mFireCount == 0)
 			{
 				//’e‚ð”­ŽË
+				mFireCount = FIRECOUNT;
 				CBullet* bullet = new CBullet();
 				bullet->mTag = EBULLETENEMY;
 				bullet->Set(0.1f, 0.5f);

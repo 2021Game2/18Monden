@@ -23,8 +23,8 @@ CPlayer *CPlayer::spThis = 0;
 CPlayer::CPlayer()
 : mLine(this, &mMatrix, CVector(0.0f, 0.0f, -14.0f), CVector(0.0f, 0.0f, 17.0f))
 , mLine2(this, &mMatrix, CVector(0.0f, 5.0f, -28.0f), CVector(0.0f, -3.0f, -18.0f))
-, mLine3(this, &mMatrix, CVector(20.0f, 0.0f, -8.0f), CVector(-20.0f, 0.0f, -8.0f))
-, mCollider(this, &mMatrix, CVector(0.0f, 0.0f, 0.0f), 0.2f)
+, mLine3(this, &mMatrix, CVector(25.0f, 0.0f, -8.0f), CVector(-30.0f, 0.0f, -8.0f))
+, mCollider(this, &mMatrix, CVector(-0.5f, 1.0f, -0.5f), 0.4f)
 , mFireCount(0)
 , mJump(0) //0はジャンプ可能
 , yadd(0)
@@ -142,7 +142,7 @@ void CPlayer::Update() {
 		CBullet* bullet = new CBullet();
 		bullet->mTag = EBULLETPLAYER;
 		bullet->Set(0.1f, 1.5f);
-		bullet->mPosition = CVector(0.0f, 0.0f, 5.0f) * mMatrix;
+		bullet->mPosition = CVector(0.0f, 0.0f, 50.0f) * mMatrix;
 		bullet->mRotation = mRotation;
 		bullet->Update();
 		//		TaskManager.Add(bullet);
@@ -185,12 +185,12 @@ void CPlayer::Collision(CCollider *m, CCollider *o) {
 		if (o->mType == CCollider::ESPHERE) {
 			if (CCollider::Collision(m, o))
 			{
-				if (o->mpParent->mTag == EBULLETENEMY && CoinGet > 0) {
-					CoinGet--;
+				if (o->mpParent->mTag == EBULLETENEMY) {
 					new CEffect(o->mpParent->mPosition, 1.0f, 1.0f, "exp.tga", 4, 4, 2);
+					if (CoinGet > 0) {
+						CoinGet--;
+					}
 				}
-				//エフェクト生成
-				//new CEffect(o->mpParent->mPosition, 1.0f, 1.0f, "exp.tga", 4, 4, 2);
 			}
 		}
 
