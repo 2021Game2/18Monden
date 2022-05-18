@@ -3,7 +3,7 @@
 
 CBullet::CBullet()
 : mLife(50)
-, mCollider(this, &mMatrix, CVector(0.0f, 0.0f, 0.0f), 0.1f)
+, mCollider(this, &mMatrix, CVector(0.0f, 0.0f, 0.0f), 0.3f)
 {}
 
 //•‚Æ‰œs‚«‚Ìİ’è

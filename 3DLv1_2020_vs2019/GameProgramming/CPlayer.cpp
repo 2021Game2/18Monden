@@ -17,7 +17,7 @@
 
 CPlayer *CPlayer::spThis = 0;
 
-#define FIRECOUNT 15	//発射間隔
+#define FIRECOUNT 5	//発射間隔
 
 
 CPlayer::CPlayer()
@@ -30,7 +30,7 @@ CPlayer::CPlayer()
 , yadd(0)
 , CoinGet(0)
 , BulletP(0)
-, EnemyCoinGet(30)
+, EnemyCoinGet(0)
 {
 	spThis = this;
 	//テクスチャファイルの読み込み（1行64列）
@@ -136,7 +136,7 @@ void CPlayer::Update() {
 
 
 	//弾発射
-	if (CKey::Push('I') && mFireCount == 0 && BulletP > 0) {
+	if (CKey::Push(VK_SPACE) && mFireCount == 0 && BulletP > 0) {
 		BulletP--;
 		mFireCount = FIRECOUNT;
 		CBullet* bullet = new CBullet();
@@ -233,7 +233,7 @@ void CPlayer::Render()
 	//2Dの描画開始
 	CUtil::Start2D(-400, 400, -300, 300);
 	//描画色の設定（緑色の半透明）
-	glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
+	glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
 	//文字列編集エリアの作成
 	char buf[64];
 

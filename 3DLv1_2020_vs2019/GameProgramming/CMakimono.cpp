@@ -43,7 +43,7 @@ void CMakimono::Collision(CCollider* m, CCollider* o) {
 				if (o->mpParent->mTag == EPLAYER) {
 					if (CCollider::Collision(o, m)) {
 						mEnabled = false;
-						CPlayer::spThis->BulletP += 10;
+						CPlayer::spThis->BulletP += 15;
 					}
 				}
 			}

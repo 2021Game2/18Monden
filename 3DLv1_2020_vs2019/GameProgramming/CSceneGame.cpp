@@ -212,13 +212,13 @@ void CSceneGame::Init() {
 		CVector(0.0f, 90.0f, 0.0f), CVector(1.0f, 100.0f, 200.0f));
 
 	//敵機のインスタンス作成
-	//new CEnemy(&mModelC5, CVector(30.0f, 0.0f, -10.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
+	new CEnemy(CVector(5.0f, -0.5f, -80.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
 	//new CEnemy(&mModelC5, CVector(30.0f, 10.0f, -130.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
 	//new CEnemy(&mModelC5, CVector(0.0f, 10.0f, -600.0f), CVector(), CVector(0.1f, 0.1f, 0.1f));
 	//new CEnemy(&mModelC5, CVector(30.0f, 10.0f, -630.0f), CVector(), CVector(0.1f, 0.1f, 0.1f));
 
 	new CEnemy2(CVector(0.0f, -0.5f, -80.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
-	new CEnemy2(CVector(10.0f, -0.5f, -850.0f)* mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
+	new CEnemy2(CVector(100.0f, -0.5f, -80.0f)* mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
 
 	//◇コイン列
 	new CCoin(&mModelCoin, CVector(5.0f, -0.5f, -535.0f),
@@ -463,19 +463,7 @@ void CSceneGame::Update() {
 	//コライダの描画
 	CCollisionManager::Get()->Render();
 #endif
-	if (CEnemy::sCount == 0)
-	{
-		//2Dの描画開始
-		//CUtil::Start2D(-400, 400, -300, 300);
-		//描画色の設定（緑色の半透明）
-		//glColor4f(239.0f / 256.0f, 175.0f / 256.0f, 0.0f, 1.0f);
 
-		//文字列の描画
-		//mText.DrawString("MISSION CLEAR", -200, 100, 16, 32);
-
-		//2Dの描画終了
-		//CUtil::End2D();
-	}
 
 }
 

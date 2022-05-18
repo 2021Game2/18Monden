@@ -8,15 +8,15 @@
 #define MTL "f16.mtl"	//モデルのマテリアルファイル
 
 #define HP 3	//耐久値
-#define VELOCITY 0.01f	//速度
+#define VELOCITY 0.3f	//速度
 
 CModel CEnemy2::mModel;	//モデルデータ作成
 
-#define FIRECOUNT 10	//発射間隔
+#define FIRECOUNT 15	//発射間隔
 
 
 CEnemy2::CEnemy2()
-: mCollider(this, &mMatrix, CVector(0.0f, 0.0f, 0.0f), 0.4f)
+: mCollider(this, &mMatrix, CVector(0.0f, 0.0f, 0.0f), 0.6f)
 , mColSearch(this, &mMatrix, CVector(0.0f, 0.0f, 100.0f), 50.0f)
 , mpPlayer(0)
 , mHp(HP)
@@ -99,14 +99,14 @@ void CEnemy2::Update() {
 		mFireCount--;
 	}
 
-	/*if (dy > margin)
+	if (dy > margin)
 	{
-		mRotation.mX -= 5.0f;
+		mRotation.mX -= 2.0f;
 	}
 	else if (dy < -margin)
 	{
-		mRotation.mX += 5.0f;
-	}*/
+		mRotation.mX += 2.0f;
+	}
 
 	mPosition = mPosition + CVector(0.0f, 0.0f, VELOCITY) * mMatrixRotate;
 	CTransform::Update();
@@ -149,6 +149,15 @@ void CEnemy2::Collision(CCollider* m, CCollider* o) {
 		//相手のコライダタイプの判定
 		switch (o->mType)
 		{
+		case CCollider::ESPHERE:
+			//相手のコライダが球コライダの時
+				if (CCollider::Collision(m, o))
+				{
+					if (o->mpParent->mTag == EBULLETPLAYER && CPlayer::spThis->EnemyCoinGet > 0) {
+						CPlayer::spThis->EnemyCoinGet--;
+						new CEffect(o->mpParent->mPosition, 1.0f, 1.0f, "exp.tga", 4, 4, 2);
+					}
+				}
 			break;
 		case CCollider::ETRIANGLE: //三角コライダの時
 			CVector adjust; //調整値
@@ -156,16 +165,9 @@ void CEnemy2::Collision(CCollider* m, CCollider* o) {
 			if (CCollider::CollisionTriangleSphere(o, m, &adjust))
 			{	//衝突しない位置まで戻す
 				mPosition = mPosition + adjust;
-			}
-			break;
-			//相手のコライダが球コライダの時
-			if (o->mType == CCollider::ESPHERE) {
-				if (CCollider::Collision(m, o))
-				{
-					if (o->mpParent->mTag == EBULLETPLAYER && CPlayer::spThis->EnemyCoinGet > 0) {
-						CPlayer::spThis->EnemyCoinGet--;
-						new CEffect(o->mpParent->mPosition, 1.0f, 1.0f, "exp.tga", 4, 4, 2);
-					}
+				mRotation.mY += 10;
+				if (mRotation.mX != 0) {
+					mRotation.mX = 0;
 				}
 			}
 			break;
