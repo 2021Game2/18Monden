@@ -30,6 +30,17 @@
 
 #include "CGround.h"
 
+//CSoundクラスのインクルード
+#include "CSound.h"
+//CSoundクラスのインスタンス作成（外部変数作成例）
+CSound Bgm;
+CSound BombSe;
+CSound shoot1Se;
+CSound CoinSe;
+CSound CarSe;
+CSound BulletSe;
+CSound shoot2Se;
+
 CModel mModelHouse;
 CModel mModelMakimono;
 CModel mModelCoin;
@@ -49,6 +60,18 @@ CModel mModelWall;
 #define BULLET_MODEL "Resource\\bullet.obj","Resource\\bullet.mtl"
 
 void CSceneGame::Init() {
+
+	//サウンド(wav)ファイルの読み込み
+	Bgm.Load("Resource\\MusMusBGM.wav");
+	BombSe.Load("Resource\\bomb.wav");
+	shoot1Se.Load("Resource\\shoot1.wav");
+	CoinSe.Load("Resource\\coin.wav");
+	CarSe.Load("Resource\\driving.wav");
+	BulletSe.Load("Resource\\bullet.wav");
+	shoot2Se.Load("Resource\\shoot2.wav");
+	//サウンドファイルの繰り返し再生
+	//Bgm.Repeat();
+
 
 	mText.LoadTexture(FONT_IMAGE,1,64);
 

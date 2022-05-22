@@ -8,9 +8,14 @@
 #define MTL "f16.mtl"	//モデルのマテリアルファイル
 
 #define HP 3	//耐久値
-#define VELOCITY 0.3f	//速度
+#define VELOCITY 0.5f	//速度
 
 CModel CEnemy2::mModel;	//モデルデータ作成
+
+//CSoundクラスのインクルード
+#include "CSound.h"
+//外部変数の参照の作成
+extern CSound BombSe;
 
 #define FIRECOUNT 15	//発射間隔
 
@@ -79,17 +84,17 @@ void CEnemy2::Update() {
 
 	if (dz < -margin)
 	{
-		mRotation.mY -= 2.0f;
+		mRotation.mY -= 5.0f;
 	}
 	else
 	{
 		if (dx > margin)
 		{
-			mRotation.mY += 2.0f;
+			mRotation.mY += 5.0f;
 		}
 		else if (dx < -margin)
 		{
-			mRotation.mY -= 2.0f;
+			mRotation.mY -= 5.0f;
 		}
 	}
 
@@ -101,11 +106,11 @@ void CEnemy2::Update() {
 
 	if (dy > margin)
 	{
-		mRotation.mX -= 2.0f;
+		mRotation.mX -= 5.0f;
 	}
 	else if (dy < -margin)
 	{
-		mRotation.mX += 2.0f;
+		mRotation.mX += 5.0f;
 	}
 
 	mPosition = mPosition + CVector(0.0f, 0.0f, VELOCITY) * mMatrixRotate;
@@ -156,6 +161,7 @@ void CEnemy2::Collision(CCollider* m, CCollider* o) {
 					if (o->mpParent->mTag == EBULLETPLAYER && CPlayer::spThis->EnemyCoinGet > 0) {
 						CPlayer::spThis->EnemyCoinGet--;
 						new CEffect(o->mpParent->mPosition, 1.0f, 1.0f, "exp.tga", 4, 4, 2);
+						BombSe.Play();
 					}
 				}
 			break;

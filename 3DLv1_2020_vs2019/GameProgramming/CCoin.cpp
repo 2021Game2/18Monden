@@ -4,6 +4,11 @@
 #include "CPlayer.h"
 #include "CCollisionManager.h"
 
+//CSoundクラスのインクルード
+#include "CSound.h"
+//外部変数の参照の作成
+extern CSound CoinSe;
+
 CCoin* CCoin::spThis = 0;
 
 //コンストラクタ
@@ -78,6 +83,7 @@ void CCoin::Collision(CCollider* m, CCollider* o) {
 						CPlayer::spThis->CoinGet++;
 						//エフェクト生成
 						new CEffect(o->mpParent->mPosition, 1.0f, 1.0f, "exp.tga", 4, 4, 2);
+						CoinSe.Play();
 					}
 				}
 				if (o->mpParent->mTag == EENEMY) {

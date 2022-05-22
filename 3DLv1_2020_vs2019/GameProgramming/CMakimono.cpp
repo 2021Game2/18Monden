@@ -4,6 +4,11 @@
 #include "CPlayer.h"
 #include "CCollisionManager.h"
 
+//CSoundクラスのインクルード
+#include "CSound.h"
+//外部変数の参照の作成
+extern CSound BulletSe;
+
 //コンストラクタ
 CMakimono::CMakimono(CModel* model, CVector position,
 	CVector rotation, CVector scale)
@@ -44,6 +49,7 @@ void CMakimono::Collision(CCollider* m, CCollider* o) {
 					if (CCollider::Collision(o, m)) {
 						mEnabled = false;
 						CPlayer::spThis->BulletP += 15;
+						BulletSe.Play();
 					}
 				}
 			}

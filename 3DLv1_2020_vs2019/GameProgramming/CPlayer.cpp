@@ -15,14 +15,22 @@
 
 #include "CCamera.h"
 
+#include "CSound.h"
+
 CPlayer *CPlayer::spThis = 0;
 
 #define FIRECOUNT 5	//発射間隔
 
+//CSoundクラスのインクルード
+#include "CSound.h"
+//外部変数の参照の作成
+extern CSound BombSe;
+extern CSound shoot1Se;
+
 
 CPlayer::CPlayer()
 : mLine(this, &mMatrix, CVector(0.0f, 0.0f, -14.0f), CVector(0.0f, 0.0f, 17.0f))
-, mLine2(this, &mMatrix, CVector(0.0f, 5.0f, -28.0f), CVector(0.0f, -3.0f, -18.0f))
+, mLine2(this, &mMatrix, CVector(0.0f, 20.0f, -28.0f), CVector(0.0f, -3.0f, -18.0f))
 , mLine3(this, &mMatrix, CVector(25.0f, 0.0f, -8.0f), CVector(-30.0f, 0.0f, -8.0f))
 , mCollider(this, &mMatrix, CVector(-0.5f, 1.0f, -0.5f), 0.4f)
 , mFireCount(0)
@@ -40,48 +48,49 @@ CPlayer::CPlayer()
 
 //更新処理
 void CPlayer::Update() {
+
 	static CVector OldRotate = mRotation;
 
+	//制限時間
 	if (Time > 0) {
 		Time--;
 	}
 
 	//Aキー入力で回転
 	if (CKey::Push('A')) {
-		if (c < 0) {
-			c -= c * 1 / 10;
+		if (curve < 0) {
+			curve -= curve * 1 / 10; //逆回転で慣性を抑える
 		}
 
-		if (c < 30) {
-			c++;
+		if (curve < 30) {
+			curve++;
 		}
-		mRotation.mY += c * 1/10;
+		mRotation.mY += curve * 1/10;
 	}
 	//Aキー離すと慣性で回転
-	if (CKey::Push('A') == false && c > 1) {
-		c--;
-		mRotation.mY += c * 1 / 20;
+	if (CKey::Push('A') == false && curve > 1) {
+		curve--;
+		mRotation.mY += curve * 1 / 20;
 	}
 
 
 
 	//Dキー入力で回転
 	if (CKey::Push('D')) {
-		if (c > 0) {
-			c -= c * 1 / 10; //逆回転で慣性を抑える
+		if (curve > 0) {
+			curve -= curve * 1 / 10; //逆回転で慣性を抑える
 		}
 
-		if (c > -30) {
-			c--;
+		if (curve > -30) {
+			curve--;
 		}
-		mRotation.mY += c * 1/10;
+		mRotation.mY += curve * 1/10;
 	}
 	//Dキー離すと慣性で回転
-	if (CKey::Push('D') == false && c < -1) {
-		c++;
-		mRotation.mY += c * 1 / 20;
+	if (CKey::Push('D') == false && curve < -1) {
+		curve++;
+		mRotation.mY += curve * 1 / 20;
 	}
-
 
 	//Wキーで前進
 	if (CKey::Push('W')) {
@@ -95,6 +104,10 @@ void CPlayer::Update() {
 	if (CKey::Push('W') == false && t > 1) {
 		t--;
 		mPosition = CVector(0.0f, 0.0f, 0.05f * t) * mMatrix;
+	}
+
+	if (t == 20) {
+		
 	}
 
 	//Sキーで後退
@@ -137,6 +150,7 @@ void CPlayer::Update() {
 
 	//弾発射
 	if (CKey::Push(VK_SPACE) && mFireCount == 0 && BulletP > 0) {
+		shoot1Se.Play();
 		BulletP--;
 		mFireCount = FIRECOUNT;
 		CBullet* bullet = new CBullet();
@@ -187,6 +201,7 @@ void CPlayer::Collision(CCollider *m, CCollider *o) {
 			{
 				if (o->mpParent->mTag == EBULLETENEMY) {
 					new CEffect(o->mpParent->mPosition, 1.0f, 1.0f, "exp.tga", 4, 4, 2);
+					BombSe.Play();
 					if (CoinGet > 0) {
 						CoinGet--;
 					}

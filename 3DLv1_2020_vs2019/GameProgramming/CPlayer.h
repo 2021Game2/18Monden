@@ -44,7 +44,7 @@ public:
 	//ƒ_ƒbƒVƒ…Šµ«
 	float t = 1;
 
-	float c = 1;
+	float curve = 1;
 
 	int CoinGet;
 
@@ -52,7 +52,7 @@ public:
 
 	int BulletP;
 
-	int Time = 120 * 60;
+	int Time = 60 * 60;
 };
 
 #endif
