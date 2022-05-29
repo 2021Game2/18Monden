@@ -108,6 +108,7 @@
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CSceneGame.cpp" />
     <ClCompile Include="CSceneManager.cpp" />
+    <ClCompile Include="CSceneTitle.cpp" />
     <ClCompile Include="CShadowMap.cpp" />
     <ClCompile Include="CSound.cpp" />
     <ClCompile Include="CTaskManager.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="CScene.h" />
     <ClInclude Include="CSceneGame.h" />
     <ClInclude Include="CSceneManager.h" />
+    <ClInclude Include="CSceneTitle.h" />
     <ClInclude Include="CShadowMap.h" />
     <ClInclude Include="CSound.h" />
     <ClInclude Include="CTask.h" />

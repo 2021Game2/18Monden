@@ -49,6 +49,8 @@ public:
 
 	float d = 1;
 	float f = 1;
+
+	EScene GetNextScene();
 };
 void Render();
 

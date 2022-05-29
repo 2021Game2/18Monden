@@ -17,7 +17,7 @@ CModel CEnemy2::mModel;	//モデルデータ作成
 //外部変数の参照の作成
 extern CSound BombSe;
 
-#define FIRECOUNT 15	//発射間隔
+#define FIRECOUNT 20	//発射間隔
 
 
 CEnemy2::CEnemy2()

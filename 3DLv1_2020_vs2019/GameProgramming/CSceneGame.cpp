@@ -40,6 +40,7 @@ CSound CoinSe;
 CSound CarSe;
 CSound BulletSe;
 CSound shoot2Se;
+CSound BrakeSe;
 
 CModel mModelHouse;
 CModel mModelMakimono;
@@ -59,18 +60,24 @@ CModel mModelWall;
 #define COIN_MODEL "Resource\\Coin.obj","Resource\\Coin.mtl"
 #define BULLET_MODEL "Resource\\bullet.obj","Resource\\bullet.mtl"
 
+
 void CSceneGame::Init() {
 
+	//シーンの設定
+	mScene = EGAME;
+
 	//サウンド(wav)ファイルの読み込み
-	Bgm.Load("Resource\\MusMusBGM.wav");
+	Bgm.Load("Resource\\BGM.wav");
 	BombSe.Load("Resource\\bomb.wav");
 	shoot1Se.Load("Resource\\shoot1.wav");
 	CoinSe.Load("Resource\\coin.wav");
 	CarSe.Load("Resource\\driving.wav");
 	BulletSe.Load("Resource\\bullet.wav");
 	shoot2Se.Load("Resource\\shoot2.wav");
-	//サウンドファイルの繰り返し再生
-	//Bgm.Repeat();
+	BrakeSe.Load("Resource\\brake.wav");
+
+	//BGM繰り返し再生
+	Bgm.Repeat();
 
 
 	mText.LoadTexture(FONT_IMAGE,1,64);
@@ -235,7 +242,7 @@ void CSceneGame::Init() {
 		CVector(0.0f, 90.0f, 0.0f), CVector(1.0f, 100.0f, 200.0f));
 
 	//敵機のインスタンス作成
-	new CEnemy(CVector(5.0f, -0.5f, -80.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
+	new CEnemy(CVector(5.0f, -0.5f, -60.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
 	//new CEnemy(&mModelC5, CVector(30.0f, 10.0f, -130.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
 	//new CEnemy(&mModelC5, CVector(0.0f, 10.0f, -600.0f), CVector(), CVector(0.1f, 0.1f, 0.1f));
 	//new CEnemy(&mModelC5, CVector(30.0f, 10.0f, -630.0f), CVector(), CVector(0.1f, 0.1f, 0.1f));
@@ -495,3 +502,7 @@ void Render()
 	CTaskManager::Get()->Render();
 }
 
+CScene::EScene CSceneGame::GetNextScene()
+{
+	return mScene;
+}

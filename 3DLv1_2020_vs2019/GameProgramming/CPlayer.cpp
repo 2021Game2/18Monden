@@ -19,20 +19,21 @@
 
 CPlayer *CPlayer::spThis = 0;
 
-#define FIRECOUNT 5	//発射間隔
+#define FIRECOUNT 10	//発射間隔
 
 //CSoundクラスのインクルード
 #include "CSound.h"
 //外部変数の参照の作成
 extern CSound BombSe;
 extern CSound shoot1Se;
-
+extern CSound CarSe;
+extern CSound BrakeSe;
 
 CPlayer::CPlayer()
-: mLine(this, &mMatrix, CVector(0.0f, 0.0f, -14.0f), CVector(0.0f, 0.0f, 17.0f))
-, mLine2(this, &mMatrix, CVector(0.0f, 20.0f, -28.0f), CVector(0.0f, -3.0f, -18.0f))
-, mLine3(this, &mMatrix, CVector(25.0f, 0.0f, -8.0f), CVector(-30.0f, 0.0f, -8.0f))
-, mCollider(this, &mMatrix, CVector(-0.5f, 1.0f, -0.5f), 0.4f)
+: mLine(this, &mMatrix, CVector(0.0f, 10.0f, -30.0f), CVector(0.0f, 10.0f, 30.0f))
+, mLine2(this, &mMatrix, CVector(0.0f, 30.0f, 0.0f), CVector(0.0f, -1.0f, 0.0f))
+, mLine3(this, &mMatrix, CVector(25.0f, 10.0f, -8.0f), CVector(-30.0f, 10.0f, -8.0f))
+, mCollider(this, &mMatrix, CVector(-0.5f, 10.0f, -0.5f), 0.4f)
 , mFireCount(0)
 , mJump(0) //0はジャンプ可能
 , yadd(0)
@@ -59,13 +60,13 @@ void CPlayer::Update() {
 	//Aキー入力で回転
 	if (CKey::Push('A')) {
 		if (curve < 0) {
-			curve -= curve * 1 / 10; //逆回転で慣性を抑える
+			curve -= curve * 1 / 3; //逆回転で慣性を抑える
 		}
 
 		if (curve < 30) {
 			curve++;
 		}
-		mRotation.mY += curve * 1/10;
+		mRotation.mY += curve * 1/5;
 	}
 	//Aキー離すと慣性で回転
 	if (CKey::Push('A') == false && curve > 1) {
@@ -78,13 +79,13 @@ void CPlayer::Update() {
 	//Dキー入力で回転
 	if (CKey::Push('D')) {
 		if (curve > 0) {
-			curve -= curve * 1 / 10; //逆回転で慣性を抑える
+			curve -= curve * 1 / 3; //逆回転で慣性を抑える
 		}
 
 		if (curve > -30) {
 			curve--;
 		}
-		mRotation.mY += curve * 1/10;
+		mRotation.mY += curve * 1/5;
 	}
 	//Dキー離すと慣性で回転
 	if (CKey::Push('D') == false && curve < -1) {
@@ -106,15 +107,23 @@ void CPlayer::Update() {
 		mPosition = CVector(0.0f, 0.0f, 0.05f * t) * mMatrix;
 	}
 
-	if (t == 20) {
-		
+	if (t == 3) {
+		CarSe.Repeat();
+	}
+
+	if (t == 1) {
+		CarSe.Stop();
 	}
 
 	//Sキーで後退
 	if (CKey::Push('S')) {
 		if (t > 0) {
 			t -= t * 1/10; //ブレーキ
+			if (t > 200 && mJump == 0) {
+				BrakeSe.Play(); //ブレーキ音再生
+			}
 		}
+
 
 		if (t > -90) {
 			t--;
@@ -138,11 +147,7 @@ void CPlayer::Update() {
 	CTransform::Update();
 
 	//ジャンプ
-	if (mJump == 0 && CKey::Once('J'))
-	{
-		yadd = -0.2f;
-		mJump++;
-	}
+	
 
 		mPosition.mY -= yadd;
 		yadd += 0.01f;
@@ -156,7 +161,7 @@ void CPlayer::Update() {
 		CBullet* bullet = new CBullet();
 		bullet->mTag = EBULLETPLAYER;
 		bullet->Set(0.1f, 1.5f);
-		bullet->mPosition = CVector(0.0f, 0.0f, 50.0f) * mMatrix;
+		bullet->mPosition = CVector(0.0f, 10.0f, 50.0f) * mMatrix;
 		bullet->mRotation = mRotation;
 		bullet->Update();
 		//		TaskManager.Add(bullet);
@@ -216,6 +221,11 @@ void CPlayer::Collision(CCollider *m, CCollider *o) {
 			{
 				yadd = 0;
 				mJump = 0;
+				if (mJump == 0 && CKey::Once('J'))
+				{
+					yadd = -0.2f;
+					mJump++;
+				}
 				//位置の更新(mPosition + adjust)
 				//mPosition = mPosition - adjust * -1;
 				//行列の更新

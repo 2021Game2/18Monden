@@ -12,7 +12,7 @@ extern CSound BulletSe;
 //コンストラクタ
 CMakimono::CMakimono(CModel* model, CVector position,
 	CVector rotation, CVector scale)
-	: mCollider(this, &mMatrix, CVector(0.0f, 0.0f, 0.0f), 1.0f)
+	: mCollider(this, &mMatrix, CVector(0.0f, 0.0f, 0.0f), 1.5f)
 {
 	//モデル、位置、回転、拡縮を設定する
 	mpModel = model; //モデルの設定
@@ -48,7 +48,7 @@ void CMakimono::Collision(CCollider* m, CCollider* o) {
 				if (o->mpParent->mTag == EPLAYER) {
 					if (CCollider::Collision(o, m)) {
 						mEnabled = false;
-						CPlayer::spThis->BulletP += 15;
+						CPlayer::spThis->BulletP += 5;
 						BulletSe.Play();
 					}
 				}

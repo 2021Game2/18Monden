@@ -2,7 +2,7 @@
 #include "CCollisionManager.h"
 
 CBullet::CBullet()
-: mLife(50)
+: mLife(10)
 , mCollider(this, &mMatrix, CVector(0.0f, 0.0f, 0.0f), 0.3f)
 {}
 
@@ -24,7 +24,7 @@ void CBullet::Update() {
 		CTransform::Update();
 		//mRotation.mY += 10;
 		//位置更新
-		mPosition = CVector(0.0f, 0.0f, 1.0f)* mMatrix;
+		mPosition = CVector(0.0f, 0.0f, 2.0f)* mMatrix;
 	}
 	else {
 		//無効にする
@@ -54,9 +54,29 @@ void CBullet::Collision(CCollider *m, CCollider *o) {
 	}
 
 	//コライダのmとyが衝突しているか判定
-	if (CCollider::Collision(m, o)) {
-		//衝突している時は無効にする
-		mEnabled = false;
+	switch (o->mType)
+	{
+	case CCollider::ESPHERE:
+		if (CCollider::Collision(m, o)) {
+			if (o->mpParent->mTag == EPLAYER) {
+				//衝突している時は無効にする
+				mEnabled = false;
+			}
+
+			if (o->mpParent->mTag == EENEMY) {
+				mEnabled = false;
+			}
+		}
+		case CCollider::ETRIANGLE:
+				if (o->mType == CCollider::ETRIANGLE) {
+					CVector adjust;//調整用ベクトル
+					//三角形と線分の衝突判定
+					if (CCollider::CollisionTriangleSphere(o, m, &adjust))
+					{
+						mEnabled = false;
+					}
+				}
+		
 	}
 
 	return;
