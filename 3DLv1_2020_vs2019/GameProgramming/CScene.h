@@ -9,6 +9,8 @@ public:
 	enum EScene {
 		EGAME,	//ゲーム
 		ETITLE, 	//タイトル
+		EWIN, //勝利画面
+		ELOSE, //敗北画面
 	};
 	EScene mScene;
 

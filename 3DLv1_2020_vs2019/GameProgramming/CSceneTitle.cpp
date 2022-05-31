@@ -19,7 +19,7 @@ void CSceneTitle::Update() {
 		//次のシーンはゲーム
 		mScene = EGAME;
 	}
-
+	Render();
 }
 
 void CSceneTitle::Render() {
@@ -30,8 +30,8 @@ void CSceneTitle::Render() {
 	glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
 	//文字列編集エリアの作成;
 
-	mText.DrawString("Time", -300, 270, 16, 32);
-
+	mText.DrawString("TITLE", -200, 0, 50, 50);
+	mText.DrawString("PUSH ENTER", -190, -70, 20, 20);
 	//2Dの描画終了
 	CUtil::End2D();
 }

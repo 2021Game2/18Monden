@@ -488,12 +488,14 @@ void CSceneGame::Update() {
 
 	mShadowMap.Render();
 
-
 #ifdef _DEBUG
 	//ƒRƒ‰ƒCƒ_‚Ì•`‰æ
 	CCollisionManager::Get()->Render();
 #endif
 
+	if (CPlayer::spThis->Time < 1 && CPlayer::spThis->CoinGet > CPlayer::spThis->EnemyCoinGet) {
+		mScene = EWIN;
+	}
 
 }
 

@@ -16,6 +16,8 @@ public:
 	void Init();
 	//XVˆ—
 	void Update();
+
+	CScene::EScene mScene;
 };
 
 #endif
