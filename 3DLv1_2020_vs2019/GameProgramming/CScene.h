@@ -11,6 +11,7 @@ public:
 		ETITLE, 	//ƒ^ƒCƒgƒ‹
 		EWIN, //Ÿ—˜‰æ–Ê
 		ELOSE, //”s–k‰æ–Ê
+		EDRAW, //ˆø‚«•ª‚¯‰æ–Ê
 	};
 	EScene mScene;
 

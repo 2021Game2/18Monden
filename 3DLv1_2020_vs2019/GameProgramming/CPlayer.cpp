@@ -36,9 +36,9 @@ CPlayer::CPlayer()
 , mCollider(this, &mMatrix, CVector(-0.5f, 10.0f, -0.5f), 0.4f)
 , mFireCount(0)
 , mJump(0) //0はジャンプ可能
+, BulletP(0)
 , yadd(0)
 , CoinGet(0)
-, BulletP(0)
 , EnemyCoinGet(0)
 {
 	spThis = this;
@@ -50,7 +50,7 @@ CPlayer::CPlayer()
 //更新処理
 void CPlayer::Update() {
 
-	static CVector OldRotate = mRotation;
+	CVector OldRotate = mRotation;
 
 	//制限時間
 	if (Time > 0) {
@@ -170,8 +170,8 @@ void CPlayer::Update() {
 	//行列を更新
 	CTransform::Update();
 
-	Camera.SetTarget(mPosition);
-	Camera.SetAddRotate(OldRotate - mRotation);
+	Camera->SetTarget(mPosition);
+	Camera->SetAddRotate(OldRotate - mRotation);
 	OldRotate = mRotation;
 }
 

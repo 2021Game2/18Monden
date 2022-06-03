@@ -21,6 +21,8 @@
 */
 class CSceneGame : public CScene {
 public:
+	~CSceneGame();
+
 	CText mText;
 
 	//モデルからコライダを生成
@@ -36,7 +38,7 @@ public:
 	CModel mModel;
 	//
 //	CCharacter mCharacter;
-	CPlayer mPlayer;
+	CPlayer*mPlayer;
 
 	CVector mEye;
 

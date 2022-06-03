@@ -2,6 +2,8 @@
 #include "CSceneGame.h"
 #include "CSceneTitle.h"
 #include "CSceneWin.h"
+#include "CSceneLose.h"
+#include "CSceneDraw.h"
 
 //コンストラクタ
 CSceneManager::CSceneManager()
@@ -42,6 +44,14 @@ void CSceneManager::Update() {
 			break;
 		case CScene::EWIN:
 			mpScene = new CSceneWin();
+			mpScene->Init();
+			break;
+		case CScene::ELOSE:
+			mpScene = new CSceneLose();
+			mpScene->Init();
+			break;
+		case CScene::EDRAW:
+			mpScene = new CSceneDraw();
 			mpScene->Init();
 			break;
 		}

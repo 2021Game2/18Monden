@@ -53,6 +53,8 @@ public:
 	int BulletP;
 
 	int Time = 10 * 60;
+
+	CVector OldRotate;
 };
 
 #endif

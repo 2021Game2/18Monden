@@ -1,6 +1,7 @@
 #include "CTexture.h"
 #include <stdio.h>	//ファイルの入力に使用
 #include <string.h>
+#include "SOIL.h"
 
 //std::map<std::string, CTexture>CTexture::mTexFile;
 
@@ -35,15 +36,62 @@ void CTexture::Destory() {
 	}
 }
 
+#include <assert.h>
+
 void CTexture::Load(const char* filename) {
+	//null 以外はエラー
+	assert(mpName == nullptr);
+
+	mpName = new char[strlen(filename) + 1];
+	strcpy(mpName, filename);
+
+	//mId = SOIL_load_OGL_texture(
+	//	filename,
+	//	SOIL_LOAD_AUTO,
+	//	SOIL_CREATE_NEW_ID,
+	//	SOIL_FLAG_POWER_OF_TWO
+	//	| SOIL_FLAG_MIPMAPS
+	//	| SOIL_FLAG_MULTIPLY_ALPHA
+	//	| SOIL_FLAG_COMPRESS_TO_DXT
+	//	| SOIL_FLAG_DDS_LOAD_DIRECT
+	//	| SOIL_FLAG_INVERT_Y
+	//);
+
+	//画像データ
+	unsigned char* data, * data2;
+
+	data = SOIL_load_image(filename, &mHeader.width, &mHeader.height, &mHeader.depth, SOIL_LOAD_AUTO);
+
+	if (data == 0)
+		return;
+
+	mId = SOIL_create_OGL_texture(data, mHeader.width, mHeader.height, mHeader.depth,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_POWER_OF_TWO
+		| SOIL_FLAG_MIPMAPS
+		| SOIL_FLAG_MULTIPLY_ALPHA
+		| SOIL_FLAG_COMPRESS_TO_DXT
+		| SOIL_FLAG_DDS_LOAD_DIRECT
+		| SOIL_FLAG_INVERT_Y
+		| SOIL_FLAG_TEXTURE_REPEATS
+	);
+
+	SOIL_free_image_data(data);
+
+	assert(mId != 0);
+
+	mHeader.depth *= 8;
+
+	return;
+
+
 	//if (mTexFile.count(filename)) {
 	//	*this = mTexFile[filename];
 	//	return;
 	//}
-	//画像データ
-	unsigned char *data, *data2;
+
 	//ファイルポインタの作成
-	FILE *fp;
+	FILE* fp;
 	//ファイルオープン
 	fp = fopen(filename, "rb");
 	//エラーのときはリターン
@@ -64,17 +112,17 @@ void CTexture::Load(const char* filename) {
 	fread(data2, length, 1, fp);
 	//画像ファイルのクローズ
 	fclose(fp);
-	
+
 	for (int i = 0; i < mHeader.width * mHeader.height; i++) {
 		int x, y;
-//		if (mHeader.discripter >> 4 & 0x01) {
+		//		if (mHeader.discripter >> 4 & 0x01) {
 		if (mHeader.discripter & 0x10) {
 			x = mHeader.width - i % mHeader.width - 1;
 		}
 		else {
 			x = i % mHeader.width;
 		}
-//		if (mHeader.discripter >> 5 & 0x01) {
+		//		if (mHeader.discripter >> 5 & 0x01) {
 		if (mHeader.discripter & 0x20) {
 			y = mHeader.height - i / mHeader.width - 1;
 		}
@@ -103,11 +151,12 @@ void CTexture::Load(const char* filename) {
 	if (mHeader.depth == 32)
 		//アルファ有りのテクスチャ作成
 		gluBuild2DMipmaps(GL_TEXTURE_2D, 4, mHeader.width,
-		mHeader.height, GL_BGRA_EXT, GL_UNSIGNED_BYTE, data);
+			mHeader.height, GL_BGRA_EXT, GL_UNSIGNED_BYTE, data);
 	else
 		//アルファ無しのテクスチャ作成
 		gluBuild2DMipmaps(GL_TEXTURE_2D, 3, mHeader.width,
-		mHeader.height, GL_BGR_EXT, GL_UNSIGNED_BYTE, data);
+			mHeader.height, GL_BGR_EXT, GL_UNSIGNED_BYTE, data);
+
 	glBindTexture(GL_TEXTURE_2D, 0);
 	/* テクスチャユニット０に戻す */
 //	glActiveTexture(GL_TEXTURE0);

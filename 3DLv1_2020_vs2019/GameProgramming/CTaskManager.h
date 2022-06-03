@@ -35,6 +35,9 @@ public:
 	void Delete();
 	//衝突処理
 	void TaskCollision();
+
+	//宣言
+	static void Destroy();
 };
 //タスクマネージャyの外部参照
 //extern CTaskManager TaskManager;

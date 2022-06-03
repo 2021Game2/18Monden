@@ -2,6 +2,26 @@
 #include "CShadowMap.h"
 #include "CMatrix.h"
 
+CShadowMap::CShadowMap()
+	: mDepthTextureID(0)
+	, mFb(0)
+{
+}
+
+CShadowMap::~CShadowMap()
+{
+	if (mDepthTextureID)
+	{
+		glDeleteTextures(1, &mDepthTextureID);
+		mDepthTextureID = 0;
+	}
+	if (mFb)
+	{
+		glDeleteFramebuffers(1, &mFb);
+		mFb = 0;
+	}
+}
+
 void CShadowMap::Init()
 {
 	/* テクスチャユニット１をDepthテクスチャで使用 */
@@ -258,6 +278,5 @@ void CShadowMap::Render()
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightcol);
 
 }
-
 
 

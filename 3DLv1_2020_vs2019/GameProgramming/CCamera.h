@@ -70,5 +70,5 @@ public:
 };
 
 //ƒJƒƒ‰‚ÌŠO•”QÆ
-extern CCamera Camera;
+extern CCamera* Camera;
 #endif

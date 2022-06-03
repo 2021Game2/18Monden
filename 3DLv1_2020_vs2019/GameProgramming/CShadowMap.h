@@ -10,6 +10,8 @@ class CShadowMap
 	GLuint mFb; //フレームバッファ識別子
 	void (*mpRender)(); //Render関数のポインタ
 public:
+	CShadowMap();
+	~CShadowMap();
 	//初期化処理
 	void Init();
 	/* 初期化処理

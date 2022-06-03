@@ -23,7 +23,16 @@ CTaskManager::CTaskManager()
 }
 
 CTaskManager::~CTaskManager() 
-{}
+{
+	//先頭から最後まで繰り返し
+	CTask* task = mHead.mpNext;
+	while (task->mpNext) {
+		CTask* del = task;
+		//次へ
+		task = task->mpNext;
+		delete del;
+	}
+}
 
 //リストに追加
 //Add(タスクのポインタ)
@@ -104,6 +113,15 @@ void CTaskManager::TaskCollision()
 		task->TaskCollision();
 		//次へ
 		task = task->mpNext;
+	}
+}
+
+void CTaskManager::Destroy()
+{
+	if (mpInstance)
+	{
+		delete mpInstance;
+		mpInstance = nullptr;
 	}
 }
 

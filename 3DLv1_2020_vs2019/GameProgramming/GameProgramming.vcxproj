@@ -61,7 +61,7 @@
     <Link>
       <SubSystem>NotSet</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glew32.lib;glfw3.lib;glfw3dll.lib;glut32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;glfw3.lib;glfw3dll.lib;glut32.lib;soil.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -106,7 +106,9 @@
     <ClCompile Include="CMatrix.cpp" />
     <ClCompile Include="CModel.cpp" />
     <ClCompile Include="CPlayer.cpp" />
+    <ClCompile Include="CSceneDraw.cpp" />
     <ClCompile Include="CSceneGame.cpp" />
+    <ClCompile Include="CSceneLose.cpp" />
     <ClCompile Include="CSceneManager.cpp" />
     <ClCompile Include="CSceneTitle.cpp" />
     <ClCompile Include="CSceneWin.cpp" />
@@ -147,7 +149,9 @@
     <ClInclude Include="CModel.h" />
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CScene.h" />
+    <ClInclude Include="CSceneDraw.h" />
     <ClInclude Include="CSceneGame.h" />
+    <ClInclude Include="CSceneLose.h" />
     <ClInclude Include="CSceneManager.h" />
     <ClInclude Include="CSceneTitle.h" />
     <ClInclude Include="CSceneWin.h" />
@@ -163,6 +167,7 @@
     <ClInclude Include="CUtil.h" />
     <ClInclude Include="CVector.h" />
     <ClInclude Include="CWall.h" />
+    <ClInclude Include="include\SOIL.h" />
     <ClInclude Include="Update.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

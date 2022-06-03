@@ -60,8 +60,14 @@ CModel mModelWall;
 #define COIN_MODEL "Resource\\Coin.obj","Resource\\Coin.mtl"
 #define BULLET_MODEL "Resource\\bullet.obj","Resource\\bullet.mtl"
 
+CSceneGame::~CSceneGame()
+{
+	CTaskManager::Destroy();
+}
 
 void CSceneGame::Init() {
+	mPlayer = new CPlayer();
+	Camera = new CCamera();
 
 	//シーンの設定
 	mScene = EGAME;
@@ -103,12 +109,12 @@ void CSceneGame::Init() {
 	CMatrix matrix;
 	matrix.Print();
 
-	mPlayer.mpModel = &mModel;
-	mPlayer.mScale = CVector(0.03f, 0.03f, 0.03f);
+	mPlayer->mpModel = &mModel;
+	mPlayer->mScale = CVector(0.03f, 0.03f, 0.03f);
 	//
-	mPlayer.mPosition = CVector(0.0f, 0.0f, -25.0f) * mBackGroundMatrix;
+	mPlayer->mPosition = CVector(0.0f, 0.0f, -25.0f) * mBackGroundMatrix;
 	//mPlayer.mPosition = CVector(0.0f, 0.0f, -503.0f);
-	mPlayer.mRotation = CVector(0.0f, 180.0f, 0.0f);
+	mPlayer->mRotation = CVector(0.0f, 180.0f, 0.0f);
 
 	//家
 	mModelHouse.Load(HOUSE_MODEL);
@@ -394,19 +400,19 @@ void CSceneGame::Init() {
 
 
 	//	e = CVector(-2.0f, 10.0f, -30.0f) * mPlayer.mMatrix;
-	e = CVector(0.0f, 31.5f, -100.0f) * CMatrix().RotateY(Camera.mRotation.mY) * mPlayer.mMatrix;
+	e = CVector(0.0f, 31.5f, -100.0f) * CMatrix().RotateY(Camera->mRotation.mY) * mPlayer->mMatrix;
 	if (CKey::Push(VK_SPACE))
 	{
-		e = CVector(0.0f, 20.0f, 100.0f) * mPlayer.mMatrix;
+		e = CVector(0.0f, 20.0f, 100.0f) * mPlayer->mMatrix;
 	}
 	//注視点を求める
-	c = mPlayer.mPosition;
+	c = mPlayer->mPosition;
 	//上方向を求める
-	u = CVector(0.0f, 1.0f, 0.0f) * mPlayer.mMatrixRotate;
+	u = CVector(0.0f, 1.0f, 0.0f) * mPlayer->mMatrixRotate;
 	//カメラの設定
 	//gluLookAt(e.mX, e.mY, e.mZ, c.mX, c.mY, c.mZ, u.mX, u.mY, u.mZ);
 	//カメラクラスの設定
-	Camera.Set(e, c, u);
+	Camera->Set(e, c, u);
 
 	float shadowColor[] = { 0.4f, 0.4f, 0.4f, 0.2f };  //影の色
 	float lightPos[] = { 0.0f, 160.0f, -550.0f };  //光源の位置
@@ -484,7 +490,7 @@ void CSceneGame::Update() {
 	//CTaskManager::Get()->Render();
 
 
-	Camera.Draw();
+	Camera->Draw();
 
 	mShadowMap.Render();
 
@@ -495,6 +501,14 @@ void CSceneGame::Update() {
 
 	if (CPlayer::spThis->Time < 1 && CPlayer::spThis->CoinGet > CPlayer::spThis->EnemyCoinGet) {
 		mScene = EWIN;
+	}
+
+	if (CPlayer::spThis->Time < 1 &&  CPlayer::spThis->EnemyCoinGet > CPlayer::spThis->CoinGet) {
+		mScene = ELOSE;
+	}
+
+	if (CPlayer::spThis->Time < 1 && CPlayer::spThis->EnemyCoinGet == CPlayer::spThis->CoinGet) {
+		mScene = EDRAW;
 	}
 
 }

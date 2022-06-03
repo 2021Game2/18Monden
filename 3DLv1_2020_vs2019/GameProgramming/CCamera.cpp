@@ -8,7 +8,7 @@
 #include "CCollisionManager.h"
 
 //ƒJƒƒ‰‚ÌŠO•”•Ï”
-CCamera Camera;
+CCamera*Camera;
 
 
 CCamera::CCamera()
