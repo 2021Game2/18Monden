@@ -273,7 +273,7 @@ void CPlayer::Render()
 	//YÀ•W‚Ì•\¦
 	//•¶š—ñ‚Ìİ’è
 	sprintf(buf, ":%d", CoinGet);
-	//•¶š—ñ‚Ì•`‰æ
+	//•¶š—ñ‚Ì•`‰æ 
 	mText.DrawString(buf, -150, 270, 16, 32);
 
 
