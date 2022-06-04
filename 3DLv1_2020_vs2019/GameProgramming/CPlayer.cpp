@@ -17,6 +17,8 @@
 
 #include "CSound.h"
 
+#include "CSceneGame.h"
+
 CPlayer *CPlayer::spThis = 0;
 
 #define FIRECOUNT 10	//発射間隔
@@ -257,6 +259,12 @@ void CPlayer::Render()
 
 	//2Dの描画開始
 	CUtil::Start2D(-400, 400, -300, 300);
+
+	//CSceneGame::sImagebullet.Draw(-370, -220, -300, -220, 400, 6000, 3000, 0);
+	//CSceneGame::sImagejet.Draw(120, 230, 230, 330, 0, 600, 500, 0);
+	//CSceneGame::sImageCar.Draw(-320, -140, 230, 310, 100, 2000, 800, 0);
+	//CSceneGame::sImageTimer.Draw(-50, 50, 200, 300, 0, 255, 255, 0);
+
 	//描画色の設定（緑色の半透明）
 	glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
 	//文字列編集エリアの作成
@@ -264,25 +272,25 @@ void CPlayer::Render()
 
 	//Y座標の表示
 	//文字列の設定
-	sprintf(buf, "PLAYER:%d", CoinGet);
+	sprintf(buf, ":%d", CoinGet);
 	//文字列の描画
-	mText.DrawString(buf, -300, 270, 16, 32);
+	mText.DrawString(buf, -150, 270, 16, 32);
 
 
 	//Y座標の表示
 	//文字列の設定
-	sprintf(buf, "ENEMY:%d", EnemyCoinGet);
+	sprintf(buf, ":%d", EnemyCoinGet);
 	//文字列の描画
-	mText.DrawString(buf, 100, 270, 16, 32);
+	mText.DrawString(buf, 250, 270, 16, 32);
 
 	//Y座標の表示
 //文字列の設定
-	sprintf(buf, "TIME:%d", Time/60);
+	sprintf(buf, "%d", Time/60);
 	//文字列の描画
-	mText.DrawString(buf, -40, 270, 8, 16);
+	mText.DrawString(buf, 0, 240, 8, 16);
 
-	sprintf(buf, "BULLET:%d", BulletP);
-	mText.DrawString(buf, -300, -270, 16, 32);
+	sprintf(buf, "%d", BulletP);
+	mText.DrawString(buf, -200, -260, 16, 32);
 
 	//2Dの描画終了
 	CUtil::End2D();

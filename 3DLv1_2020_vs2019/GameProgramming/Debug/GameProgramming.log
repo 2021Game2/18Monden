@@ -1,4 +1,4 @@
-﻿  CSceneGame.cpp
+﻿  CPlayer.cpp
 C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CSound.h(101,50): warning C4101: 'cnt': ローカル変数は 1 度も使われていません。
 C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CSound.h(100,24): warning C4101: 'state': ローカル変数は 1 度も使われていません。
 C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\GameProgramming\CSound.h(101,87): warning C4101: 'dw': ローカル変数は 1 度も使われていません。

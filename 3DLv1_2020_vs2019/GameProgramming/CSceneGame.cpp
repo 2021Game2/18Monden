@@ -42,12 +42,6 @@ CSound BulletSe;
 CSound shoot2Se;
 CSound BrakeSe;
 
-CModel mModelHouse;
-CModel mModelMakimono;
-CModel mModelCoin;
-CModel mModelWall;
-
-
 #define TEXWIDTH  8192  //テクスチャ幅
 #define TEXHEIGHT  6144  //テクスチャ高さ
 
@@ -59,6 +53,18 @@ CModel mModelWall;
 #define SKY_MODEL "Resource\\sky.obj","Resource\\sky.mtl"
 #define COIN_MODEL "Resource\\Coin.obj","Resource\\Coin.mtl"
 #define BULLET_MODEL "Resource\\bullet.obj","Resource\\bullet.mtl"
+
+//弾丸画像
+#define BULLET_IMAGE "Resource\\bullet.png"
+
+//戦闘機画像
+#define JET_IMAGE "Resource\\Jet.png"
+
+//車画像
+#define CAR_IMAGE "Resource\\Car.png"
+
+//時計画像
+#define TIMER_IMAGE "Resource\\Timer.png"
 
 CSceneGame::~CSceneGame()
 {
@@ -81,6 +87,11 @@ void CSceneGame::Init() {
 	BulletSe.Load("Resource\\bullet.wav");
 	shoot2Se.Load("Resource\\shoot2.wav");
 	BrakeSe.Load("Resource\\brake.wav");
+
+	sImagebullet.Load(BULLET_IMAGE);
+	sImagejet.Load(JET_IMAGE);
+	sImageCar.Load(CAR_IMAGE);
+	sImageTimer.Load(TIMER_IMAGE);
 
 	//BGM繰り返し再生
 	Bgm.Repeat();
@@ -494,6 +505,17 @@ void CSceneGame::Update() {
 
 	mShadowMap.Render();
 
+	//2Dの描画開始
+	CUtil::Start2D(-400, 400, -300, 300);
+
+	sImagebullet.Draw(-370, -220, -300, -220, 400, 6000, 3000, 0);
+	sImagejet.Draw(120, 230, 230, 330, 0, 600, 500, 0);
+	sImageCar.Draw(-320, -140, 230, 310, 100, 2000, 800, 0);
+	sImageTimer.Draw(-20, 20, 250, 290, 0, 255, 255, 0);
+
+	//2Dの描画終了
+	CUtil::End2D();
+
 #ifdef _DEBUG
 	//コライダの描画
 	CCollisionManager::Get()->Render();
@@ -516,6 +538,7 @@ void CSceneGame::Update() {
 void Render()
 {
 	CTaskManager::Get()->Render();
+
 }
 
 CScene::EScene CSceneGame::GetNextScene()

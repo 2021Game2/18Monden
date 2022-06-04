@@ -34,6 +34,12 @@ public:
 	CModel mModelC5;
 	CModel mBackGround;
 	CMatrix mBackGroundMatrix;
+
+	CModel mModelHouse;
+	CModel mModelMakimono;
+	CModel mModelCoin;
+	CModel mModelWall;
+
 	//モデルクラスのインスタンス作成
 	CModel mModel;
 	//
@@ -53,6 +59,11 @@ public:
 	float f = 1;
 
 	EScene GetNextScene();
+
+	CTexture sImagebullet;
+	CTexture sImagejet;
+	CTexture sImageCar;
+	CTexture sImageTimer;
 };
 void Render();
 
