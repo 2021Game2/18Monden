@@ -3,7 +3,7 @@
 //キャラクタクラスのインクルード
 #include "CCharacter.h"
 #include "CCollider.h"
-#include "CEffect.h"
+#include "CEffect2.h"
 
 /*
 アイテムクラス

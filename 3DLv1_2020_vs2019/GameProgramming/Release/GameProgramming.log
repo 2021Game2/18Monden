@@ -1,0 +1,4 @@
+﻿CTexture.obj : error LNK2001: 外部シンボル _SOIL_free_image_data は未解決です
+CTexture.obj : error LNK2001: 外部シンボル _SOIL_load_image は未解決です
+CTexture.obj : error LNK2001: 外部シンボル _SOIL_create_OGL_texture は未解決です
+C:\Users\81802\Desktop\Game2 Season2\18Monden\3DLv1_2020_vs2019\Release\GameProgramming.exe : fatal error LNK1120: 3 件の未解決の外部参照

@@ -52,7 +52,7 @@ public:
 
 	int BulletP;
 
-	int Time = 10 * 60;
+	int Time = 60 * 60;
 
 	CVector OldRotate;
 };

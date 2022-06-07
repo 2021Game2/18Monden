@@ -4,7 +4,7 @@
 
 CSceneWin::CSceneWin()
 {
-	mText.LoadTexture("FontWhite.tga", 1, 64);
+	mText.LoadTexture("Resource\\FontWhite.tga", 1, 64);
 }
 
 void CSceneWin::Init() {

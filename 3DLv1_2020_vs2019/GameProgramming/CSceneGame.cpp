@@ -22,7 +22,7 @@
 
 #include "CCity.h"
 
-#include "CMakimono.h"
+#include "CBulletItem.h"
 
 #include "CCoin.h"
 
@@ -45,7 +45,7 @@ CSound BrakeSe;
 #define TEXWIDTH  8192  //テクスチャ幅
 #define TEXHEIGHT  6144  //テクスチャ高さ
 
-#define FONT_IMAGE "FontWhite.tga"
+#define FONT_IMAGE "Resource\\FontWhite.tga"
 #define ENEMY_MODEL "Resource\\c5.obj","Resourece\\c5.mtl"
 #define GROUND_TRANSLATE 0.0f, 0.0f, -500.0f
 #define CAR_MODEL "Resource\\Car.obj","Resource\\Car.mtl"
@@ -53,6 +53,7 @@ CSound BrakeSe;
 #define SKY_MODEL "Resource\\sky.obj","Resource\\sky.mtl"
 #define COIN_MODEL "Resource\\Coin.obj","Resource\\Coin.mtl"
 #define BULLET_MODEL "Resource\\bullet.obj","Resource\\bullet.mtl"
+#define WALL_MODEL "Resource\\wall.obj", "Resource\\wall.mtl"
 
 //弾丸画像
 #define BULLET_IMAGE "Resource\\bullet.png"
@@ -65,6 +66,7 @@ CSound BrakeSe;
 
 //時計画像
 #define TIMER_IMAGE "Resource\\Timer.png"
+
 
 CSceneGame::~CSceneGame()
 {
@@ -145,23 +147,23 @@ void CSceneGame::Init() {
 		CVector(), CVector(1.0f, 1.0f, 1.0f));
 
 	//弾丸
-	mModelMakimono.Load(BULLET_MODEL);
-	new CMakimono(&mModelMakimono, CVector(-123.0f, 0.5f, -550.0f),
+	mModelBullet.Load(BULLET_MODEL);
+	new CBulletItem(&mModelBullet, CVector(-123.0f, 0.5f, -550.0f),
 		CVector(60.0f,0.0f, -50.0f), CVector(7.0f, 7.0f, 7.0f));
 
-	new CMakimono(&mModelMakimono, CVector(-73.0f, 0.5f, -550.0f),
+	new CBulletItem(&mModelBullet, CVector(-73.0f, 0.5f, -550.0f),
 		CVector(60.0f, 0.0f, -50.0f), CVector(7.0f, 7.0f, 7.0f));
 
-	new CMakimono(&mModelMakimono, CVector(-23.0f, 0.5f, -550.0f),
+	new CBulletItem(&mModelBullet, CVector(-23.0f, 0.5f, -550.0f),
 		CVector(60.0f, 0.0f, -50.0f), CVector(7.0f, 7.0f, 7.0f));
 
-	new CMakimono(&mModelMakimono, CVector(27.0f, 0.5f, -550.0f),
+	new CBulletItem(&mModelBullet, CVector(27.0f, 0.5f, -550.0f),
 		CVector(60.0f, 0.0f, -50.0f), CVector(7.0f, 7.0f, 7.0f));
 
-	new CMakimono(&mModelMakimono, CVector(77.0f, 0.5f, -550.0f),
+	new CBulletItem(&mModelBullet, CVector(77.0f, 0.5f, -550.0f),
 		CVector(60.0f, 0.0f, -50.0f), CVector(7.0f, 7.0f, 7.0f));
 
-	new CMakimono(&mModelMakimono, CVector(123.0f, 0.5f, -550.0f),
+	new CBulletItem(&mModelBullet, CVector(123.0f, 0.5f, -550.0f),
 		CVector(60.0f, 0.0f, -50.0f), CVector(7.0f, 7.0f, 7.0f));
 
 	//コイン
@@ -245,7 +247,7 @@ void CSceneGame::Init() {
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
 	//壁
-	mModelWall.Load("wall.obj", "wall.mtl");
+	mModelWall.Load(WALL_MODEL);
 	new CWall(&mModelWall, CVector(130.0f, -0.5f, -530.0f),
 		CVector(0.0f, 90.0f, 0.0f), CVector(100.0f, 100.0f, 1.0f));
 
@@ -521,16 +523,22 @@ void CSceneGame::Update() {
 	CCollisionManager::Get()->Render();
 #endif
 
-	if (CPlayer::spThis->Time < 1 && CPlayer::spThis->CoinGet > CPlayer::spThis->EnemyCoinGet) {
+	if (CPlayer::spThis->Time < 50 && CPlayer::spThis->CoinGet > CPlayer::spThis->EnemyCoinGet) {
 		mScene = EWIN;
+		Bgm.Stop();
+		CarSe.Stop();
 	}
 
-	if (CPlayer::spThis->Time < 1 &&  CPlayer::spThis->EnemyCoinGet > CPlayer::spThis->CoinGet) {
+	if (CPlayer::spThis->Time < 50 &&  CPlayer::spThis->EnemyCoinGet > CPlayer::spThis->CoinGet) {
 		mScene = ELOSE;
+		Bgm.Stop();
+		CarSe.Stop();
 	}
 
-	if (CPlayer::spThis->Time < 1 && CPlayer::spThis->EnemyCoinGet == CPlayer::spThis->CoinGet) {
+	if (CPlayer::spThis->Time < 50 && CPlayer::spThis->EnemyCoinGet == CPlayer::spThis->CoinGet) {
 		mScene = EDRAW;
+		Bgm.Stop();
+		CarSe.Stop();
 	}
 
 }

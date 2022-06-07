@@ -45,7 +45,7 @@ CPlayer::CPlayer()
 {
 	spThis = this;
 	//テクスチャファイルの読み込み（1行64列）
-	mText.LoadTexture("FontWhite.tga", 1, 64);
+	mText.LoadTexture("Resource\\FontWhite.tga", 1, 64);
 	mTag = EPLAYER;
 }
 
@@ -207,7 +207,7 @@ void CPlayer::Collision(CCollider *m, CCollider *o) {
 			if (CCollider::Collision(m, o))
 			{
 				if (o->mpParent->mTag == EBULLETENEMY) {
-					new CEffect(o->mpParent->mPosition, 1.0f, 1.0f, "exp.tga", 4, 4, 2);
+					new CEffect(o->mpParent->mPosition, 1.0f, 1.0f, "Resource\\exp.tga", 4, 4, 2);
 					BombSe.Play();
 					if (CoinGet > 0) {
 						CoinGet--;
@@ -285,9 +285,18 @@ void CPlayer::Render()
 
 	//Y座標の表示
 //文字列の設定
-	sprintf(buf, "%d", Time/60);
-	//文字列の描画
-	mText.DrawString(buf, 0, 240, 8, 16);
+	if (Time > 600) {
+		sprintf(buf, "%d", Time / 60);
+		//文字列の描画
+		mText.DrawString(buf, -6, 240, 8, 16);
+	}
+
+	if (Time < 600) {
+		sprintf(buf, "%d", Time / 60);
+		//文字列の描画
+		mText.DrawString(buf, 0, 240, 8, 16);
+	}
+
 
 	sprintf(buf, "%d", BulletP);
 	mText.DrawString(buf, -200, -260, 16, 32);

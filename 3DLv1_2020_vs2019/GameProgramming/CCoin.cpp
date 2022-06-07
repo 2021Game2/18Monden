@@ -82,7 +82,7 @@ void CCoin::Collision(CCollider* m, CCollider* o) {
 						CoinRender = 1000;
 						CPlayer::spThis->CoinGet++;
 						//エフェクト生成
-						new CEffect(o->mpParent->mPosition, 1.0f, 1.0f, "exp.tga", 4, 4, 2);
+						new CEffect2(o->mpParent->mPosition, 2.0f, 2.0f, "Resource\\tktk17.png", 2, 5, 2);
 						CoinSe.Play();
 					}
 				}

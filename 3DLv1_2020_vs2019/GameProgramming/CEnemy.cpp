@@ -4,8 +4,8 @@
 #include "CCollisionManager.h"
 #include "CPlayer.h"
 
-#define OBJ "f16.obj"	//モデルのファイル
-#define MTL "f16.mtl"	//モデルのマテリアルファイル
+#define OBJ "Resource\\f16.obj"	//モデルのファイル
+#define MTL "Resource\\f16.mtl"	//モデルのマテリアルファイル
 
 #define HP 3	//耐久値
 #define VELOCITY 0.2f	//速度
@@ -153,7 +153,7 @@ void CEnemy::Collision(CCollider* m, CCollider* o) {
 			{
 				if (o->mpParent->mTag == EBULLETPLAYER && CPlayer::spThis->EnemyCoinGet > 0) {
 					CPlayer::spThis->EnemyCoinGet--;
-					new CEffect(o->mpParent->mPosition, 1.0f, 1.0f, "exp.tga", 4, 4, 2);
+					new CEffect(o->mpParent->mPosition, 1.0f, 1.0f, "Resource\\exp.tga", 4, 4, 2);
 					BombSe.Play();
 				}
 			}

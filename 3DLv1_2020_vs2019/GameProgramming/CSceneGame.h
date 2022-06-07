@@ -36,7 +36,7 @@ public:
 	CMatrix mBackGroundMatrix;
 
 	CModel mModelHouse;
-	CModel mModelMakimono;
+	CModel mModelBullet;
 	CModel mModelCoin;
 	CModel mModelWall;
 
