@@ -4,8 +4,8 @@
 #include "CCollisionManager.h"
 #include "CPlayer.h"
 
-#define OBJ "f16.obj"	//モデルのファイル
-#define MTL "f16.mtl"	//モデルのマテリアルファイル
+#define OBJ "Resource\\f16.obj"	//モデルのファイル
+#define MTL "Resource\\f16.mtl"	//モデルのマテリアルファイル
 
 #define HP 3	//耐久値
 #define VELOCITY 0.5f	//速度
