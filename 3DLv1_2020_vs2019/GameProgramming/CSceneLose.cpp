@@ -31,7 +31,7 @@ void CSceneLose::Render() {
 	//文字列編集エリアの作成;
 
 	mText.DrawString("LOSE", -150, 0, 50, 50);
-	mText.DrawString("PUSH ENTER", -190, -70, 20, 20);
+	mText.DrawString("PUSH ENTER", -190, -70, 20, 20); 
 
 	//2Dの描画終了
 	CUtil::End2D();
