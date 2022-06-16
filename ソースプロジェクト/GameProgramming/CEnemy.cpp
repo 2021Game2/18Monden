@@ -135,6 +135,11 @@ void CEnemy::Update() {
 			}
 		}
 	}
+
+	if (mPosition.mY < -0.5f) {
+		mPosition.mY = -0.5f;
+	}
+
 	mpPlayer = 0;
 }
 #include "CCoin.h"
@@ -163,7 +168,7 @@ void CEnemy::Collision(CCollider* m, CCollider* o) {
 			//三角コライダと球コライダの衝突判定
 			if (CCollider::CollisionTriangleSphere(o, m, &adjust))
 			{	//衝突しない位置まで戻す
-				mPosition = mPosition + adjust;
+				mPosition = mPosition + adjust * 10;
 				mRotation.mY += 10;
 				if (mRotation.mX != 0) {
 					mRotation.mX = 0;

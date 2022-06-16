@@ -1,6 +1,9 @@
 #include "CSceneWin.h"
 #include "CKey.h"
 #include "CUtil.h"
+#include "CSound.h"
+
+CSound fanfare;
 
 CSceneWin::CSceneWin()
 {
@@ -10,6 +13,10 @@ CSceneWin::CSceneWin()
 void CSceneWin::Init() {
 	//シーンの設定
 	mScene = EWIN;
+
+	fanfare.Load("Resource\\fanfare.wav");
+
+	fanfare.Play();
 }
 
 //更新処理のオーバーライド
@@ -18,6 +25,7 @@ void CSceneWin::Update() {
 	if (CKey::Once(VK_RETURN)) {
 		//次のシーンはゲーム
 		mScene = ETITLE;
+		fanfare.Stop();
 	}
 	Render();
 }

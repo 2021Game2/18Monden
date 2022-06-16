@@ -170,7 +170,7 @@ void CEnemy2::Collision(CCollider* m, CCollider* o) {
 			//三角コライダと球コライダの衝突判定
 			if (CCollider::CollisionTriangleSphere(o, m, &adjust))
 			{	//衝突しない位置まで戻す
-				mPosition = mPosition + adjust;
+				mPosition = mPosition + adjust * 2;
 				mRotation.mY += 10;
 				if (mRotation.mX != 0) {
 					mRotation.mX = 0;

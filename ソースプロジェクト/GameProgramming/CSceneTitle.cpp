@@ -1,6 +1,9 @@
 #include "CSceneTitle.h"
 #include "CKey.h"
 #include "CUtil.h"
+#include "CSound.h"
+
+CSound TitleBgm;
 
 CSceneTitle::CSceneTitle()
 {
@@ -10,6 +13,10 @@ CSceneTitle::CSceneTitle()
 void CSceneTitle::Init() {
 	//シーンの設定
 	mScene = ETITLE;
+
+	TitleBgm.Load("Resource\\TitleBGM.wav");
+
+	TitleBgm.Repeat();
 }
 
 //更新処理のオーバーライド
@@ -18,6 +25,7 @@ void CSceneTitle::Update() {
 	if (CKey::Once(VK_RETURN)) {
 		//次のシーンはゲーム
 		mScene = EGAME;
+		TitleBgm.Stop();
 	}
 	Render();
 }

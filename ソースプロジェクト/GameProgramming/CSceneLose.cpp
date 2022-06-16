@@ -1,6 +1,9 @@
 #include "CSceneLose.h"
 #include "CKey.h"
 #include "CUtil.h"
+#include "CSound.h"
+
+CSound LoseSe;
 
 CSceneLose::CSceneLose()
 {
@@ -10,6 +13,10 @@ CSceneLose::CSceneLose()
 void CSceneLose::Init() {
 	//シーンの設定
 	mScene = ELOSE;
+
+	LoseSe.Load("Resource\\Lose.wav");
+
+	LoseSe.Play();
 }
 
 //更新処理のオーバーライド
