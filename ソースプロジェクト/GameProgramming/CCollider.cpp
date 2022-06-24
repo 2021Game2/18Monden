@@ -2,6 +2,8 @@
 #include "CCollisionManager.h"
 #include "CColliderLine.h"
 
+CCollider* CCollider::spThis = 0;
+
 CCollider::CCollider()
 : mpParent(0)
 , mpMatrix(&mMatrix)
@@ -26,6 +28,8 @@ CCollider::CCollider(CCharacter *parent, CMatrix *matrix,
 	mPosition = position; //位置
 	//半径設定
 	mRadius = radius;
+
+	spThis = this;
 }
 
 //描画
@@ -78,6 +82,7 @@ bool CCollider::CollisionTriangleLine(CCollider *t, CCollider *l, CVector *a) {
 	ev = l->mV[1] * *l->mpMatrix;
 	//面の法線を、外積を正規化して求める
 	CVector normal = (v[1] - v[0]).Cross(v[2] - v[0]).Normalize();
+	t->mV[3] = normal;
 	//三角の頂点から線分始点へのベクトルを求める
 	CVector v0sv = sv - v[0];
 	//三角の頂点から線分終点へのベクトルを求める

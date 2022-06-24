@@ -104,7 +104,6 @@ void CEnemy::Update() {
 		mFireCount--;
 	}
 
-	
 
 	mPosition = mPosition + CVector(0.0f, 0.0f, VELOCITY) * mMatrixRotate;
 	CTransform::Update();

@@ -24,7 +24,7 @@ public:
 	};
 	EType mType;//コライダタイプ
 	//頂点
-	CVector mV[3];
+	CVector mV[4];
 
 	CCharacter *mpParent;//親
 	CMatrix *mpMatrix;//親行列
@@ -53,6 +53,8 @@ public:
 	static bool CollisionTriangleSphere(CCollider *triangle, CCollider *sphere, CVector *adjust);
 	//優先度の変更
 	virtual void ChangePriority();
+
+	static CCollider* spThis;
 };
 
 #endif

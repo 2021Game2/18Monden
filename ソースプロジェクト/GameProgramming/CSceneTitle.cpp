@@ -5,9 +5,12 @@
 
 CSound TitleBgm;
 
+#define TITLE_IMAGE "Resource\\TitleImage.png"
+
 CSceneTitle::CSceneTitle()
 {
-	mText.LoadTexture("Resource\\FontWhite.tga", 1, 64);
+	mText.LoadTexture("Resource\\FontGold1.png", 1, 64);
+	mTitleImage.Load(TITLE_IMAGE);
 }
 
 void CSceneTitle::Init() {
@@ -17,6 +20,7 @@ void CSceneTitle::Init() {
 	TitleBgm.Load("Resource\\TitleBGM.wav");
 
 	TitleBgm.Repeat();
+
 }
 
 //更新処理のオーバーライド
@@ -34,11 +38,11 @@ void CSceneTitle::Render() {
 
 	//2Dの描画開始
 	CUtil::Start2D(-400, 400, -300, 300);
-	//描画色の設定（緑色の半透明）
-	glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
-	//文字列編集エリアの作成;
+	mTitleImage.Draw(-400, 400, -300, 300, -2000, 2000, 1500, -1500);
 
+	//文字列編集エリアの作成;
 	mText.DrawString("COIN BATTLE", -300, 0, 30, 30);
+
 	mText.DrawString("PUSH ENTER", -190, -70, 20, 20);
 	//2Dの描画終了
 	CUtil::End2D();

@@ -19,6 +19,12 @@
 
 #include "CSceneGame.h"
 
+#define _USE_MATH_DEFINES
+
+#include <math.h>
+
+#include <stdio.h>
+
 CPlayer *CPlayer::spThis = 0;
 
 #define FIRECOUNT 10	//発射間隔
@@ -45,12 +51,17 @@ CPlayer::CPlayer()
 {
 	spThis = this;
 	//テクスチャファイルの読み込み（1行64列）
+	mCoinText.LoadTexture("Resource\\FontGold1.png", 1, 64);
 	mText.LoadTexture("Resource\\FontWhite.tga", 1, 64);
 	mTag = EPLAYER;
 }
 
 //更新処理
 void CPlayer::Update() {
+	CVector vx = CVector(1.0f, 0.0f, 0.0f) * mMatrixRotate;
+	CVector vy = CVector(0.0f, 1.0f, 0.0f) * mMatrixRotate;
+	CVector vz = CVector(0.0f, 0.0f, 1.0f) * mMatrixRotate;
+	CVector vp = mPoint - mPosition;
 
 	CVector OldRotate = mRotation;
 
@@ -175,9 +186,27 @@ void CPlayer::Update() {
 	Camera->SetTarget(mPosition);
 	Camera->SetAddRotate(OldRotate - mRotation);
 	OldRotate = mRotation;
+
+	if (mRotation.mZ < 0) {
+		mRotation.mZ++; //車体の傾き修正
+	}
+
+	if (mRotation.mZ > 0) {
+		mRotation.mZ--; //車体の傾き修正
+	}
+
+	if (mRotation.mX < 0) {
+		mRotation.mX++; //車体の傾き修正 
+	}
+
+	if (mRotation.mX > 0) {
+		mRotation.mX--; //車体の傾き修正
+	}
 }
 
 void CPlayer::Collision(CCollider *m, CCollider *o) {
+	CVector vz = CVector(0.0f, 0.0f, 1.0f) * mMatrixRotate;
+
 	//相手がサーチの時は戻る
 	if (o->mTag == CCollider::ESEARCH)
 	{
@@ -230,6 +259,11 @@ void CPlayer::Collision(CCollider *m, CCollider *o) {
 				}
 				//位置の更新(mPosition + adjust)
 				//mPosition = mPosition - adjust * -1;
+				CVector x = o->mV[3].Cross(vz).Normalize();
+				CVector z = x.Cross(o->mV[3]).Normalize();
+				mRotation.mX = -asin(z.mY) / M_PI * 180;
+				//mRotation.mY = atan2(z.mX, z.mZ) / M_PI * 180;
+				mRotation.mZ = atan2(x.mY, o->mV[3].mY) / M_PI * 180;
 				//行列の更新
 				CTransform::Update();
 			}
@@ -265,8 +299,7 @@ void CPlayer::Render()
 	//CSceneGame::sImageCar.Draw(-320, -140, 230, 310, 100, 2000, 800, 0);
 	//CSceneGame::sImageTimer.Draw(-50, 50, 200, 300, 0, 255, 255, 0);
 
-	//描画色の設定（緑色の半透明）
-	glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
+
 	//文字列編集エリアの作成
 	char buf[64];
 
@@ -274,16 +307,18 @@ void CPlayer::Render()
 	//文字列の設定
 	sprintf(buf, ":%d", CoinGet);
 	//文字列の描画 
-	mText.DrawString(buf, -150, 270, 16, 32);
+	mCoinText.DrawString(buf, -150, 270, 20, 32);
 
 
 	//Y座標の表示
 	//文字列の設定
 	sprintf(buf, ":%d", EnemyCoinGet);
 	//文字列の描画
-	mText.DrawString(buf, 250, 270, 16, 32);
+	mCoinText.DrawString(buf, 250, 270, 20, 32);
 
-	//Y座標の表示
+	//描画色の設定（緑色の半透明）
+	glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
+	
 //文字列の設定
 	if (Time > 600) {
 		sprintf(buf, "%d", Time / 60);

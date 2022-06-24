@@ -14,11 +14,12 @@
 プレイヤークラス
 キャラクタクラスを継承
 */
-class CPlayer : public CCharacter {
+class CPlayer : public CCharacter , CVector{
 public:
 	int mFireCount;
 	CCollider mCollider;
 	CText mText;
+	CText mCoinText;
 	static CPlayer *spThis;
 	CColliderLine mLine; //線分コライダ
 	CColliderLine mLine2;
@@ -55,6 +56,10 @@ public:
 	int Time = 60 * 60;
 
 	CVector OldRotate;
+
+	CVector mPoint;	//目標地点
+
+	static bool CollisionTriangleLine(CCollider* triangle, CCollider* line, CVector* adjust);
 };
 
 #endif
