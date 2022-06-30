@@ -35,14 +35,12 @@ private:
 	void Render();
 
 	int mJump; //ジャンプフラグ
-	//重力
-	float x = 300.0f;
-	float y = 300.0f;
-	float yadd;
+	
+	float myadd; //重力
 
-	float t = 1; //ダッシュ慣性
+	float mSpeed; //ダッシュ慣性
 
-	float curve = 1; //カーブ慣性
+	float mCurve; //カーブ慣性
 
 	CVector OldRotate;
 
@@ -53,16 +51,18 @@ private:
 public:
 	//デフォルトコンストラクタ
 	CPlayer();
+	//デストラクタ
+	~CPlayer();
 
 	static CPlayer* spThis;
 
-	int Time = 60 * 60; //制限時間
+	int mTime;
 
-	int CoinGet; //コイン獲得数
+	int mCoinGet; //コイン獲得数
 
-	int EnemyCoinGet; //敵コイン獲得数
+	int mEnemyCoinGet; //敵コイン獲得数
 
-	int BulletP; //弾数
+	int mBulletP; //弾数
 
 };
 

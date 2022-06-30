@@ -1,6 +1,5 @@
 #include "CCoin.h"
 #include "CTaskManager.h"
-#define VELOCITY 0.11f
 #include "CPlayer.h"
 #include "CCollisionManager.h"
 
@@ -31,11 +30,13 @@ CCoin::CCoin(CModel* model, CVector position,
 
 	CTransform::Update();
 	mCollider.ChangePriority();
-	Time = 100;
 	CoinRender = 0;
 
 }
 
+CCoin::~CCoin()
+{
+}
 
 //更新処理
 void CCoin::Update() {
@@ -80,7 +81,7 @@ void CCoin::Collision(CCollider* m, CCollider* o) {
 				if (o->mpParent->mTag == EPLAYER) {
 					if (CCollider::Collision(o, m)) {
 						CoinRender = 1000;
-						CPlayer::spThis->CoinGet++;
+						CPlayer::spThis->mCoinGet++;
 						//エフェクト生成
 						new CEffect2(m->mpParent->mPosition, 2.0f, 2.0f, "Resource\\tktk17.png", 2, 5, 2);
 						CoinSe.Play();
@@ -89,7 +90,7 @@ void CCoin::Collision(CCollider* m, CCollider* o) {
 				if (o->mpParent->mTag == EENEMY) {
 					if (CCollider::Collision(o, m)) {
 						CoinRender = 1000;
-						CPlayer::spThis->EnemyCoinGet++;
+						CPlayer::spThis->mEnemyCoinGet++;
 						}
 					}
 				}

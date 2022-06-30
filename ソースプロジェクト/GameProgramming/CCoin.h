@@ -11,29 +11,27 @@
 */
 class CCoin : private CCharacter {
 private:
-
-	int Time;
-
 	//コライダ
 	CCollider mCollider;
 
-public:
-	//コンストラクタ
-	CCoin(CModel* model, CVector position, CVector rotation, CVector scale);
 	//更新処理
 	void Update();
 
-	static CCoin *spThis;
+	void Render();
 
 	//衝突処理
-	//Collision(コライダ１,コライダ２)
+//Collision(コライダ１,コライダ２)
 	void Collision(CCollider* m, CCollider* o);
 
 	void TaskCollision();
 
-	void Render();
+public:
+	static CCoin* spThis;
 
-	void ColliderRender();
+	//コンストラクタ
+	CCoin(CModel* model, CVector position, CVector rotation, CVector scale);
+	//デストラクタ
+	~CCoin();
 
 	int CoinRender;
 };

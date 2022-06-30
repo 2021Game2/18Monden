@@ -38,8 +38,10 @@ CEnemy::CEnemy()
 	mpModel = &mModel;
 }
 
+CEnemy::~CEnemy()
+{
+}
 
-//コンストラクタ
 //CEnemy(位置, 回転, 拡縮)
 CEnemy::CEnemy(const CVector& position, const CVector& rotation, const CVector& scale)
 	: CEnemy()
@@ -56,6 +58,7 @@ CEnemy::CEnemy(const CVector& position, const CVector& rotation, const CVector& 
 	//目標地点の設定
 	mPoint = mPosition + CVector(0.0f, 0.0f, 100.0f) * mMatrixRotate;
 }
+
 
 //更新処理
 void CEnemy::Update() {
@@ -156,8 +159,8 @@ void CEnemy::Collision(CCollider* m, CCollider* o) {
 			//相手のコライダが球コライダの時
 			if (CCollider::Collision(m, o))
 			{
-				if (o->mpParent->mTag == EBULLETPLAYER && CPlayer::spThis->EnemyCoinGet > 0) {
-					CPlayer::spThis->EnemyCoinGet--;
+				if (o->mpParent->mTag == EBULLETPLAYER && CPlayer::spThis->mEnemyCoinGet > 0) {
+					CPlayer::spThis->mEnemyCoinGet--;
 					new CEffect(o->mpParent->mPosition, 1.0f, 1.0f, "Resource\\exp.tga", 4, 4, 2);
 					BombSe.Play();
 				}

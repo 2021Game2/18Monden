@@ -56,17 +56,10 @@ CSound CountDownSe;
 #define BULLET_MODEL "Resource\\bullet.obj","Resource\\bullet.mtl"
 #define WALL_MODEL "Resource\\wall.obj", "Resource\\wall.mtl"
 
-//弾丸画像
-#define BULLET_IMAGE "Resource\\bullet.png"
-
-//戦闘機画像
-#define JET_IMAGE "Resource\\Jet.png"
-
-//車画像
-#define CAR_IMAGE "Resource\\Car.png"
-
-//時計画像
-#define TIMER_IMAGE "Resource\\Timer.png"
+#define BULLET_IMAGE "Resource\\bullet.png" //弾丸画像
+#define JET_IMAGE "Resource\\Jet.png" //敵戦闘機画像
+#define CAR_IMAGE "Resource\\Car.png" //車画像
+#define TIMER_IMAGE "Resource\\Timer.png" //時計画像
 
 
 CSceneGame::~CSceneGame()
@@ -100,14 +93,9 @@ void CSceneGame::Init() {
 	//BGM繰り返し再生
 	Bgm.Repeat();
 
-
 	mText.LoadTexture(FONT_IMAGE,1,64);
 
 	mBackGroundMatrix.Translate(GROUND_TRANSLATE);
-
-	//三角コライダの確認
-//	mColliderTriangle.Set(NULL, NULL, CVector(-50.0f, 0.0f, -50.0f), CVector(-50.0f, 0.0f, 50.0f), CVector(50.0f, 0.0f, -50.0f));
-//	mColliderTriangle2.Set(NULL, NULL, CVector(50.0f, 0.0f, -50.0f), CVector(-50.0f, 0.0f, 50.0f), CVector(50.0f, 0.0f, 50.0f));
 
 	//C5モデルの読み込み
 	mModelC5.Load(ENEMY_MODEL);
@@ -128,14 +116,10 @@ void CSceneGame::Init() {
 	mPlayer->mScale = CVector(0.03f, 0.03f, 0.03f);
 	//
 	mPlayer->mPosition = CVector(0.0f, 0.0f, -25.0f) * mBackGroundMatrix;
-	//mPlayer.mPosition = CVector(0.0f, 0.0f, -503.0f);
 	mPlayer->mRotation = CVector(0.0f, 180.0f, 0.0f);
 
 	//家
 	mModelHouse.Load(HOUSE_MODEL);
-	/*new CCity(&mModelHouse, CVector(0.0f, -2.0f, -550.0f),
-		CVector(), CVector(1.0f, 1.0f, 1.0f));*/
-
 	new CCity(&mModelHouse, CVector(50.0f, -2.0f, -550.0f),
 		CVector(), CVector(1.0f, 1.0f, 1.0f));
 
@@ -188,9 +172,6 @@ void CSceneGame::Init() {
 	new CCoin(&mModelCoin, CVector(-20.0f, 1.5f, -530.0f),
 			CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
-	/*new CCoin(&mModelCoin, CVector(0.0f, -0.5f, -530.0f),
-		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));*/
-
 	new CCoin(&mModelCoin, CVector(20.0f, 1.5f, -530.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
@@ -227,9 +208,6 @@ void CSceneGame::Init() {
 	new CCoin(&mModelCoin, CVector(-20.0f, -0.5f, -575.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
-	/*new CCoin(&mModelCoin, CVector(0.0f, -0.5f, -570.0f),
-		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));*/
-
 	new CCoin(&mModelCoin, CVector(20.0f, -0.5f, -575.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
@@ -264,10 +242,6 @@ void CSceneGame::Init() {
 
 	//敵機のインスタンス作成
 	new CEnemy(CVector(110.0f, -0.5f, -30.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
-	//new CEnemy(&mModelC5, CVector(30.0f, 10.0f, -130.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
-	//new CEnemy(&mModelC5, CVector(0.0f, 10.0f, -600.0f), CVector(), CVector(0.1f, 0.1f, 0.1f));
-	//new CEnemy(&mModelC5, CVector(30.0f, 10.0f, -630.0f), CVector(), CVector(0.1f, 0.1f, 0.1f));
-
 	new CEnemy2(CVector(-100.0f, -0.5f, -30.0f)*mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
 	new CEnemy2(CVector(100.0f, -0.5f, -80.0f)* mBackGroundMatrix, CVector(), CVector(0.1f, 0.1f, 0.1f));
 
@@ -316,9 +290,6 @@ void CSceneGame::Init() {
 
 	new CCoin(&mModelCoin, CVector(-15.0f, -0.5f, -555.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
-
-	/*new CCoin(&mModelCoin, CVector(-20.0f, -0.5f, -550.0f),
-		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));*/
 
 	//足場
 	new CWall(&mModelWall, CVector(0.0f, 0.0f, -570.0f),
@@ -401,45 +372,26 @@ void CSceneGame::Init() {
 	new CCoin(&mModelCoin, CVector(-15.0f, 4.1f, -565.0f),
 		CVector(0.0f, 0.0f, 0.0f), CVector(2.0f, 2.0f, 2.0f));
 
-
-	//ビルボードの生成
-	//new CBillBoard(CVector(-6.0f, 3.0f, -10.0f), 1.0f, 1.0f);
-	//背景モデルから三角コライダを生成
-	//親インスタンスと行列はなし
-	//mColliderMesh.Set(NULL, NULL, &mBackGround);
-	//mColliderMesh.Set(NULL, &mBackGroundMatrix, &mBackGround);
-
 	//カメラのパラメータを作成する
 	CVector e, c, u;//視点、注視点、上方向
 	//視点を求める
-
-
-	//	e = CVector(-2.0f, 10.0f, -30.0f) * mPlayer.mMatrix;
 	e = CVector(0.0f, 31.5f, -100.0f) * CMatrix().RotateY(Camera->mRotation.mY) * mPlayer->mMatrix;
-	if (CKey::Push(VK_SPACE))
-	{
-		e = CVector(0.0f, 20.0f, 100.0f) * mPlayer->mMatrix;
-	}
 	//注視点を求める
 	c = mPlayer->mPosition;
 	//上方向を求める
 	u = CVector(0.0f, 1.0f, 0.0f) * mPlayer->mMatrixRotate;
-	//カメラの設定
-	//gluLookAt(e.mX, e.mY, e.mZ, c.mX, c.mY, c.mZ, u.mX, u.mY, u.mZ);
 	//カメラクラスの設定
 	Camera->Set(e, c, u);
 
 	float shadowColor[] = { 0.4f, 0.4f, 0.4f, 0.2f };  //影の色
 	float lightPos[] = { 0.0f, 160.0f, -550.0f };  //光源の位置
 	mShadowMap.Init(TEXWIDTH, TEXHEIGHT, Render, shadowColor, lightPos);
-
 }
 
 void CSceneGame::Update() {
 
 	CTaskManager::Get()->Update();
 	//コリジョンマネージャの衝突処理
-//削除	CCollisionManager::Get()->Collision();
 	CTaskManager::Get()->TaskCollision();
 
 
@@ -468,54 +420,19 @@ void CSceneGame::Update() {
 		mEye.mY -= 0.1f;
 	}
 
-	//視点の設定
-	//gluLookAt(視点X, 視点Y, 視点Z, 中心X, 中心Y, 中心Z, 上向X, 上向Y, 上向Z)
-	//gluLookAt(mEye.mX, mEye.mY, mEye.mZ, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-
-//	mPlayer.Update();
-	//カメラのパラメータを作成する
-/*	CVector e, c, u;//視点、注視点、上方向
-	//視点を求める
-
-
-	//	e = CVector(-2.0f, 10.0f, -30.0f) * mPlayer.mMatrix;
-	e = CVector(0.0f, 31.5f, -100.0f) * CMatrix().RotateY(Camera.mRotation.mY) * mPlayer.mMatrix;
-	if (CKey::Push(VK_SPACE))
-	{
-		e = CVector(0.0f, 20.0f, 100.0f) * mPlayer.mMatrix;
-	}
-	//注視点を求める
-	c = mPlayer.mPosition;
-	//上方向を求める
-	u = CVector(0.0f, 1.0f, 0.0f) * mPlayer.mMatrixRotate;
-	//カメラの設定
-	//gluLookAt(e.mX, e.mY, e.mZ, c.mX, c.mY, c.mZ, u.mX, u.mY, u.mZ);
-	//カメラクラスの設定
-	Camera.Set(e, c, u);*/
-	//Camera.Render();
-	//	mPlayer.Render();
-
-	//mBackGround.Render(mBackGroundMatrix);
-
-//	mPlayer.bullet.Update();
-//	mPlayer.bullet.Render();
-
 	//タスクリストの削除
 	CTaskManager::Get()->Delete();
-	//CTaskManager::Get()->Render();
 
-
-	Camera->Draw();
-
-	mShadowMap.Render();
+	Camera->Draw(); //カメラ適用
+	mShadowMap.Render(); //影の描画
 
 	//2Dの描画開始
 	CUtil::Start2D(-400, 400, -300, 300);
 
-	sImagebullet.Draw(-370, -220, -300, -220, 400, 6000, 3000, 0);
-	sImagejet.Draw(120, 230, 230, 330, 0, 600, 500, 0);
-	sImageCar.Draw(-220, -80, 230, 310, 100, 2000, 800, 0);
-	sImageTimer.Draw(-20, 20, 250, 290, 0, 255, 255, 0);
+	sImagebullet.Draw(-370, -220, -300, -220, 400, 6000, 3000, 0); //弾丸イラスト
+	sImagejet.Draw(120, 230, 230, 330, 0, 600, 500, 0); //戦闘機イラスト
+	sImageCar.Draw(-220, -80, 230, 310, 100, 2000, 800, 0); //車イラスト
+	sImageTimer.Draw(-20, 20, 250, 290, 0, 255, 255, 0); //タイマーイラスト
 
 	//2Dの描画終了
 	CUtil::End2D();
@@ -525,19 +442,22 @@ void CSceneGame::Update() {
 	CCollisionManager::Get()->Render();
 #endif
 
-	if (CPlayer::spThis->Time < 50 && CPlayer::spThis->CoinGet > CPlayer::spThis->EnemyCoinGet) {
+	//タイムアップ時にコイン数が勝っていれば勝利画面へ移動
+	if (CPlayer::spThis->mTime < 50 && CPlayer::spThis->mCoinGet > CPlayer::spThis->mEnemyCoinGet) { 
 		mScene = EWIN;
 		Bgm.Stop();
 		CarSe.Stop();
 	}
 
-	if (CPlayer::spThis->Time < 50 &&  CPlayer::spThis->EnemyCoinGet > CPlayer::spThis->CoinGet) {
+	//タイムアップ時にコイン数が負けていれば敗北画面へ移動
+	if (CPlayer::spThis->mTime < 50 &&  CPlayer::spThis->mEnemyCoinGet > CPlayer::spThis->mCoinGet) {
 		mScene = ELOSE;
 		Bgm.Stop();
 		CarSe.Stop();
 	}
 
-	if (CPlayer::spThis->Time < 50 && CPlayer::spThis->EnemyCoinGet == CPlayer::spThis->CoinGet) {
+	//タイムアップ時にコイン数が同じであれば引き分け画面へ移動
+	if (CPlayer::spThis->mTime < 50 && CPlayer::spThis->mEnemyCoinGet == CPlayer::spThis->mCoinGet) {
 		mScene = EDRAW;
 		Bgm.Stop();
 		CarSe.Stop();

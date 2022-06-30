@@ -45,16 +45,23 @@ CPlayer::CPlayer()
 , mCollider(this, &mMatrix, CVector(-0.5f, 10.0f, -0.5f), 0.4f)
 , mFireCount(0)
 , mJump(0) //0はジャンプ可能
-, BulletP(0)
-, yadd(0)
-, CoinGet(0)
-, EnemyCoinGet(0)
+, mBulletP(0)
+, myadd(0)
+, mTime(60 * 60)
+, mCoinGet(0)
+, mEnemyCoinGet(0)
+, mSpeed(0)
+, mCurve(0)
 {
 	spThis = this;
 	//テクスチャファイルの読み込み（1行64列）
 	mCoinText.LoadTexture("Resource\\FontGold1.png", 1, 64);
 	mText.LoadTexture("Resource\\FontWhite.tga", 1, 64);
 	mTag = EPLAYER;
+}
+
+CPlayer::~CPlayer()
+{
 }
 
 //更新処理
@@ -67,88 +74,88 @@ void CPlayer::Update() {
 	CVector OldRotate = mRotation;
 
 	//制限時間
-	if (Time > 0) {
-		Time--;
+	if (mTime > 0) {
+		mTime--;
 	}
 
 	//Aキー入力で左回転
 	if (CKey::Push('A')) {
-		if (curve < 0) {
-			curve -= curve * 1 / 3; //逆回転で慣性を抑える
+		if (mCurve < 0) {
+			mCurve -= mCurve * 1 / 3; //逆回転で慣性を抑える
 		}
 
-		if (curve < 30) {
-			curve++;
+		if (mCurve < 30) {
+			mCurve++;
 		}
-		mRotation.mY += curve * 1/5;
+		mRotation.mY += mCurve * 1/5;
 	}
 	//Aキー離すと慣性で回転
-	if (CKey::Push('A') == false && curve > 1) {
-		curve--;
-		mRotation.mY += curve * 1 / 20;
+	if (CKey::Push('A') == false && mCurve > 1) {
+		mCurve--;
+		mRotation.mY += mCurve * 1 / 20;
 	}
 
 
 
 	//Dキー入力で右回転
 	if (CKey::Push('D')) {
-		if (curve > 0) {
-			curve -= curve * 1 / 3; //逆回転で慣性を抑える
+		if (mCurve > 0) {
+			mCurve -= mCurve * 1 / 3; //逆回転で慣性を抑える
 		}
 
-		if (curve > -30) {
-			curve--;
+		if (mCurve > -30) {
+			mCurve--;
 		}
-		mRotation.mY += curve * 1/5;
+		mRotation.mY += mCurve * 1/5;
 	}
 	//Dキー離すと慣性で回転
-	if (CKey::Push('D') == false && curve < -1) {
-		curve++;
-		mRotation.mY += curve * 1 / 20;
+	if (CKey::Push('D') == false && mCurve < -1) {
+		mCurve++;
+		mRotation.mY += mCurve * 1 / 20;
 	}
 
 	//Wキーで前進
 	if (CKey::Push('W')) {
-		if (t < 300) {
-			t++;
+		if (mSpeed < 300) {
+			mSpeed++;
 		}
 		//Z軸方向に1進んだ値を回転移動させる
-		mPosition = CVector(0.0f, 0.0f, 0.05f * t) * mMatrix;
+		mPosition = CVector(0.0f, 0.0f, 0.05f * mSpeed) * mMatrix;
 	}
 	//キー離すと慣性で滑る
-	if (CKey::Push('W') == false && t > 1) {
-		t--;
-		mPosition = CVector(0.0f, 0.0f, 0.05f * t) * mMatrix;
+	if (CKey::Push('W') == false && mSpeed > 1) {
+		mSpeed--;
+		mPosition = CVector(0.0f, 0.0f, 0.05f * mSpeed) * mMatrix;
 	}
 
-	if (t == 3) {
+	if (mSpeed == 3) {
 		CarSe.Repeat();
 	}
 
-	if (t == 1) {
+	if (mSpeed == 1) {
 		CarSe.Stop();
 	}
 
 	//Sキーで後退
 	if (CKey::Push('S')) {
-		if (t > 0) {
-			t -= t * 1/10; //ブレーキ
-			if (t > 200 && mJump == 0) {
+		if (mSpeed > 0) {
+			mSpeed -= mSpeed * 1/10; //ブレーキ
+			if (mSpeed > 200 && mJump == 0) {
 				BrakeSe.Play(); //ブレーキ音再生
 			}
 		}
 
 
-		if (t > -90) {
-			t--;
+		if (mSpeed > -90) {
+			mSpeed--;
 		}
-		mPosition = CVector(0.0f, 0.0f, 0.05f * t) * mMatrix;
+		mPosition = CVector(0.0f, 0.0f, 0.05f * mSpeed) * mMatrix;
 	}
 
 	//キー離すと慣性で滑る
-	if (CKey::Push('S') == false && t < -1) {
-		t++;
-		mPosition = CVector(0.0f, 0.0f, 0.05f * t) * mMatrix;
+	if (CKey::Push('S') == false && mSpeed < -1) {
+		mSpeed++;
+		mPosition = CVector(0.0f, 0.0f, 0.05f * mSpeed) * mMatrix;
 	}
 
 
@@ -161,14 +168,14 @@ void CPlayer::Update() {
 	CTransform::Update();
 
 	//落下
-	mPosition.mY -= yadd;
-	yadd += 0.01f;
+	mPosition.mY -= myadd;
+	myadd += 0.01f;
 
 
 	//弾発射
-	if (CKey::Push(VK_SPACE) && mFireCount == 0 && BulletP > 0) {
+	if (CKey::Push(VK_SPACE) && mFireCount == 0 && mBulletP > 0) {
 		shoot1Se.Play();
-		BulletP--;
+		mBulletP--;
 		mFireCount = FIRECOUNT;
 		CBullet* bullet = new CBullet();
 		bullet->mTag = EBULLETPLAYER;
@@ -203,15 +210,15 @@ void CPlayer::Update() {
 	}
 
 //カウントダウンSe再生
-	if (Time ==  240){
+	if (mTime ==  240){
 
 		CountDownSe.Play();		
 	}
-	if (Time == 180) {
+	if (mTime == 180) {
 
 		CountDownSe.Play();
 	}
-	if (Time == 120) {
+	if (mTime == 120) {
 
 		CountDownSe.Play();
 	}
@@ -251,8 +258,8 @@ void CPlayer::Collision(CCollider *m, CCollider *o) {
 				if (o->mpParent->mTag == EBULLETENEMY) {
 					new CEffect(o->mpParent->mPosition, 1.0f, 1.0f, "Resource\\exp.tga", 4, 4, 2); //被弾
 					BombSe.Play();
-					if (CoinGet > 0) {
-						CoinGet--;
+					if (mCoinGet > 0) {
+						mCoinGet--;
 					}
 				}
 			}
@@ -263,11 +270,11 @@ void CPlayer::Collision(CCollider *m, CCollider *o) {
 			//三角形と線分の衝突判定
 			if (CCollider::CollisionTriangleSphere(o, m, &adjust))
 			{
-				yadd = 0; //着地
+				myadd = 0; //着地
 				mJump = 0; //ジャンプ可能
 				if (mJump == 0 && CKey::Once('J')) //ジャンプ
 				{
-					yadd = -0.2f;
+					myadd = -0.2f;
 					mJump++;
 				}
 				//位置の更新(mPosition + adjust)
@@ -311,9 +318,9 @@ void CPlayer::Render()
 	char buf[64];
 
 	//文字列の設定
-	sprintf(buf, ":%d", CoinGet);
+	sprintf(buf, ":%d", mCoinGet);
 	//文字列の描画
-	if (CoinGet < 10) {
+	if (mCoinGet < 10) {
 		mCoinText.DrawString(buf, -320, 255, 20, 32); //プレイヤーコイン獲得数
 	}
 	else
@@ -324,9 +331,9 @@ void CPlayer::Render()
 	mCoinText.DrawString("COIN", -300, 220, 6, 12);
 
 	//文字列の設定
-	sprintf(buf, ":%d", EnemyCoinGet);
+	sprintf(buf, ":%d", mEnemyCoinGet);
 	//文字列の描画
-	if (EnemyCoinGet < 10) {
+	if (mEnemyCoinGet < 10) {
 		mCoinText.DrawString(buf, 250, 255, 20, 32); //敵コイン獲得数
 	}
 	else
@@ -339,26 +346,26 @@ void CPlayer::Render()
 	//描画色の設定（赤色の半透明）
 	glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
 
-	if (Time > 600) {
-		sprintf(buf, "%d", Time / 60);
+	if (mTime > 600) {
+		sprintf(buf, "%d", mTime / 60);
 		//文字列の描画
 		mText.DrawString(buf, -6, 240, 8, 16); //制限時間
 	}
 
-	if (Time < 600 && Time > 240) {
-		sprintf(buf, "%d", Time / 60);
+	if (mTime < 600 && mTime > 240) {
+		sprintf(buf, "%d", mTime / 60);
 		//文字列の描画
 		mText.DrawString(buf, 0, 240, 8, 16);
 	}
 
-	if (Time < 240) {
-		sprintf(buf, "%d", Time / 60);
+	if (mTime < 240) {
+		sprintf(buf, "%d", mTime / 60);
 		//文字列の描画
 		mText.DrawString(buf, 0, 0, 24, 48); //ラスト3カウント
 	}
 
 
-	sprintf(buf, "%d", BulletP);
+	sprintf(buf, "%d", mBulletP);
 	mText.DrawString(buf, -200, -260, 16, 32); //装弾数
 
 	//2Dの描画終了

@@ -25,6 +25,8 @@ private:
 
 	//コンストラクタ
 	CEnemy();
+	//デストラクタ
+	~CEnemy();
 
 	//更新処理
 	void Update();

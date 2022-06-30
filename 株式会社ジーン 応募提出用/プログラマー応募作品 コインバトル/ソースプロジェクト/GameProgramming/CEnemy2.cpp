@@ -8,7 +8,7 @@
 #define MTL "Resource\\f16.mtl"	//モデルのマテリアルファイル
 
 #define HP 3	//耐久値
-#define VELOCITY 0.5f	//速度
+#define VELOCITY 0.4f	//速度
 
 CModel CEnemy2::mModel;	//モデルデータ作成
 
@@ -38,8 +38,10 @@ CEnemy2::CEnemy2()
 	mpModel = &mModel;
 }
 
+CEnemy2::~CEnemy2()
+{
+}
 
-//コンストラクタ
 //CEnemy(位置, 回転, 拡縮)
 CEnemy2::CEnemy2(const CVector& position, const CVector& rotation, const CVector& scale)
 	: CEnemy2()
@@ -144,8 +146,8 @@ void CEnemy2::Collision(CCollider* m, CCollider* o) {
 			//相手のコライダが球コライダの時
 				if (CCollider::Collision(m, o))
 				{
-					if (o->mpParent->mTag == EBULLETPLAYER && CPlayer::spThis->EnemyCoinGet > 0) {
-						CPlayer::spThis->EnemyCoinGet--;
+					if (o->mpParent->mTag == EBULLETPLAYER && CPlayer::spThis->mEnemyCoinGet > 0) {
+						CPlayer::spThis->mEnemyCoinGet--;
 						new CEffect(o->mpParent->mPosition, 1.0f, 1.0f, "Resource\\exp.tga", 4, 4, 2);
 						BombSe.Play();
 					}

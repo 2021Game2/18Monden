@@ -4,6 +4,7 @@
 #include <mmsystem.h>
 #include <xaudio2.h>
 
+#pragma warning(disable:4996)
 #pragma comment(lib,"xaudio2.lib")
 #pragma comment(lib,"winmm.lib")
 
@@ -63,7 +64,7 @@ public:
 		if (mpSourceVoice == 0)
 		{
 			//ƒtƒ@ƒCƒ‹–¼•Û‘¶
-			strcpy(file, filename);
+			strcpy_s(file, filename);
 			MMCKINFO mmckinfo; PCMWAVEFORMAT pcmwf; MMRESULT mmret;
 			memset(&g_mmioinfo, 0x00, sizeof(g_mmioinfo));
 			g_hmmio = mmioOpen(const_cast<TCHAR *>(filename), &g_mmioinfo, MMIO_READ);
@@ -99,7 +100,9 @@ public:
 
 			XAUDIO2_VOICE_STATE state;
 			unsigned char /**buf, */ *ptr; UINT32 buflen, cnt; LONG readlen; HRESULT hr; DWORD dw;
-
+			cnt;
+			state;
+			dw;
 			hr = mpXAudio->CreateSourceVoice(&mpSourceVoice, &g_wfx, XAUDIO2_VOICE_NOPITCH /*| XAUDIO2_VOICE_MUSIC*/, XAUDIO2_DEFAULT_FREQ_RATIO, NULL, NULL, NULL);
 			if (FAILED(hr))
 				return false;

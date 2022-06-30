@@ -1,6 +1,5 @@
 #include "CBulletItem.h"
 #include "CTaskManager.h"
-#define VELOCITY 0.11f;
 #include "CPlayer.h"
 #include "CCollisionManager.h"
 
@@ -48,7 +47,7 @@ void CBulletItem::Collision(CCollider* m, CCollider* o) {
 				if (o->mpParent->mTag == EPLAYER) {
 					if (CCollider::Collision(o, m)) {
 						mEnabled = false;
-						CPlayer::spThis->BulletP += 5;
+						CPlayer::spThis->mBulletP += 5;
 						BulletSe.Play();
 					}
 				}
