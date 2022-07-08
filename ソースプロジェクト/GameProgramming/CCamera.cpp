@@ -14,7 +14,7 @@ CCamera*Camera;
 
 
 CCamera::CCamera()
-	: mLine(this, nullptr, CVector(0.0f, 0.0f, 0.0f), CVector(0.0f, 0.0f, 0.0f))
+	: mLine(this, nullptr, CVector(0.0f, 0.0f, 0.0f), CVector(1.0f, 1.0f, 1.0f))
 {
 	mPriority = 0;
 	CTaskManager::Get()->Remove(this);

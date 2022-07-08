@@ -43,8 +43,8 @@ CSound shoot2Se;
 CSound BrakeSe;
 CSound CountDownSe;
 
-#define TEXWIDTH  8192  //テクスチャ幅
-#define TEXHEIGHT  6144  //テクスチャ高さ
+#define TEXWIDTH  9192  //テクスチャ幅
+#define TEXHEIGHT  7144  //テクスチャ高さ
 
 #define FONT_IMAGE "Resource\\FontWhite.tga"
 #define ENEMY_MODEL "Resource\\c5.obj","Resourece\\c5.mtl"
@@ -383,7 +383,7 @@ void CSceneGame::Init() {
 	//カメラクラスの設定
 	Camera->Set(e, c, u);
 
-	float shadowColor[] = { 0.4f, 0.4f, 0.4f, 0.2f };  //影の色
+	float shadowColor[] = { 0.6f, 0.6f, 0.6f, 0.2f };  //影の色
 	float lightPos[] = { 0.0f, 160.0f, -550.0f };  //光源の位置
 	mShadowMap.Init(TEXWIDTH, TEXHEIGHT, Render, shadowColor, lightPos);
 }
