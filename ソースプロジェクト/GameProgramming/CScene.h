@@ -9,6 +9,7 @@ public:
 	enum EScene {
 		EGAME,	//ゲーム
 		ETITLE, 	//タイトル
+		EEXPLAIN, //説明画面
 		EWIN, //勝利画面
 		ELOSE, //敗北画面
 		EDRAW, //引き分け画面

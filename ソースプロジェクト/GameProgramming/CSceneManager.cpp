@@ -4,11 +4,17 @@
 #include "CSceneWin.h"
 #include "CSceneLose.h"
 #include "CSceneDraw.h"
+#include "CSceneExplain.h"
+#include "CUtil.h"
+#include "main.h"
 
 //コンストラクタ
 CSceneManager::CSceneManager()
-: mpScene(0)
-{}
+: mpScene(0),mpFade(0)
+{
+	mpFade = new CFade;
+}
+
 //デストラクタ（削除されるときに実行されます）
 CSceneManager::~CSceneManager() {
 	//シーンがあれば削除
@@ -16,6 +22,11 @@ CSceneManager::~CSceneManager() {
 		//シーンの削除
 		delete mpScene;
 	mpScene = 0;
+
+	if (mpFade) {
+		delete mpFade;
+		mpFade = 0;
+	}
 }
 //初期化処理
 void CSceneManager::Init() {
@@ -27,7 +38,9 @@ void CSceneManager::Init() {
 //更新処理
 void CSceneManager::Update() {
 	//ポインタのUpdateを呼ぶ
+
 	mpScene->Update();
+	mpFade->Update();
 	//次のシーンを取得し異なるか判定
 	if (mScene != mpScene->GetNextScene()) {
 		mScene = mpScene->GetNextScene();
@@ -40,6 +53,10 @@ void CSceneManager::Update() {
 			break;
 		case CScene::ETITLE:
 			mpScene = new CSceneTitle();
+			mpScene->Init();
+			break;
+		case CScene::EEXPLAIN:
+			mpScene = new CSceneExplain();
 			mpScene->Init();
 			break;
 		case CScene::EWIN:
@@ -55,5 +72,13 @@ void CSceneManager::Update() {
 			mpScene->Init();
 			break;
 		}
+	}
+}
+
+void CSceneManager::Render() {
+	if (mpFade) {
+		CUtil::Start2D(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+		mpFade->Render();
+		CUtil::End2D();
 	}
 }

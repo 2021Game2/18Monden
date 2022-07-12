@@ -2,6 +2,7 @@
 #include "CKey.h"
 #include "CUtil.h"
 #include "CSound.h"
+#include "CFade.h"
 
 CSound TitleBgm;
 
@@ -27,9 +28,16 @@ void CSceneTitle::Init() {
 void CSceneTitle::Update() {
 
 	if (CKey::Once(VK_RETURN)) {
-		//次のシーンはゲーム
-		mScene = EGAME;
+		//次のシーンはゲーム説明
+		//mScene = CScene::EEXPLAIN;
+		mSceneChange = true;
+		CFade::SetFade(CFade::FADE_OUT);
 		TitleBgm.Stop();
+	}
+	if (mSceneChange) {
+		if (CFade::IsFadeEnd()) {
+			mScene = CScene::EEXPLAIN;
+		}
 	}
 	Render();
 }

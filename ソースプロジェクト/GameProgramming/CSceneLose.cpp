@@ -36,7 +36,7 @@ void CSceneLose::Render() {
 
 	//2Dの描画開始
 	CUtil::Start2D(-400, 400, -300, 300);
-	mLoseImage.Draw(-400, 400, -300, 300, 2500, 0, 1000, -0);
+	mLoseImage.Draw(-400, 400, -300, 300, 2500, 0, 1000, 0);
 	//描画色の設定
 	glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
 	//文字列編集エリアの作成;

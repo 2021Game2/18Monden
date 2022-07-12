@@ -30,6 +30,8 @@
 
 #include "CGround.h"
 
+#include "CFade.h"
+
 //CSoundクラスのインクルード
 #include "CSound.h"
 //CSoundクラスのインスタンス作成（外部変数作成例）
@@ -73,6 +75,7 @@ void CSceneGame::Init() {
 
 	//シーンの設定
 	mScene = EGAME;
+	CFade::SetFade(CFade::FADE_IN);
 
 	//サウンド(wav)ファイルの読み込み
 	Bgm.Load("Resource\\BGM.wav");

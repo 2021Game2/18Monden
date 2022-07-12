@@ -16,8 +16,12 @@ private:
 	CModel mBackGround;
 
 	CText mText;
-
+ 
 	CTexture mTitleImage;
+
+	bool CSceneTitle::mSceneChange;
+
+	//CScene::EScene CSceneTitle::mNextScene;
 	
 public:
 	CSceneTitle();

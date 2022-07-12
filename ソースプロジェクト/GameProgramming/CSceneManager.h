@@ -1,6 +1,7 @@
 #ifndef CSCENEMANAGER_H
 #define CSCENEMANAGER_H
 #include "CScene.h"
+#include "CFade.h"
 
 /*
 シーンマネージャクラス
@@ -16,8 +17,11 @@ public:
 	void Init();
 	//更新処理
 	void Update();
+	void Render();
 
 	CScene::EScene mScene;
+
+	CFade*mpFade;
 };
 
 #endif
