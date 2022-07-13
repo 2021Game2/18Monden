@@ -6,6 +6,7 @@
 #define EXPLAIN_IMAGE "Resource\\explain.png"
 
 CSceneExplain::CSceneExplain()
+: SceneChangeCount(300)
 {
 	mExplainImage.Load(EXPLAIN_IMAGE);
 }
@@ -18,10 +19,18 @@ void CSceneExplain::Init() {
 
 //更新処理のオーバーライド
 void CSceneExplain::Update() {
+	SceneChangeCount--;
 
-	if (CKey::Once(VK_RETURN)) {
+	if (SceneChangeCount == 0) {
 		//次のシーンはゲーム
-		mScene = EGAME;
+		mNextScene = CScene::EGAME;
+		mSceneChange = true;
+		CFade::SetFade(CFade::FADE_OUT);
+	}
+	if (mSceneChange) {
+		if (CFade::IsFadeEnd()) {
+			mScene = mNextScene;
+		}
 	}
 	Render();
 }

@@ -6,7 +6,7 @@
 
 CFade* CFade::gInst = NULL;
 
-CFade::CFade() :mFade(1.0f), mFadeType(FADE_IN), mbFade(true), mFadeSpeed(0.01f){
+CFade::CFade() :mFade(1.0f), mFadeType(FADE_IN), mbFade(true), mFadeSpeed(0.02f){
 	assert(!gInst);
 	gInst = this;
 }

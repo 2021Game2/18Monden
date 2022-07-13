@@ -20,7 +20,7 @@ public:
 	CFade();
 
 	//フェード設定
-	static void SetFade(eFadeMode type, float speed = 0.01f);
+	static void SetFade(eFadeMode type, float speed = 0.02f);
 	//フェード完了確認用
 	static bool IsFadeEnd();
 	void Update(); //更新

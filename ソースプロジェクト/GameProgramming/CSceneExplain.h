@@ -15,6 +15,12 @@ private:
 
 	CTexture mExplainImage;
 
+	bool CSceneExplain::mSceneChange;
+
+	CScene::EScene CSceneExplain::mNextScene;
+
+	int SceneChangeCount;
+
 public:
 	CSceneExplain();
 };

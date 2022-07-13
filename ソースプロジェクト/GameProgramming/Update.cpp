@@ -14,4 +14,5 @@ void Init() {
 void Update() {
 	//シーンマネージャの更新
 	SceneManager.Update();
+	SceneManager.Render();
 }

@@ -21,7 +21,7 @@ private:
 
 	bool CSceneTitle::mSceneChange;
 
-	//CScene::EScene CSceneTitle::mNextScene;
+	CScene::EScene CSceneTitle::mNextScene;
 	
 public:
 	CSceneTitle();

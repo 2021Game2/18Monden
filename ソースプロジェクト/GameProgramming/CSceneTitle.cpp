@@ -26,17 +26,16 @@ void CSceneTitle::Init() {
 
 //更新処理のオーバーライド
 void CSceneTitle::Update() {
-
 	if (CKey::Once(VK_RETURN)) {
 		//次のシーンはゲーム説明
-		//mScene = CScene::EEXPLAIN;
+		mNextScene = CScene::EEXPLAIN;
 		mSceneChange = true;
 		CFade::SetFade(CFade::FADE_OUT);
 		TitleBgm.Stop();
 	}
 	if (mSceneChange) {
 		if (CFade::IsFadeEnd()) {
-			mScene = CScene::EEXPLAIN;
+			mScene = mNextScene;
 		}
 	}
 	Render();
