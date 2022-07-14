@@ -21,7 +21,7 @@ public:
 
 	CScene::EScene mScene;
 
-	CFade*mpFade;
+	CFade* mpFade;
 };
 
 #endif

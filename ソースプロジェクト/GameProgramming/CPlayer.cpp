@@ -222,6 +222,10 @@ void CPlayer::Update() {
 
 		CountDownSe.Play();
 	}
+
+	if (mPosition.mY < -2) {
+		mPosition.mY = 1;
+	}
 }
 
 void CPlayer::Collision(CCollider *m, CCollider *o) {

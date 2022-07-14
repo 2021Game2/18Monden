@@ -39,8 +39,8 @@ void CSceneManager::Init() {
 void CSceneManager::Update() {
 	//ポインタのUpdateを呼ぶ
 
-	mpScene->Update();
-	mpFade->Update();
+	if(mpScene)mpScene->Update();
+	if(mpFade)mpFade->Update();
 	//次のシーンを取得し異なるか判定
 	if (mScene != mpScene->GetNextScene()) {
 		mScene = mpScene->GetNextScene();
